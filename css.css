@@ -1,0 +1,80 @@
+body {
+	padding-top: 130px;
+}
+
+.navLogo {
+	width: 1wv;
+	height: 1vw;
+}
+
+.polozky {
+  background-color: #99ccff;
+  left: 30px;
+  float: left;
+  margin: 1em;
+  padding: 1em;
+  width: 275px;
+  height:180px;
+  box-sizing: content-box;
+  font-weight: 500;
+}
+
+.small, small {
+margin: 1em;
+}
+
+.obrazok{
+  width: 180px;
+  height: 180px;
+}
+
+#aaa {
+	padding-bottom: 20px;
+}
+
+.mb3 {
+	margin-top: 1rem;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+
+#funguj:hover{
+	background-color: #808080;
+}
+
+#activated {
+	background-color: white;
+	color: black;
+	padding: 0.3vw;
+}
+
+#navBarButton:hover {
+	text-decoration-line: underline;
+	text-decoration-color: white;
+}
+
+#abc {
+	opacity: 75%;
+}
+
+#rightUserButtons {
+	height: 5vh;
+}
+
+#footerLink {
+	color: white;
+}
