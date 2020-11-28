@@ -18,12 +18,12 @@
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
-					<a href = "index.html"> <img src = "img/icon2.png" > </a>
+					<a href = "index.php"> <img src = "img/icon2.png" > </a>
 				</div>
 				<a id = "navBarButton" class="navbar-brand" href="produkty.html">Produkty</a>
 				<a id = "navBarButton" class="navbar-brand" href="sluzby.html">Služby</a>
 				<a id = "navBarButton" class="navbar-brand" href="aktivity.html">Aktivity</a>
-				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><i class="fas fa-question-circle"></i></a>
+				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" style="height: 3vh;"></a>
 			</div>
 			<div class = "navbar-right" id="mnBt">
 				<button id="rightUserButtons" class="btn btn-warning btn-rounded" onclick = "pridajInzerat();">Pridať inzerát</button>
@@ -36,7 +36,6 @@
 			
 		</nav>
 		<div class = "container">
-			<h1>Vitajte na stránkach internátneho portálu ^_^ </h1><br>
 			<div style="background-color: blue;">
 		    <div class="polozky"><img class="obrazok" src="img/elektro.svg" /><small>Elektronika</small></div>
 				<div class="polozky"><img class="obrazok" src="img/coffee.svg" /><small>Potraviny</small></div>
