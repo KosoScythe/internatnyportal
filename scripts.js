@@ -1,3 +1,5 @@
+var url = "http://68.183.71.15:5000/"
+
 function logIn() {
 	var url = window.location.href;
 	url = url.substring(41, url.length);
@@ -66,7 +68,7 @@ function showroom() {
 	}
 }
 function findInDatabase(stranka='n'){
-	if (stranka == 'aktivity') {
+	/*if (stranka == 'aktivity') {
 		hashtag = document.getElementById('hashtag').value;
 	}
 	else {
@@ -76,6 +78,21 @@ function findInDatabase(stranka='n'){
 		console.log(kategoria,typ, hashtag);
 	}
 	
+	return false;*/
+	console.log("Leeeeeeeeeeroy");
+	var xmlhttp = new XMLHttpRequest();
+	var url = url + "kategoria";
+	
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data2 = JSON.parse(this.responseText);
+			vypisLog(data2);
+		}
+	}
+	xmlhttp.open("POST", url, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	var tmp = "?kategoria=1";
+	xmlhttp.send(tmp);
 	return false;
 }
 
