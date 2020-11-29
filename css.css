@@ -19,13 +19,16 @@ body {
   font-weight: 500;
 }
 
-.small, small {
-margin: 1em;
+.polozky p {
+  margin-left: 55%;
+  margin-top: 25%;
 }
 
 .obrazok{
   width: 180px;
   height: 180px;
+  width: 48%;
+  float: left;
 }
 
 #aaa {
