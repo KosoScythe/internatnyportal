@@ -147,6 +147,16 @@ function JsonAndContent(data) {
 	document.getElementById('content').innerHTML = content;
 }
 
+function vyberKategoriu(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const kat = urlParams.get('kat')
+  if (kat != null){
+    document.getElementById('kategoria').value=kat;
+    findInDatabase();
+  }
+}
+
 // This is called with the results from from FB.getLoginStatus().
       function statusChangeCallback(response) {
       console.log('statusChangeCallback');
