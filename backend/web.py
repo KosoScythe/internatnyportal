@@ -3,6 +3,8 @@ from flask import Flask, request
 from flask_cors import CORS
 import json
 import psycopg2.extras
+import re
+
 def connectpg():
         return psycopg2.connect(host="db-postgresql-fra1-54507-do-user-8314748-0.b.db.ondigitalocean.com",database="internatnyportal", user="doadmin", password="ms9axdl0dx93krdb", port = "25060")
 
@@ -16,12 +18,7 @@ def kat():
     kategoria = parametre.get('kategoria')
     typ = parametre.get('typ')
     nazov = parametre.get('nazov')
-    popis = parametre.get('popis') 
-    hashtag = parametre.get('hashtag')
-    
-    if hashtag:
-            hashtag = hashtag.strip().split('#')
-            hashtag = hashtag[1::]
+    hladane_vyrazy = [i.strip() for i in re.split('[, #]', nazov) if i.strip() != '']
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     query = 'select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal where'
@@ -32,26 +29,28 @@ def kat():
     if typ:
         query += ' typ = %s AND'
         to_filter.append(typ)
-    if nazov:
-        query += ' nazov like \'%%\'||%s||\'%%\' OR'
-        to_filter.append(nazov)
-    if popis:
-        query += ' popis like \'%%\'||%s||\'%%\' OR'
-        to_filter.append(popis)
-    if hashtag:
-            if len(hashtag) >= 1:
-                for i in hashtag:
-                        query += ' hashtag like \'%%\'||%s||\'%%\' OR'
-                        to_filter.append(i)
-                        query += ' nazov like \'%%\'||%s||\'%%\' OR'
-                        to_filter.append(i)
-                        query += ' popis like \'%%\'||%s||\'%%\' OR'
-                        to_filter.append(i)
-    if query[-1] == 'R':
-        query = query[:-3]
-    else:
-        query = query[:-4] 
-    if not (kategoria or typ or nazov or popis or hashtag):
+    if len(hladane_vyrazy) != 0:
+        query += ' ('
+        for i in hladane_vyrazy:            
+            query += ' unaccent(lower(nazov)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]    
+        query += ') OR ('
+        for i in hladane_vyrazy:
+            query += ' unaccent(lower(hashtag)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]
+        query += ') OR ('
+        for i in hladane_vyrazy:    
+            query += ' unaccent(lower(popis)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]
+        query += ')'
+    
+    if query[-1] == 'D':
+        query = query[:-4]
+
+    if not (kategoria or typ or nazov or hashtag):
         query = 'select * from portal'
     c.execute(query, to_filter)
     t = c.fetchall()
@@ -82,21 +81,29 @@ def ins():
     a.commit()
     c.close()
     a.close()
-    return 'a string'
+    return ''
 
 @app.route("/nove" , methods=['POST'])
 def nove():
     parametre= request.form
     typ = parametre.get('typ')
+    if typ:
+            typ = typ.strip().split(',')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where typ = %s ORDER BY inserted_at DESC LIMIT 5'
-    to_filter = [typ]
+    query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where '
+    to_filter = []
+    if typ:
+        if len(typ) >= 1:
+            for i in typ:
+                query += 'typ = %s OR '
+                to_filter.append(i)
+    query = query[:-3]
+    query += ' ORDER BY inserted_at DESC LIMIT 5'
     c.execute(query, to_filter)
     t = c.fetchall()
     c.close()
     a.close()
-    print(query,t)
     dict_result = []
     for row in t:
         dict_result.append(dict(row))
