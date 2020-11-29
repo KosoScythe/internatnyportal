@@ -4,9 +4,11 @@ from flask_cors import CORS
 import json
 import psycopg2.extras
 import re
+from OpenSSL import SSL
+
 
 def connectpg():
-        return psycopg2.connect(host="db-postgresql-fra1-54507-do-user-8314748-0.b.db.ondigitalocean.com",database="internatnyportal", user="doadmin", password="ms9axdl0dx93krdb", port = "25060")
+    return psycopg2.connect(host="db-postgresql-fra1-54507-do-user-8314748-0.b.db.ondigitalocean.com",database="internatnyportal", user="doadmin", password="ms9axdl0dx93krdb", port = "25060")
 
 
 app = Flask(__name__)
@@ -112,9 +114,10 @@ def nove():
     return js.decode()
 
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+cif __name__ == "__main__":
+    app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
 
+#app.run('0.0.0.0', debug=True, port=8100, ssl_context='adhoc')
 def get_dict_resultset(sql):
     conn = psycopg2.connect("dbname=pem host=localhost user=postgres password=Drupal#1008")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
