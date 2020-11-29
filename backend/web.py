@@ -18,7 +18,9 @@ def kat():
     kategoria = parametre.get('kategoria')
     typ = parametre.get('typ')
     nazov = parametre.get('nazov')
-    hladane_vyrazy = [i.strip() for i in re.split('[, #]', nazov) if i.strip() != '']
+    hladane_vyrazy = []
+    if nazov:
+        hladane_vyrazy = [i.strip() for i in re.split('[, #]', nazov) if i.strip() != '']
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     query = 'select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal where'
@@ -30,7 +32,7 @@ def kat():
         query += ' typ = %s AND'
         to_filter.append(typ)
     if len(hladane_vyrazy) != 0:
-        query += ' ('
+        query += ' (('
         for i in hladane_vyrazy:            
             query += ' unaccent(lower(nazov)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
             to_filter.append(i)
@@ -45,11 +47,10 @@ def kat():
             query += ' unaccent(lower(popis)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
             to_filter.append(i)
         query = query[:-4]
-        query += ')'
+        query += '))'
     
     if query[-1] == 'D':
         query = query[:-4]
-
     if not (kategoria or typ or nazov or hashtag):
         query = 'select * from portal'
     c.execute(query, to_filter)
@@ -71,7 +72,7 @@ def ins():
     nazov = parametre.get('nazov')
     popis = parametre.get('popis') 
     hashtag = parametre.get('hashtag')
-    user = parametre.get('uzivatel')
+    uzivatel = parametre.get('uzivatel')
     cena = parametre.get('cena')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
