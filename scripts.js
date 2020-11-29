@@ -31,27 +31,19 @@ function loggedUser() {
 	return true;
 }
 
-function menuButton() {
-	var h = document.getElementById('mnBt').innerHTML;
-	if (loggedUser()) {
-		h = '<p>Prihlásený ako: ' + localStorage.getItem('user') + '</p>' + h;
-		h += "<button class='btn bg-warning btn-rounded' onclick = 'logOut()';' >Odhlásiť sa</button>";
-		document.getElementById('mnBt').innerHTML = h;
-	}
-	else {
-		h += "<fb:login-button class='btn btn-info btn-rounded' id='M-btn-prihlas' scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>";
-		document.getElementById('mnBt').innerHTML = h;
-	}
-}
 
 function pridajInzerat() {
-	if (loggedUser()) {
-		window.location.href = "inzerat.html";
-	}
-	else {
-		window.location.href = "facebook-login.html";
-	}
+  if(FB.getAuthResponse() != null) {
+    window.location.href = "inzerat.html";
+  } else {
+    $("#pridajModal").modal();
+  }
 }
+
+function prihlasSa() {
+  $("#loginModal").modal();
+}
+
 
 function acceptInz() {
 	localStorage.setItem('nazov', document.getElementById('nazov').value);
