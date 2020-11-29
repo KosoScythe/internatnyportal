@@ -1,4 +1,4 @@
-var url = "http://68.183.71.15:5000/";
+var url = "https://68.183.71.15:5000/";
 
 function pridajInzerat() {
   if(FB.getAuthResponse() != null) {
@@ -25,7 +25,7 @@ function addAd() {
 
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
-	var url = "http://68.183.71.15:5000/";
+	var url = "https://68.183.71.15:5000/";
 	url = url + "insert";
 	
 	xmlhttp.onreadystatechange = function() {
@@ -58,7 +58,7 @@ function showLatestAd(typ, kategoria) {
 
 	
 	var xmlhttp = new XMLHttpRequest();
-	var url = "http://68.183.71.15:5000/";
+	var url = "https://68.183.71.15:5000/";
 	url = url + "nove";
 	
 	xmlhttp.onreadystatechange = function() {
@@ -101,7 +101,7 @@ function findInDatabase(stranka){
 
 function databaseConnector(tmp){
 	var xmlhttp = new XMLHttpRequest();
-	var url = "http://68.183.71.15:5000/";
+	var url = "https://68.183.71.15:5000/";
 	url = url + "kategoria";
 	
 	xmlhttp.onreadystatechange = function() {
@@ -123,13 +123,21 @@ function JsonAndContent(data) {
 	if (data.length > 0) {
 		for (var i  = 0; i < data.length; i++){
 			var diel = data[i];
-			content += "<div class='card'>"+
-			"<div class='card-body'>" +
-				"<h5 class='card-title'>" + diel["nazov"] +"</h5>" + 
-				"<p class='card-text'>"+ diel["popis"] +"</p>" + 
-				"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
-			"</div>"+
-		"</div>"
+			content += 	"<div class='card'>"+
+							"<div class='card-body'>" +
+								"<div class='row'>" +
+									"<div class='col'>" +
+										"<h5 class='card-title'>" + diel["nazov"] +"</h5>" + 
+									"</div>" +
+									"<div class='col'>" +
+										"<p class='card-text'>Cena: "+ diel["cena"] +"</p>" + 
+									"</div>" +
+								"</div>" +
+								"<p class='card-text'>"+ diel["popis"] +"</p>" + 
+								"<p class='card-text'>"+ diel["hashtag"] +"</p>" + 
+								"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
+							"</div>"+
+						"</div>"
 		}
 	}
 	else {

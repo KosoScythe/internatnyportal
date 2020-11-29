@@ -27,6 +27,7 @@
 			</div>
 			<div class = "navbar-right" id="mnBt">
 				<button id="rightUserButtons" class="btn btn-warning btn-rounded" onclick = "pridajInzerat();">Pridať inzerát</button>
+				<button id="rightUserButtons" class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>
 			</div>
 		</nav>
 		
@@ -64,48 +65,62 @@
 							</div>
 						</div>
 						<div class="col">
-							<input id = "hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadané hashtagy" aria-label="Hľadané výrazy">
+							<input id = "hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadané výrazy" aria-label="Hľadané výrazy">
 							<button class="btn btn-info btn-rounded" type="submit" >Hľadať</button><br>
 						</div>
 					</div>
 				</form>
-
 				<div id = "content" class ="list-group">
 				</div>
-			
-			
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
+			</div>
+			<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
+				<div class="container-fluid text-center text-md-left bg-primary">
+					<div class="row">
+						<div class="col-md-6 mt-md-0 mt-3">
+							<h5 class="text-uppercase">Internátny portál</h5>
+							<p>Zlepšujeme život študentom na Mlynoch</p>
 						</div>
-						<div class="modal-body">
-							<div class="d-flex w-100 justify-content-between">
-									<h5 class="mb-1">Predám USB-C nabíjačku</h5>
-									<h5 class="mb-1"><b>Cena:</b>6€</h5>
-									<small>pred 4 dňami</small>
-								</div>
-								<p class="mb-1">Predám USB - C nabíjačku. Bývam na Šturáku na izbe VBA 906.</p>
+						<hr class="clearfix w-100 d-md-none pb-3">
+						<div class="col-md-3 mb-md-0 mb-3">
+							<h5 class="text-uppercase">O portáli</h5>
+							<ul class="list-unstyled">
+								<li>
+									<a id = "footerLink" href="portal.html">O nás</a>
+								</li>
+								<li>
+									<a id = "footerLink" href="#!">Podmienky používania</a>
+								</li>
+								<li>
+									<a id = "footerLink" href="#!">Ochrana osobných údajov</a>
+								</li>
+							</ul>
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
-							<button type="button" class="btn btn-primary" onclick="window.location.href='uplne-realny-facebook.html'">Kontaktovať na Facebooku</button>
-						</div>
+						<div class="col-md-3 mb-md-0 mb-3">
+							<h5 class="text-uppercase">Užitočné odkazy</h5>
+							<ul class="list-unstyled">
+							<li>
+							<a id ="footerLink" href="https://mlyny.uniba.sk/">Mlyny</a>
+							</li>
+							<li>
+							<a id = "footerLink" href="https://uniba.sk/">Uniba</a>
+							</li>
+							<li>
+							<a id = "footerLink" href="https://www.stuba.sk/">STU</a>
+							</li>
+							</ul>
 						</div>
 					</div>
 				</div>
-			
-				<!-- Modal HELP -->
-				<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
+				<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
+				</div>
+			</footer>
+		</div>
+		<!-- Modal HELP -->
+		<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Nápoveda</h5>
+						<h5 class="modal-title" id="exampleModalLabel">NÁPOVEDA</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
@@ -114,66 +129,68 @@
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1">Vyhľadávanie inzerátov</h5>
 						</div>
-						<p class="mb-1">Pokiaľ chcete vyhľadávať produkty/služby/aktivity prejdite na príslušnú podstránku. Prvým krokom je výber, či hľadáme ponuky, dopyt alebo oboje. 
-						Po vybratí zadáme do vyhľadávacieho pola pojmy, ktoré cheme hľadať. Pred každý pojem dávame hashtag (#).<br>
-						Napríklad chceme vyhľadať a kúpiť USB-C nabíjačku, z pravého okna si vyberieme možnosť ponuky a do vyhľadávacieho poľa zadáme - #nabíjačka #usbc</p>
-						<br>
-						
+						<p class="mb-1">Pokiaľ chcete vyhľadávať produkty/služby/aktivity prejdite na príslušnú podstránku. Následne vyberieme typ a kategóriu, ktorú chceme prehľadávať.
+							Po vybratí zadáme do vyhľadávacieho pola pojmy, ktoré cheme hľadať.
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1">Pridávanie inzerátov</h5>
 						</div>
-						<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
+						<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. 
+							Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu.</p>
 						<br>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
 					</div>
-					</div>
 				</div>
-				</div>
-
+			</div>
 		</div>
-		<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
-			<div class="container-fluid text-center text-md-left bg-primary">
-				<div class="row">
-					<div class="col-md-6 mt-md-0 mt-3">
-						<h5 class="text-uppercase">Internátny portál</h5>
-						<p>Zlepšujeme život študentom na Mlynoch</p>
+      
+		<!-- Modal Pridaj -->
+		<div class="modal fade" id="pridajModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Nápoveda</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					<hr class="clearfix w-100 d-md-none pb-3">
-					<div class="col-md-3 mb-md-0 mb-3">
-						<h5 class="text-uppercase">O portáli</h5>
-						<ul class="list-unstyled">
-							<li>
-								<a id = "footerLink" href="portal.html">O nás</a>
-							</li>
-							<li>
-								<a id = "footerLink" href="#!">Podmienky používania</a>
-							</li>
-							<li>
-								<a id = "footerLink" href="#!">Ochrana osobných údajov</a>
-							</li>
-						</ul>
+					<div class="modal-body">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Pridávanie inzerátov</h5>
+						</div>
+						<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
+						<br>
+						<b>Prihláste sa prosím.</b><fb:login-button scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>
 					</div>
-					<div class="col-md-3 mb-md-0 mb-3">
-						<h5 class="text-uppercase">Užitočné odkazy</h5>
-						<ul class="list-unstyled">
-						<li>
-						<a id ="footerLink" href="https://mlyny.uniba.sk/">Mlyny</a>
-						</li>
-						<li>
-						<a id = "footerLink" href="https://uniba.sk/">Uniba</a>
-						</li>
-						<li>
-						<a id = "footerLink" href="https://www.stuba.sk/">STU</a>
-						</li>
-						</ul>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
 					</div>
 				</div>
 			</div>
-			<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
+		</div>
+
+		<!-- Modal Prihlas -->
+		<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Prihláste sa</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Sposoby prihlásenia</h5>
+						</div>
+						<fb:login-button scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
+					</div>
+				</div>
 			</div>
-		</footer>
 		</div>
 	</body>
 </html>

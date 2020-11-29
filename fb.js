@@ -60,9 +60,6 @@
       }(document, 'script', 'facebook-jssdk'));
       
       function testAPI() {
-      //document.getElementById("M-btn-odhlas").style.display="block";
-      //document.getElementById("M-btn-prihlas").style.display="none";
-      //document.getElementById("M-btn-pridaj").style.display="block";
         console.log('Welcome! Fetching your information.... ');
         FB.api('/me?fields=name,email', function(response) {
         console.log('Successful login for: ' + response.name);
@@ -70,19 +67,18 @@
         //TU SI ULOZIT EMAIL
         
         var h = document.getElementById('mnBt').innerHTML;
-        h = "<button class='btn bg-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>"
-        h += "<button class='btn bg-warning btn-rounded' onclick = 'mojaFunkcia();' >Odhlásiť sa</button>";
+        h = "<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>"
+        h +="<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
         document.getElementById('mnBt').innerHTML = h;
         
         $("#helpModal").modal('hide');
         $("#pridajModal").modal('hide');
         $("#loginModal").modal('hide');
-      //var im = document.getElementById("profileImage").setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=normal");     
-      //document.getElementById("status").innerHTML = '<p>Vitaj '+response.name+ '! <br>email: '+response.email+'</p>'
+     
       });
       }
      
-       function mojaFunkcia(){
+       function logOut(){
         FB.logout();
         window.location.reload();
 

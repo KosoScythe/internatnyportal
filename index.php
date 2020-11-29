@@ -26,12 +26,8 @@
 				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" style="height: 3vh;"></a>
 			</div>
 			<div class = "navbar-right" id="mnBt">
-        <button class='btn bg-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>
-        <button class='btn bg-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>
-        <!--
-        <button class='btn bg-warning btn-rounded' onclick = 'force_click()'>Prihlásiť sa</button>
-				<fb:login-button class='btn bg-warning btn-rounded' id="fbb" scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button> 
-        -->
+				<button id="rightUserButtons" class='btn bg-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>
+				<button id="rightUserButtons" class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>
 			</div>
 			
 		</nav>
@@ -89,80 +85,81 @@
 		</footer>
 		
 		<!-- Modal HELP -->
-			<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+		<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-				  <div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Nápoveda</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Vyhľadávanie inzerátov</h5>
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">NÁPOVEDA</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					<p class="mb-1">Pokiaľ chcete vyhľadávať produkty/služby/aktivity prejdite na príslušnú podstránku. Prvým krokom je výber, či hľadáme ponuky, dopyt alebo oboje. 
-					Po vybratí zadáme do vyhľadávacieho pola pojmy, ktoré cheme hľadať. Pred každý pojem dávame hashtag (#).<br>
-					Napríklad chceme vyhľadať a kúpiť USB-C nabíjačku, z pravého okna si vyberieme možnosť ponuky a do vyhľadávacieho poľa zadáme - #nabíjačka #usbc</p>
-					<br>
-          
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Pridávanie inzerátov</h5>
+					<div class="modal-body">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Vyhľadávanie inzerátov</h5>
+						</div>
+						<p class="mb-1">Pokiaľ chcete vyhľadávať produkty/služby/aktivity prejdite na príslušnú podstránku. Následne vyberieme typ a kategóriu, ktorú chceme prehľadávať.
+							Po vybratí zadáme do vyhľadávacieho pola pojmy, ktoré cheme hľadať.
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Pridávanie inzerátov</h5>
+						</div>
+						<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. 
+							Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu.</p>
+						<br>
 					</div>
-					<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
-					<br>
-          <b>PROSTE SA PRIHLÁS TY MARHA! -></b><fb:login-button scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
-				  </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
+					</div>
 				</div>
-			  </div>
 			</div>
+		</div>
       
-    <!-- Modal Pridaj -->
-			<div class="modal fade" id="pridajModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+		<!-- Modal Pridaj -->
+		<div class="modal fade" id="pridajModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-				  <div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Nápoveda</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body">
-          
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Pridávanie inzerátov</h5>
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Nápoveda</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
-					<br>
-          <b>PROSTE SA PRIHLÁS TY MARHA! -></b><fb:login-button scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
-				  </div>
+					<div class="modal-body">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Pridávanie inzerátov</h5>
+						</div>
+						<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
+						<br>
+						<b>Prihláste sa prosím.</b><fb:login-button scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
+					</div>
 				</div>
-			  </div>
 			</div>
-      
-       <!-- Modal Prihlas -->
-			<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+		</div>
+
+		<!-- Modal Prihlas -->
+		<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-				  <div class="modal-header">					
-          <b>PROSTE SA PRIHLÁS TY MARHA! -></b><fb:login-button scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
-				  </div>
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Prihláste sa</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Sposoby prihlásenia</h5>
+						</div>
+						<fb:login-button scope='public_profile,email' onlogin='checkLoginState();'></fb:login-button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
+					</div>
 				</div>
-			  </div>
 			</div>
-      
-      
-      
-      
+		</div>
 	</body>
 </html>
