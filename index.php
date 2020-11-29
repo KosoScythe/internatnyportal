@@ -29,8 +29,8 @@
 				<button id="rightUserButtons" class="btn btn-warning btn-rounded" onclick = "pridajInzerat();">Pridať inzerát</button>
 				<button class="btn btn-info btn-rounded" id="M-btn-odhlas" onclick="mojaFunkcia()">Odhlásiť sa!</button>
                                   <script>
-                                  document.getElementById("M-btn-odhlas").style.display="none";
-                                  document.getElementById("M-btn-pridaj").style.display="none";
+                                	document.getElementById("M-btn-odhlas").style.display="none";
+                                  	document.getElementById("M-btn-pridaj").style.display="none";
                                   </script>
 			</div>
 			

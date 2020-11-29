@@ -1,4 +1,4 @@
-var url = "http://68.183.71.15:5000/"
+var url = "http://68.183.71.15:5000/";
 
 function logIn() {
 	var url = window.location.href;
@@ -63,37 +63,69 @@ function acceptInz() {
 
 function showroom() {
 	if (localStorage.getItem('cena') != null) {
-		document.getElementById('semPridaj').innerHTML = "";
-		document.getElementById('semPridaj').innerHTML = "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start bg-light rounded'><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" + localStorage.getItem('nazov') + "</h5><h5 class='mb-1'><b>Cena: " + localStorage.getItem('cena') + "</b></h5><small>dnes</small></div><p class='mb-1'>" + localStorage.getItem('popis') + "</p></a>";
+		document.getElementById('content').innerHTML = "";
+		document.getElementById('content').innerHTML = "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start bg-light rounded'><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" + localStorage.getItem('nazov') + "</h5><h5 class='mb-1'><b>Cena: " + localStorage.getItem('cena') + "</b></h5><small>dnes</small></div><p class='mb-1'>" + localStorage.getItem('popis') + "</p></a>";
 	}
 }
-function findInDatabase(stranka='n'){
-	/*if (stranka == 'aktivity') {
+function findInDatabase(stranka){
+	var tmp = null;
+	if (stranka == 'aktivity') {
 		hashtag = document.getElementById('hashtag').value;
+		if (hashtag) {
+			tmp = "hashtag=" + hashtag;
+		}
 	}
 	else {
 		kategoria = document.getElementById('kategoria').value;
 		typ = document.getElementById('typ').value;
 		hashtag = document.getElementById('hashtag').value;
-		console.log(kategoria,typ, hashtag);
+		tmp = "kategoria=" + kategoria +"&typ=" + typ;
+		if (hashtag){
+			tmp + "&hashtag=" + hashtag;
+		}
 	}
-	
-	return false;*/
-	console.log("Leeeeeeeeeeroy");
+
+	databaseConnector(tmp);
+
+	return false;
+}
+
+function databaseConnector(tmp){
 	var xmlhttp = new XMLHttpRequest();
-	var url = url + "kategoria";
+	var url = "http://68.183.71.15:5000/";
+	url = url + "kategoria";
 	
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			var data2 = JSON.parse(this.responseText);
-			vypisLog(data2);
+			var data = JSON.parse(this.responseText);
+			JsonAndContent(data);
 		}
 	}
 	xmlhttp.open("POST", url, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	var tmp = "?kategoria=1";
 	xmlhttp.send(tmp);
 	return false;
+}
+
+function JsonAndContent(data) {
+	console.log(data);
+	if (data.length > 0) {
+		for (var i  = 0; i < data.length; i++){
+			var diel = data[i];
+			var content = "<div class='card'>"+
+			"<div class='card-body'>" +
+				"<h5 class='card-title'>" + diel["nazov"] +"</h5>" + 
+				"<p class='card-text'>"+ diel["popis"] +"</p>" + 
+				"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
+			"</div>"+
+		"</div>"
+		}
+	}
+	else {
+		var content = "<h2>Sorry, nič také som nenašiel :(</h2>";
+	}
+	
+	document.getElementById('content').innerHTML = content;
 }
 
 function checkWords(res) {
