@@ -28,6 +28,40 @@ function insertAdIntoDatabase(tmp) {
 	return false;
 }
 
+function showLatestAd(typ, kategoria) {
+	var tmp = '';
+	if (typ != 0) {
+		tmp += typ;
+	}
+	else if (kategoria != 0) {
+		if (typ) {
+			tmp += '&kategoria=' + kategoria; 
+		}
+		else {
+			tmp += kategoria;
+		}
+	}
+
+	if (!tmp) {
+		tmp = null;
+	}
+
+	
+	var xmlhttp = new XMLHttpRequest();
+	var url = "http://68.183.71.15:5000/";
+	url = url + "nove";
+	
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(this.responseText);
+			JsonAndContent(data);
+		}
+	}
+	xmlhttp.open("POST", url, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
+}
 
 function findInDatabase(stranka){
 	var tmp = null;
