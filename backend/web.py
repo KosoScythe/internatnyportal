@@ -1,5 +1,6 @@
 import psycopg2
 from flask import Flask, request
+from flask_cors import CORS
 import json
 import psycopg2.extras
 def connectpg():
@@ -7,6 +8,7 @@ def connectpg():
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/kategoria" , methods=['POST'])
 def kat():
@@ -16,14 +18,14 @@ def kat():
     nazov = parametre.get('nazov')
     popis = parametre.get('popis') 
     hashtag = parametre.get('hashtag')
-    hashtag = hashtag.strip().split('#')
-    if(len(hashtag)>1):
+   
+    if hashtag:
+            hashtag = hashtag.strip().split('#')
             hashtag = hashtag[1::]
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'select * from portal where'
+    query = 'select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,user from portal where'
     to_filter = []
-
     if kategoria:
         query += ' kategoria = %s AND'
         to_filter.append(kategoria)
@@ -36,14 +38,15 @@ def kat():
     if popis:
         query += ' popis like \'%%\'||%s||\'%%\' OR'
         to_filter.append(popis)
-    if len(hashtag) >= 1:
-        for i in hashtag:
-                query += ' hashtag like \'%%\'||%s||\'%%\' OR'
-                to_filter.append(i)
-                query += ' nazov like \'%%\'||%s||\'%%\' OR'
-                to_filter.append(i)
-                query += ' popis like \'%%\'||%s||\'%%\' OR'
-                to_filter.append(i)
+    if hashtag:
+            if len(hashtag) >= 1:
+                for i in hashtag:
+                        query += ' hashtag like \'%%\'||%s||\'%%\' OR'
+                        to_filter.append(i)
+                        query += ' nazov like \'%%\'||%s||\'%%\' OR'
+                        to_filter.append(i)
+                        query += ' popis like \'%%\'||%s||\'%%\' OR'
+                        to_filter.append(i)
     if query[-1] == 'R':
         query = query[:-3]
     else:
