@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="sk">
 	<head>
 		<meta charset="utf-8">
@@ -11,9 +10,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 		<link href="fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
 		<script src="scripts.js"></script>
-	</head>
+	</head>	
 	
-	<body onload = "setUserOnLoad();menuButton();">
+	<body onload = "menuButton();">
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
@@ -21,48 +20,94 @@
 				</div>
 				<a id = "navBarButton" class="navbar-brand" href="produkty.html">Produkty</a>
 				<a id = "navBarButton" class="navbar-brand" href="sluzby.html">Služby</a>
-				<a id = "navBarButton" class="navbar-brand" href="aktivity.html">Aktivity</a>
+				<a id = "navBarButton" class="navbar-brand rounded" href="aktivity.html">Aktivity</a>
 				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" style="height: 3vh;"></a>
 			</div>
 			<div class = "navbar-right" id="mnBt">
 				<button id="rightUserButtons" class="btn btn-warning btn-rounded" onclick = "pridajInzerat();">Pridať inzerát</button>
 			</div>
 		</nav>
-		<div class='container'>
-			<h4>Pridanie inzerátu</h4></br>
-			<form action="javascript: acceptInz();" >
-				<div class="form-group">
-					<label for="exampleInputEmail1">Názov</label>
-					<input type="text" class="form-control" id="nazov" aria-describedby="emailHelp" required>
+		
+		<div id="page-container">
+			<div class = "container w-75 border-right-1 border-left-1 text ">
+				<h4>Pridanie inzerátu</h4></br>
+				<form id="formular" action="javascript: addAd();">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Názov</label>
+						<input type="text" class="form-control" id="nazov" aria-describedby="nazov" required>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Cena</label>
+						<input type="text" class="form-control" id="cena" required>
+					</div>
+					<div class="form-group">
+						<label for="typ">Typ</label>
+						<select class="custom-select" id="typ" required>
+							<option value="1">Produkty - dopyt</option>
+							<option value="2">Produkty - ponuka</option>
+							<option value="3">Služby - ponuka</option>
+							<option value="4">Služby - dopyt</option>
+							<option value="5">Aktivity</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="typ">Kategória</label>
+						<select class="custom-select" id="kategoria" required>
+							<option value="1">Elektronika</option>
+							<option value="2">Drogéria</option>
+							<option value="3">Jedlo</option>
+							<option value="4">Knihy</option>
+							<option value="5">Študijné materiály</option>
+							<option value="6">Oblečenie</option>
+							<option value="7">Alkohol</option>
+							<option value="8">Iné</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="popis">Popis</label>
+						<input type="text" class="form-control" id="popis" required>
+					</div>
+					<div class="form-group">
+						<label for="hashtagy">Hashtagy</label> <small>Heslá píš aj so znakom #!</small>
+						<input type="text" class="form-control" id="hashtagy" required>
+					</div>
+					
+					<button type="submit" class="btn btn-primary">Pridať inzerát</button>
+				</form>
+			
+				<!-- Modal HELP -->
+				<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Nápoveda</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Vyhľadávanie inzerátov</h5>
+						</div>
+						<p class="mb-1">Pokiaľ chcete vyhľadávať produkty/služby/aktivity prejdite na príslušnú podstránku. Prvým krokom je výber, či hľadáme ponuky, dopyt alebo oboje. 
+						Po vybratí zadáme do vyhľadávacieho pola pojmy, ktoré cheme hľadať. Pred každý pojem dávame hashtag (#).<br>
+						Napríklad chceme vyhľadať a kúpiť USB-C nabíjačku, z pravého okna si vyberieme možnosť ponuky a do vyhľadávacieho poľa zadáme - #nabíjačka #usbc</p>
+						<br>
+						
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Pridávanie inzerátov</h5>
+						</div>
+						<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
+						<br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
+					</div>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Cena</label>
-					<input type="text" class="form-control" id="cena" required>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Kategória</label>
-					<select class="custom-select" id="inputGroupSelect01" required>
-					<option disabled selected>Vyber možnosť</option>
-					<option value="1">Produkty - ponuka</option>
-					<option value="2">Produkty - dopyt</option>
-					<option value="3">Služby - ponuka</option>
-					<option value="4">Služby - dopyt</option>
-					<option value="5">Aktivity</option>
-				</select>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Popis</label>
-					<input type="text" class="form-control" id="popis" required>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Hashtagy</label> <small>Heslá píš aj so znakom #!</small>
-					<input type="text" class="form-control" id="hashtagy" required>
-				</div>
-				
-				<button type="submit" class="btn btn-primary">Pridať inzerát</button>
-			</form>
-		</div>
 
+		</div>
 		<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
 			<div class="container-fluid text-center text-md-left bg-primary">
 				<div class="row">
@@ -104,38 +149,6 @@
 			<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
 			</div>
 		</footer>
-		
-		<!-- Modal HELP -->
-			<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Nápoveda</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Vyhľadávanie inzerátov</h5>
-					</div>
-					<p class="mb-1">Pokiaľ chcete vyhľadávať produkty/služby/aktivity prejdite na príslušnú podstránku. Prvým krokom je výber, či hľadáme ponuky, dopyt alebo oboje. 
-					Po vybratí zadáme do vyhľadávacieho pola pojmy, ktoré cheme hľadať. Pred každý pojem dávame hashtag (#).<br>
-					Napríklad chceme vyhľadať a kúpiť USB-C nabíjačku, z pravého okna si vyberieme možnosť ponuky a do vyhľadávacieho poľa zadáme - #nabíjačka #usbc</p>
-					<br>
-					
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Pridávanie inzerátov</h5>
-					</div>
-					<p class="mb-1">Pre pridávanie inzerátov je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
-					<br>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvoriť</button>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		
+		</div>
 	</body>
 </html>

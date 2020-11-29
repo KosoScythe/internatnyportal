@@ -31,7 +31,6 @@ function loggedUser() {
 	return true;
 }
 
-
 function pridajInzerat() {
   if(FB.getAuthResponse() != null) {
     window.location.href = "inzerat.html";
@@ -53,18 +52,30 @@ function acceptInz() {
 	window.location.href = "sluzby.html";
 }
 
-function showroom() {
-	if (localStorage.getItem('cena') != null) {
-		document.getElementById('content').innerHTML = "";
-		document.getElementById('content').innerHTML = "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start bg-light rounded'><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" + localStorage.getItem('nazov') + "</h5><h5 class='mb-1'><b>Cena: " + localStorage.getItem('cena') + "</b></h5><small>dnes</small></div><p class='mb-1'>" + localStorage.getItem('popis') + "</p></a>";
+function insertAdIntoDatabase(tmp) {
+	var xmlhttp = new XMLHttpRequest();
+	var url = "http://68.183.71.15:5000/";
+	url = url + "insert";
+	
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(this.responseText);
+		}
 	}
+	xmlhttp.open("POST", url, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
 }
+
+
 function findInDatabase(stranka){
 	var tmp = null;
 	if (stranka == 'aktivity') {
 		hashtag = document.getElementById('hashtag').value;
+		tmp = 'typ=5'
 		if (hashtag) {
-			tmp = "hashtag=" + hashtag;
+			tmp = "&hashtag=" + hashtag;
 		}
 	}
 	else {
@@ -101,10 +112,11 @@ function databaseConnector(tmp){
 
 function JsonAndContent(data) {
 	console.log(data);
+	var content = '';
 	if (data.length > 0) {
 		for (var i  = 0; i < data.length; i++){
 			var diel = data[i];
-			var content = "<div class='card'>"+
+			content += "<div class='card'>"+
 			"<div class='card-body'>" +
 				"<h5 class='card-title'>" + diel["nazov"] +"</h5>" + 
 				"<p class='card-text'>"+ diel["popis"] +"</p>" + 
