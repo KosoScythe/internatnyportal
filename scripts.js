@@ -1,4 +1,4 @@
-var url = "http://68.183.71.15:5000/";
+var url = "https://internatnyportalxyz.xyz:5000/";
 
 function pridajInzerat() {
   if(FB.getAuthResponse() != null) {
@@ -25,7 +25,7 @@ function addAd() {
 
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
-	var url = "http://68.183.71.15:5000/";
+	var url = "https://internatnyportalxyz.xyz:5000/";
 	url = url + "insert";
 	
 	xmlhttp.onreadystatechange = function() {
@@ -58,7 +58,7 @@ function showLatestAd(typ, kategoria) {
 
 	
 	var xmlhttp = new XMLHttpRequest();
-	var url = "http://68.183.71.15:5000/";
+	var url = "https://internatnyportalxyz.xyz:5000/";
 	url = url + "nove";
 	
 	xmlhttp.onreadystatechange = function() {
@@ -101,7 +101,7 @@ function findInDatabase(stranka){
 
 function databaseConnector(tmp){
 	var xmlhttp = new XMLHttpRequest();
-	var url = "http://68.183.71.15:5000/";
+	var url = "https://internatnyportalxyz.xyz:5000/";
 	url = url + "kategoria";
 	
 	xmlhttp.onreadystatechange = function() {
