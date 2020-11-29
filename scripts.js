@@ -12,6 +12,17 @@ function prihlasSa() {
   $("#loginModal").modal();
 }
 
+function addAd() {
+	var nazov = document.getElementById('nazov').value;
+	var cena =  document.getElementById('cena').value;
+	var typ =  document.getElementById('typ').value;
+	var kategoria =  document.getElementById('kategoria').value;
+	var popis = document.getElementById('popis').value;
+	var hashtagy = document.getElementById('hashtagy').value;
+	var tmp = 'nazov=' + nazov + '&cena=' + cena + '&typ=' + typ + '&kategoria=' + kategoria + '&popis=' + popis + '&hashtag=' + hashtagy + '&uzivatel=jozkomrkvicka@abc.com'//response.email;
+	insertAdIntoDatabase(tmp);
+}
+
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
 	var url = "http://68.183.71.15:5000/";
@@ -19,7 +30,6 @@ function insertAdIntoDatabase(tmp) {
 	
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(this.responseText);
 		}
 	}
 	xmlhttp.open("POST", url, true);
@@ -31,14 +41,14 @@ function insertAdIntoDatabase(tmp) {
 function showLatestAd(typ, kategoria) {
 	var tmp = '';
 	if (typ != 0) {
-		tmp += typ;
+		tmp += 'typ=' + typ;
 	}
 	else if (kategoria != 0) {
 		if (typ) {
 			tmp += '&kategoria=' + kategoria; 
 		}
 		else {
-			tmp += kategoria;
+			tmp += 'kategoria=' + kategoria;
 		}
 	}
 
@@ -66,19 +76,21 @@ function showLatestAd(typ, kategoria) {
 function findInDatabase(stranka){
 	var tmp = null;
 	if (stranka == 'aktivity') {
+		console.log('a');
 		hashtag = document.getElementById('hashtag').value;
 		tmp = 'typ=5'
 		if (hashtag) {
-			tmp = "&hashtag=" + hashtag;
+			tmp += "&nazov=" + hashtag;
 		}
 	}
 	else {
+		console.log('b');
 		kategoria = document.getElementById('kategoria').value;
 		typ = document.getElementById('typ').value;
 		hashtag = document.getElementById('hashtag').value;
 		tmp = "kategoria=" + kategoria +"&typ=" + typ;
 		if (hashtag){
-			tmp + "&hashtag=" + hashtag;
+			tmp += "&nazov=" + hashtag;
 		}
 	}
 
@@ -100,6 +112,7 @@ function databaseConnector(tmp){
 	}
 	xmlhttp.open("POST", url, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	console.log(tmp);
 	xmlhttp.send(tmp);
 	return false;
 }
