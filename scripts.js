@@ -19,7 +19,7 @@ function addAd() {
 	var kategoria =  document.getElementById('kategoria').value;
 	var popis = document.getElementById('popis').value;
 	var hashtagy = document.getElementById('hashtagy').value;
-	var tmp = 'nazov=' + nazov + '&cena=' + cena + '&typ=' + typ + '&kategoria=' + kategoria + '&popis=' + popis + '&hashtag=' + hashtagy + '&uzivatel=jozkomrkvicka@abc.com'//response.email;
+	var tmp = 'nazov=' + nazov + '&cena=' + cena + '&typ=' + typ + '&kategoria=' + kategoria + '&popis=' + popis + '&hashtag=' + hashtagy + '&uzivatel=' + response.email;
 	insertAdIntoDatabase(tmp);
 }
 

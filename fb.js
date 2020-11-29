@@ -59,12 +59,14 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
       
+      var mail = '';
+
       function testAPI() {
         console.log('Welcome! Fetching your information.... ');
         FB.api('/me?fields=name,email', function(response) {
         console.log('Successful login for: ' + response.name);
 
-        //TU SI ULOZIT EMAIL
+       mail = response.email;
         
         var h = document.getElementById('mnBt').innerHTML;
         h = "<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>"
