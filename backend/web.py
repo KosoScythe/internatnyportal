@@ -18,13 +18,13 @@ def kat():
     nazov = parametre.get('nazov')
     popis = parametre.get('popis') 
     hashtag = parametre.get('hashtag')
-   
+    
     if hashtag:
             hashtag = hashtag.strip().split('#')
             hashtag = hashtag[1::]
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,user from portal where'
+    query = 'select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal where'
     to_filter = []
     if kategoria:
         query += ' kategoria = %s AND'
@@ -62,6 +62,47 @@ def kat():
         dict_result.append(dict(row))
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
+
+
+@app.route("/insert" , methods=['POST'])
+def ins():
+    parametre= request.form
+    kategoria = parametre.get('kategoria')
+    typ = parametre.get('typ')
+    nazov = parametre.get('nazov')
+    popis = parametre.get('popis') 
+    hashtag = parametre.get('hashtag')
+    user = parametre.get('uzivatel')
+    cena = parametre.get('cena')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'INSERT INTO portal (nazov,cena,kategoria,typ,popis,hashtag,uzivatel) VALUES (%s,%s,%s,%s,%s,%s,%s);'
+    to_filter = [nazov,cena,int(kategoria),int(typ),popis,hashtag,uzivatel]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return 'a string'
+
+@app.route("/nove" , methods=['POST'])
+def nove():
+    parametre= request.form
+    typ = parametre.get('typ')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where typ = %s ORDER BY inserted_at DESC LIMIT 5'
+    to_filter = [typ]
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    print(query,t)
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
