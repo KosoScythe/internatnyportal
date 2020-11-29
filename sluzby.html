@@ -14,7 +14,7 @@
 		<script src="fb.js"></script>
 	</head>	
 	
-	<body onload = "menuButton(); showLatestAd('3,4', 0)">
+	<body onload = "showLatestAd('3,4', 0)">
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
@@ -64,7 +64,7 @@
 							</div>
 						</div>
 						<div class="col">
-							<input id = "hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadané hashtagy" aria-label="Hľadané hashtagy (oddeľ medzerou)">
+							<input id = "hashtag" class="form-control mr-sm-3" type="text" pattern="^(#[A-Za-z1-9]+)*" placeholder="Hľadané hashtagy" aria-label="Hľadané hashtagy (oddeľ medzerou)">
 							<button class="btn btn-info btn-rounded" type="submit" >Hľadať</button><br>
 						</div>
 					</div>

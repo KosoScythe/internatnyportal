@@ -14,7 +14,7 @@
 		<script src="fb.js"></script>
 	</head>
 	
-	<body onload = "setUserOnLoad();">
+	<body>
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
