@@ -18,9 +18,9 @@
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
-					<a href = "index.php"> <img src = "img/icon2.png" > </a>
+					<a href = "https://internatnyportalxyz.xyz/"> <img src = "img/icon2.png" > </a>
 				</div>
-				<a id = "activated" class="navbar-brand rounded" href="#">Produkty</a>
+				<a id = "navBarButton" class="navbar-brand rounded" href="#">Produkty</a>
 				<a id = "navBarButton" class="navbar-brand" href="sluzby.html">Služby</a>
 				<a id = "navBarButton"  class="navbar-brand" href="aktivity.html">Aktivity</a>
 				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" style="height: 3vh;"></a>
