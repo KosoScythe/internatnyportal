@@ -44,49 +44,49 @@
 				<div class="polozky"><img class="obrazok" src="img/sport.svg" /><p>Šport</p></div>
 				<div class="polozky"><img class="obrazok" src="img/boardgame.svg" /><p>Stolové hry</p></div>
 			</div>
-		</div>
-		<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
-			<div class="container-fluid text-center text-md-left bg-primary">
-				<div class="row">
-					<div class="col-md-6 mt-md-0 mt-3">
-						<h5 class="text-uppercase">Internátny portál</h5>
-						<p>Zlepšujeme život študentom na Mlynoch</p>
-					</div>
-					<hr class="clearfix w-100 d-md-none pb-3">
-					<div class="col-md-3 mb-md-0 mb-3">
-						<h5 class="text-uppercase">O portáli</h5>
-						<ul class="list-unstyled">
+		
+			<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
+				<div class="container-fluid text-center text-md-left bg-primary">
+					<div class="row">
+						<div class="col-md-6 mt-md-0 mt-3">
+							<h5 class="text-uppercase">Internátny portál</h5>
+							<p>Zlepšujeme život študentom na Mlynoch</p>
+						</div>
+						<hr class="clearfix w-100 d-md-none pb-3">
+						<div class="col-md-3 mb-md-0 mb-3">
+							<h5 class="text-uppercase">O portáli</h5>
+							<ul class="list-unstyled">
+								<li>
+									<a id = "footerLink" href="portal.html">O nás</a>
+								</li>
+								<li>
+									<a id = "footerLink" href="#!">Podmienky používania</a>
+								</li>
+								<li>
+									<a id = "footerLink" href="#!">Ochrana osobných údajov</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-3 mb-md-0 mb-3">
+							<h5 class="text-uppercase">Užitočné odkazy</h5>
+							<ul class="list-unstyled">
 							<li>
-								<a id = "footerLink" href="portal.html">O nás</a>
+							<a id ="footerLink" href="https://mlyny.uniba.sk/">Mlyny</a>
 							</li>
 							<li>
-								<a id = "footerLink" href="#!">Podmienky používania</a>
+							<a id = "footerLink" href="https://uniba.sk/">Uniba</a>
 							</li>
 							<li>
-								<a id = "footerLink" href="#!">Ochrana osobných údajov</a>
+							<a id = "footerLink" href="https://www.stuba.sk/">STU</a>
 							</li>
-						</ul>
-					</div>
-					<div class="col-md-3 mb-md-0 mb-3">
-						<h5 class="text-uppercase">Užitočné odkazy</h5>
-						<ul class="list-unstyled">
-						<li>
-						<a id ="footerLink" href="https://mlyny.uniba.sk/">Mlyny</a>
-						</li>
-						<li>
-						<a id = "footerLink" href="https://uniba.sk/">Uniba</a>
-						</li>
-						<li>
-						<a id = "footerLink" href="https://www.stuba.sk/">STU</a>
-						</li>
-						</ul>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
-			</div>
-		</footer>
-		
+				<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
+				</div>
+			</footer>
+		</div>
 		<!-- Modal HELP -->
 		<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
