@@ -14,26 +14,26 @@
 		<script src="fb.js"></script>
 	</head>
 	
-	<body>
+	<body onload = "showLatestAd('1,2',0); vyberKategoriu();">
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
 					<a href = "index.php"> <img src = "img/icon2.png" > </a>
 				</div>
-				<a id = "navBarButton" class="navbar-brand" href="produkty.html">Produkty</a>
+				<a id = "activated" class="navbar-brand rounded" href="#">Produkty</a>
 				<a id = "navBarButton" class="navbar-brand" href="sluzby.html">Služby</a>
-				<a id = "navBarButton" class="navbar-brand" href="aktivity.html">Aktivity</a>
+				<a id = "navBarButton"  class="navbar-brand" href="aktivity.html">Aktivity</a>
 				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" style="height: 3vh;"></a>
 			</div>
 			<div class = "navbar-right" id="mnBt">
-				<button id="rightUserButtons" class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>
+				<button id="rightUserButtons" class="btn btn-warning btn-rounded" onclick = "pridajInzerat();">Pridať inzerát</button>
 				<button id="rightUserButtons" class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>
 			</div>
-			
 		</nav>
+		
 		<div id="page-container">
 			<div class = "container w-75 border-right-1 border-left-1 text ">
-				<div style="background-color: blue;">
+			<div style="background-color: blue;">
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" /><p>Elektronika</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=2"' class="polozky"><img class="obrazok" src="img/drogeria.svg" /><p>Drogéria</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=3"' class="polozky"><img class="obrazok" src="img/jedlo.svg" /><p>Potraviny</p></div>
@@ -46,7 +46,6 @@
 					<div class="polozky"><img class="obrazok" src="img/boardgame.svg" /><p>Stolové hry</p></div>
 				</div>
 			</div>
-		
 			<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
 				<div class="container-fluid text-center text-md-left bg-primary">
 					<div class="row">
