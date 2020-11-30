@@ -22,13 +22,13 @@ function addAd() {
 	var tmp = 'nazov=' + nazov + '&cena=' + cena + '&typ=' + typ + '&kategoria=' + kategoria + '&popis=' + popis + '&hashtag=' + hashtagy + '&uzivatel=' + sessionStorage.getItem('email');
 	insertAdIntoDatabase(tmp);
 	if (typ == 1 || typ == 2) {
-		window.open('produkty.html');
+		window.open('produkty.html', "_self", function(){("#inzeratModal").modal("show");});
 	}
 	else if (typ == 4 || typ == 3) {
-		window.open('sluzby.html');
+		window.open('sluzby.html',"_self", function(){("#inzeratModal").modal("show");});
 	}
 	else {
-		window.open('aktivity.html');
+		window.open('aktivity.html', "_self", function(){("#inzeratModal").modal("show");});
 	}
 }
 
