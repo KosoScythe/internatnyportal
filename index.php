@@ -31,18 +31,20 @@
 			</div>
 			
 		</nav>
-		<div class = "container">
-			<div style="background-color: blue;">
-		    <div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" /><p>Elektronika</p></div>
-				<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=2"' class="polozky"><img class="obrazok" src="img/drogeria.svg" /><p>Drogéria</p></div>
-				<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=3"' class="polozky"><img class="obrazok" src="img/jedlo.svg" /><p>Potraviny</p></div>
-				<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=4"' class="polozky"><img class="obrazok" src="img/books.svg" /><p>Knihy</p></div>
-				<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=5"' class="polozky"><img class="obrazok" src="img/s_books.svg" /><p>Študijné materiály</p></div>
-				<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=6"' class="polozky"><img class="obrazok" src="img/oblecenie.svg" /><p>Oblečenie</p></div>
-				<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=7"' class="polozky"><img class="obrazok" src="img/alkohol.svg" /><p>Alkohol</p></div>
-				<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=8"' class="polozky"><img class="obrazok" src="img/ine.svg" /><p>Iné</p></div>
-				<div class="polozky"><img class="obrazok" src="img/sport.svg" /><p>Šport</p></div>
-				<div class="polozky"><img class="obrazok" src="img/boardgame.svg" /><p>Stolové hry</p></div>
+		<div id="page-container">
+			<div class = "container w-75 border-right-1 border-left-1 text ">
+				<div style="background-color: blue;">
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" /><p>Elektronika</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=2"' class="polozky"><img class="obrazok" src="img/drogeria.svg" /><p>Drogéria</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=3"' class="polozky"><img class="obrazok" src="img/jedlo.svg" /><p>Potraviny</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=4"' class="polozky"><img class="obrazok" src="img/books.svg" /><p>Knihy</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=5"' class="polozky"><img class="obrazok" src="img/s_books.svg" /><p>Študijné materiály</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=6"' class="polozky"><img class="obrazok" src="img/oblecenie.svg" /><p>Oblečenie</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=7"' class="polozky"><img class="obrazok" src="img/alkohol.svg" /><p>Alkohol</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=8"' class="polozky"><img class="obrazok" src="img/ine.svg" /><p>Iné</p></div>
+					<div class="polozky"><img class="obrazok" src="img/sport.svg" /><p>Šport</p></div>
+					<div class="polozky"><img class="obrazok" src="img/boardgame.svg" /><p>Stolové hry</p></div>
+				</div>
 			</div>
 		
 			<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
