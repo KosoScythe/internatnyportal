@@ -76,7 +76,7 @@ body {
 
 #rightUserButtons {
   height: 5vh;
-  padding-right: 1vw;
+  margin-right: 0.5vw;
 }
 
 #footerLink {
