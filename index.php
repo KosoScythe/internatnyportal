@@ -46,7 +46,7 @@
 					<div class="polozky"><img class="obrazok" src="img/boardgame.svg" /><p>Stolové hry</p></div>
 				</div>
 			</div>
-			<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
+			<footer id="indexFooter" class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
 				<div class="container-fluid text-center text-md-left bg-primary">
 					<div class="row">
 						<div class="col-md-6 mt-md-0 mt-3">
