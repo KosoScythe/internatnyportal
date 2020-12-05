@@ -31,9 +31,9 @@
 			</div>
 		</nav>
 		
-		<div id="page-container">
-			<div class = "container w-75 border-right-1 border-left-1 text ">
-			<div style="background-color: blue;">
+		<section id="page-container">
+			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
+				<div style="background-color: blue;">
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" /><p>Elektronika</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=2"' class="polozky"><img class="obrazok" src="img/drogeria.svg" /><p>Drogéria</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=3"' class="polozky"><img class="obrazok" src="img/jedlo.svg" /><p>Potraviny</p></div>
@@ -45,7 +45,7 @@
 					<div class="polozky"><img class="obrazok" src="img/sport.svg" /><p>Šport</p></div>
 					<div class="polozky"><img class="obrazok" src="img/boardgame.svg" /><p>Stolové hry</p></div>
 				</div>
-			</div>
+			</main>
 			<footer id="indexFooter" class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
 				<div class="container-fluid text-center text-md-left bg-primary">
 					<div class="row">
@@ -87,7 +87,7 @@
 				<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
 				</div>
 			</footer>
-		</div>
+</section>
 		<!-- Modal HELP -->
 		<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
 			<div class="modal-dialog">

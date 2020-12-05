@@ -30,8 +30,8 @@
 			</div>
 		</nav>
 		
-		<div id="page-container">
-			<div class = "container w-75 border-right-1 border-left-1 text ">
+		<section id="page-container">
+			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
 				<h4>Pridanie inzerátu</h4></br>
 				<form id="formular" action="javascript: addAd();">
 					<div class="form-group">
@@ -55,6 +55,7 @@
 					<div class="form-group">
 						<label for="typ">Kategória</label>
 						<select class="custom-select" id="kategoria" required>
+							<option value="">Všetko</option>
 							<option value="1">Elektronika</option>
 							<option value="2">Drogéria</option>
 							<option value="3">Jedlo</option>
@@ -70,13 +71,13 @@
 						<input type="text" class="form-control" id="popis" required>
 					</div>
 					<div class="form-group">
-						<label for="hashtagy">Kľúčové slová</label> <small>Kľúčové slová píš oddelené čiarkou, medzerou či hashtagom (#)!</small>
+						<label for="hashtagy">Kľúčové slová</label>
 						<input type="text" class="form-control" id="hashtagy" required>
 					</div>
 					
 					<button type="submit" class="btn btn-primary">Pridať inzerát</button>
 				</form>
-			</div>
+			</main>
 			<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
 				<div class="container-fluid text-center text-md-left bg-primary">
 					<div class="row">
@@ -118,7 +119,7 @@
 				<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
 				</div>
 			</footer>
-		</div>
+		</section>
 		<!-- Modal HELP -->
 		<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
 			<div class="modal-dialog">

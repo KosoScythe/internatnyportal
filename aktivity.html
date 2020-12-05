@@ -31,23 +31,23 @@
 			</div>
 		</nav>
 		
-		<div id="page-container">
-			<div class = "container w-75 border-right-1 border-left-1 text ">
+		<section id="page-container">
+			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
 				<h1 style="padding-top: 2vw; padding-bottom: 2vw;" class="align-self-center"><i>Aktivity</i></h1>
-				<form class="form-inline md-form mr-auto mb-4" action="javascript:;" onsubmit="findInDatabase('aktivity')">
+				<form class="form-inline md-form mr-auto mb-4 bg-info" onsubmit="findInDatabase('aktivity')">
 					<div class="row w-100">
 						<div class="col">
 							<h3 class="align-self-center"><i>O aké aktivity máš záujem?</i></h3>
 						</div>
 						<div class="col">
 							<input id = "hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadané výrazy" aria-label="Hľadané výrazy">
-							<button class="btn btn-info btn-rounded" type="submit" >Hľadať</button><br>
+							<button class="btn btn-warning btn-rounded" type="submit" >Hľadať</button><br>
 						</div>
 					</div>
 				</form>
-				<div id = "content" class ="list-group">
-				</div>
-			</div>
+				<section id = "content" class ="list-group">
+				</section>
+			</main>
 			<footer class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
 				<div class="container-fluid text-center text-md-left bg-primary">
 					<div class="row">
@@ -89,7 +89,7 @@
 				<div class="footer-copyright text-center py-3">© 2020 Copyright: Filip Eliaš, Zuzana Hlávková, Tomáš Kosec, Maroš Malý
 				</div>
 			</footer>
-		</div>
+		</section>
 		<!-- Modal HELP -->
 		<div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
