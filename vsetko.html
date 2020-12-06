@@ -36,11 +36,11 @@
 		</nav>
 		
 		<section id="page-container">
-			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
+			<main id="kontajner" class = "container w-75 border-right-1 border-left-1 text shadow-lg">
 				<h1 style="padding-top: 2vw; padding-bottom: 2vw;" class="align-self-center"><i>Produkty</i></h1>
 				<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;" onsubmit="findInDatabase()">
 					<div class="row w-100">
-						<div class="col">
+						<div id="typ_box">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="typ">Typ</label>
@@ -51,7 +51,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="col">
+						<div id="kategoria_box">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="kategoria">Kategória</label>
@@ -69,7 +69,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="col">
+						<div id="vyrazy_box">
 							<input id ="hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadané výrazy" aria-label="Hľadané výrazy">
 							<button class="btn btn-warning btn-rounded" type="submit" >Hľadať</button><br>
 						</div>
