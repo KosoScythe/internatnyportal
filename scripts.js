@@ -47,7 +47,7 @@ function insertAdIntoDatabase(tmp) {
 	return false;
 }
 
-function showLatestAd(typ, kategoria) {
+function showLatestAd(typ, kategoria, urln=0) {
 	var tmp = '';
 	if (typ != 0) {
 		tmp += 'typ=' + typ;
@@ -65,9 +65,15 @@ function showLatestAd(typ, kategoria) {
 		tmp = null;
 	}
 	
+	
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "nove";
+	if (urln == 0){
+		url = url + "nove";
+	}
+	else {
+		url = url + "vsetky";	
+	}
 	
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
