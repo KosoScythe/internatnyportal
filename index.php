@@ -37,6 +37,7 @@
 		<section id="page-container">
 			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
 				<div style="background-color: blue;">
+					<div style="cursor: pointer;" onclick = 'location.href="produkty.html"' class="polozky"><img class="obrazok" src="img/all.svg" /><p>Všetko</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" alt="Elektro" /><p>Elektronika</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=2"' class="polozky"><img class="obrazok" src="img/drogeria.svg" alt="Drogéria" /><p>Drogéria</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=3"' class="polozky"><img class="obrazok" src="img/jedlo.svg" alt="Jedlo" /><p>Potraviny</p></div>
