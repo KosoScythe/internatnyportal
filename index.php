@@ -23,6 +23,7 @@
 				<div class = "navbar-brand">
 					<a href = "https://internatnyportalxyz.xyz/"> <img class = "icon_ip" src = "img/icon2.png" alt="Logo"> </a>
 				</div>
+				<a id = "navBarButton" class="navbar-brand rounded" href="vsetko.html">Všetko</a>
 				<a id = "navBarButton" class="navbar-brand rounded" href="produkty.html">Produkty</a>
 				<a id = "navBarButton" class="navbar-brand" href="sluzby.html">Služby</a>
 				<a id = "navBarButton"  class="navbar-brand" href="aktivity.html">Aktivity</a>
@@ -47,7 +48,6 @@
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=7"' class="polozky"><img class="obrazok" src="img/alkohol.svg" alt="Alkohol" /><p>Alkohol</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=8"' class="polozky"><img class="obrazok" src="img/ine.svg" alt="Iné" /><p>Iné</p></div>
 					<div class="polozky"><img class="obrazok" src="img/sport.svg" alt="Šport" /><p>Šport</p></div>
-					<div class="polozky" onclick="javascript: showLatestAd('1,2,3,4,5,6,7,8',0,5)"><img class="obrazok" src="img/boardgame.svg" alt="Spoločenské hry"/><p>Všetko možné</p></div>
 				</div>
 			</main>
 			<footer id="indexFooter" class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">
