@@ -1,0 +1,125 @@
+body {
+    padding-top: 130px;
+  }
+  
+  .navLogo {
+      width: 1vw;
+      height: 1vw;
+  }
+  
+  .polozky {
+    background-color: #99ccff;
+    left: 30px;
+    float: left;
+    margin-top: 1em;
+    padding: 1em;
+    width: 275px;
+    height:180px;
+    box-sizing: content-box;
+    font-weight: 500;
+  }
+  
+  .polozky p {
+    margin-left: 55%;
+    margin-top: 25%;
+  }
+  
+  .obrazok{
+    width: 180px;
+    height: 180px;
+    width: 48%;
+    float: left;
+  }
+  
+  #aaa {
+      padding-bottom: 20px;
+  }
+  
+  .mb3 {
+      margin-top: 1rem;
+  }
+  
+  #page-container {
+    position: absolute;
+    /*min-height: 100vh;*/
+    padding-top:10%;
+  }
+  
+  #content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
+  }
+  
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+  }
+  
+  #indexFooter {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+  }
+  
+  #funguj:hover{
+      background-color: #808080;
+  }
+  
+  #activated {
+      background-color: white;
+      color: black;
+      padding: 0.3vw;
+  }
+  
+  #navBarButton:hover {
+      text-decoration-line: underline;
+      text-decoration-color: white;
+  }
+  
+  #abc {
+      opacity: 75%;
+  }
+  
+  .navbar-left{
+      width:100%;
+  }
+
+  .navbar-right{
+    width: 100%;
+    padding-left: 25%;
+}
+  
+  .icon_ip{
+    position: relative;  
+  }
+  
+  
+
+  #pridaj_inzerat{
+    margin-right: 5%;
+  }
+
+  #footerLink {
+      color: white;
+  }
+  
+  #content{
+    padding-bottom: 5vh;
+  }
+  
+  #formular {
+    padding-bottom: 8vh;
+    font-size: 2vh;
+  }
+  
+  #karta {
+
+    font-size: 2vh;
+  }
+  
+  form {
+    padding: 3vh 3vh 2vh 3vh;
+    border-radius: 25px;
+  }
