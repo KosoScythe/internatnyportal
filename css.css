@@ -19,6 +19,24 @@ body {
   font-weight: 500;
 }
 
+#kontajner{
+  width: 75%;
+}
+
+#typ_box{
+  float:left;
+  padding:1%;
+}
+#kategoria_box{
+float:left;
+padding:1%;
+}
+
+#vyrazy_box{
+float:left;
+padding:1%;
+}
+
 .polozky p {
   margin-left: 55%;
   margin-top: 25%;

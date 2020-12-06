@@ -2,6 +2,7 @@
 
 <html lang="sk">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
 		<title> Internátny portál </title>
 		<link rel="shortcut icon" type="png" href= "img/icon.png" >
@@ -21,7 +22,7 @@
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
-					<a href = "https://internatnyportalxyz.xyz/"> <img src = "img/icon2.png" > </a>
+					<a href = "https://internatnyportalxyz.xyz/"> <img class = "icon_ip" src = "img/icon2.png" > </a>
 				</div>
 				<a id = "navBarButton" class="navbar-brand" href="produkty.html">Produkty</a>
 				<a id = "navBarButton" class="navbar-brand" href="sluzby.html">Služby</a>
@@ -35,10 +36,10 @@
 		</nav>
 		
 		<section id="page-container">
-			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
+			<main  id="kontajner" class = "container border-right-1 border-left-1 text shadow-lg">
 				<h1 style="padding-top: 2vw; padding-bottom: 2vw;" class="align-self-center"><i>Aktivity</i></h1>
 				<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;" onsubmit="findInDatabase('aktivity')">
-					<div class="row w-100">
+					<div id=vyrazy_box >
 						<div class="col">
 							<h3 class="align-self-center"><i>O aké aktivity máš záujem?</i></h3>
 						</div>

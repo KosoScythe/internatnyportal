@@ -2,6 +2,7 @@
 
 <html lang="sk">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
 		<title> Internátny portál </title>
 		<link rel="shortcut icon" type="png" href= "img/icon.png" >
@@ -21,7 +22,7 @@
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
-					<a href = "https://internatnyportalxyz.xyz/"> <img src = "img/icon2.png" > </a>
+					<a href = "https://internatnyportalxyz.xyz/"> <img class = "icon_ip" src = "img/icon2.png" > </a>
 				</div>
 				<a id = "navBarButton" class="navbar-brand" href="produkty.html">Produkty</a>
 				<a id = "activated" class="navbar-brand rounded" href="#">Služby</a>
@@ -35,11 +36,11 @@
 		</nav>
 		
 		<section id="page-container">
-			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
+			<main  id="kontajner" class = "container border-right-1 border-left-1 text shadow-lg">
 				<h1 style="padding-top: 2vw; padding-bottom: 2vw;" class="align-self-center"><i>Služby</i></h1>
 				<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;" onsubmit="findInDatabase()">
 					<div class="row w-100">
-						<div class="col">
+						<div id="typ_box">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="typ">Typ</label>
@@ -50,7 +51,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="col">
+						<div id="kategoria_box">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<label class="input-group-text" for="kategoria">Kategória</label>
@@ -68,7 +69,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="col">
+						<div id="vyrazy_box">
 							<input id = "hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadané výrazy" aria-label="Hľadané výrazy">
 							<button class="btn btn-warning btn-rounded" type="submit" >Hľadať</button><br>
 						</div>

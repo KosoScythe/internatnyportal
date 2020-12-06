@@ -41,8 +41,7 @@ body {
   
   #page-container {
     position: absolute;
-    /*min-height: 100vh;*/
-    padding-top:10%;
+    min-height: 100vh;
   }
   
   #content-wrap {
@@ -87,15 +86,41 @@ body {
   }
 
   .navbar-right{
-    width: 100%;
-    padding-left: 25%;
+    width:100%;
 }
-  
-  .icon_ip{
-    position: relative;  
+
+    #pridaj_inzerat{
+        margin-left:20%;
+    }
+
+    #kontajner{
+        width: 100%;
+        padding-top: 10%;
+        margin-top: -10%;
+    }
+
+  .navbar-brand{
+      display: none;
   }
   
+  .icon_ip{
+    display: none;  
+  }
   
+  #typ_box{
+      width: 100%;
+      float:left;
+  }
+  #kategoria_box{
+    width: 100%;
+    float:left;
+}
+
+#vyrazy_box{
+    width: 100%;
+    float:left;
+}
+
 
   #pridaj_inzerat{
     margin-right: 5%;
