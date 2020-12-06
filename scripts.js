@@ -124,13 +124,11 @@ function databaseConnector(tmp){
 	}
 	xmlhttp.open("POST", url, true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	console.log(tmp);
 	xmlhttp.send(tmp);
 	return false;
 }
 
 function JsonAndContent(data) {
-	console.log(data);
 	var content = '';
 	if (data.length > 0) {
 		for (var i  = 0; i < data.length; i++){
