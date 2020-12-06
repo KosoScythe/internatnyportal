@@ -91,7 +91,7 @@ def nove():
     parametre= request.form
     typ = parametre.get('typ')
     if typ:
-            typ = typ.strip().split(',')
+        typ = typ.strip().split(',')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where '
@@ -101,6 +101,9 @@ def nove():
             for i in typ:
                 query += 'typ = %s OR '
                 to_filter.append(i)
+        else:
+            query += 'typ = %s OR '
+            to_filter.append(typ[0])
     query = query[:-3]
     query += ' ORDER BY inserted_at DESC LIMIT 5'
     c.execute(query, to_filter)
@@ -113,6 +116,34 @@ def nove():
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
 
+@app.route("/vsetky" , methods=['POST'])
+def vsetky():
+    parametre= request.form
+    typ = parametre.get('typ')
+    if typ:
+        typ = typ.strip().split(',')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where '
+    to_filter = []
+    if typ:
+        if len(typ) >= 1:
+            for i in typ:
+                query += 'typ = %s OR '
+                to_filter.append(i)
+        else:
+            query += 'typ = %s OR '
+            to_filter.append(typ[0])
+    query = query[:-3]
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
