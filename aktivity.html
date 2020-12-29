@@ -52,15 +52,18 @@
 				<h1 style="padding-top: 2vw; padding-bottom: 2vw;" class="align-self-center"><i>Aktivity</i></h1>
 				<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;" onsubmit="findInDatabase('aktivity')">
 					<div id=vyrazy_box class="col-12">
-						<div class="col">
-							<h3 class="align-self-center"><i>O aké aktivity máš záujem?</i></h3>
+						
+						<div class="row" style="margin-top:1em;">
+							<div class="col-12">
+								<h3 class="align-self-center"><i>O aké aktivity máš záujem?</i></h3>
+							</div>
+
+							<div class="col-12">
+								<input id = "hashtag" class="form-control w-50" type="text" placeholder="Hľadaná aktivita" aria-label="Hľadané výrazy">
+							</div>
 						</div>
 
-						<div class="col-12">
-							<input id = "hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadaná aktivita" aria-label="Hľadané výrazy">
-						</div>
-
-						<div class="row">
+						<div class="row" style="margin-top:1em;">
 							<div class="col-4">
 								Kedy?
 								<input type="text" id="datepicker" placeholder="Kedykoľvek"/>
@@ -76,7 +79,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row" style="margin-top:1em;">
 							
 							<div class="col-3">
 								V ktoré dni?
@@ -105,7 +108,7 @@
 							</script>
 						</div>
 
-						<div class="col-12">
+						<div class="col-12" style="margin-top:1em;margin-left:-1em;">
 							<button class="btn btn-warning btn-rounded" type="submit" >Hľadať</button><br>
 						</div>
 					</div>
