@@ -21,7 +21,7 @@
 		<script src="fb.js"></script>
 	</head>
 
-	<body onload = "showLatestAd('5',0)">
+	<body onload = "showLatestAd('5',0);">
 		<nav class="navbar fixed-top navbar-dark bg-primary">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
@@ -33,13 +33,15 @@
 				<a id = "activated" class="navbar-brand rounded" href="#">Aktivity</a>
 				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" alt="Nápoveda" style="height: 3vh;"></a>
 			</div>
+			<div class = "navbar-right" id="pridavanie_akt">
+				<button id='pridaj_aktivitu' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>
+			</div>
 			<div class = "navbar-right" id="mnBt">
-				<button id="pridaj_aktivitu" class="btn btn-warning btn-rounded" onclick = "pridajAktivitu();">Pridať aktivitu</button>
-				<button id="pridaj_inzerat" class="btn btn-warning btn-rounded" onclick = "pridajInzerat();">Pridať inzerát</button>
-				<button id="prihlas_sa" class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>
+
 			</div>
 
 			<script>
+
 				function pridajAktivitu(){
 					window.location.href = "pridaj_aktivitu.html";
 				}

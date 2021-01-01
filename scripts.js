@@ -154,7 +154,7 @@ function JsonAndContent(data) {
 		var content = "<h2>Sorry, nič také som nenašiel :(</h2>";
 	}
 	
-	document.getElementById('content').innerHTML = content;
+	//document.getElementById('content').innerHTML = content;
 }
 
 function vyberKategoriu(){

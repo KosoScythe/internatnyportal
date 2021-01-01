@@ -31,8 +31,7 @@
 				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" alt="Nápoveda" style="height: 3vh;"></a>
 			</div>
 			<div class = "navbar-right" id="mnBt">
-				<button id="pridaj_inzerat" class="btn btn-warning btn-rounded" onclick = "pridajInzerat();">Pridať inzerát</button>
-				<button id="prihlas_sa" class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>
+
 			</div>
 		</nav>
 		

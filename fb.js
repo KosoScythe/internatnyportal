@@ -10,9 +10,11 @@
       // Logged into your app and Facebook.
       testAPI();
       } else if (response.status === 'not_authorized') {
+        neprihlaseny();
       // The person is logged into Facebook, but not your app.
       //document.getElementById('status').innerHTML = 'Login with Facebook ';
       } else {
+        neprihlaseny();
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       //document.getElementById('status').innerHTML = 'Login with Facebook ';
@@ -28,7 +30,8 @@
       }
       window.fbAsyncInit = function() {
       FB.init({
-      appId : '2779146055678575',
+      //appId : '2779146055678575', //internatnyportalxyz.xyz
+      appId : '2820959324850465', //localhost Maros
       cookie : true, // enable cookies to allow the server to access
       // the session
       xfbml : true, // parse social plugins on this page
@@ -68,20 +71,42 @@
 
         sessionStorage.setItem('email', response.email);
         
-        var h = document.getElementById('mnBt').innerHTML;
-        h = "<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>"
-        h +="<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
+        //h = "<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+        //h +="<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
+        //h += "<img id ='profileImage' src='' width='50' height='50' class=profilepic onclick='mojProfil()'>";
+        //document.getElementById('mnBt').innerHTML = h;
+
+        h = "<button id='btn-pridaj_inzerat' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+				h += "<button id='btn-odhlas_sa' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
+        h += "<img id ='btn-moj_profil' src='' width='50' height='50' class='profilepic' onclick='mojProfil()'></img>";
         document.getElementById('mnBt').innerHTML = h;
+
+        var im = document.getElementById("btn-moj_profil").setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=normal");
         
         $("#helpModal").modal('hide');
         $("#pridajModal").modal('hide');
         $("#loginModal").modal('hide');
+
+        localStorage.setItem('prihlaseny', 'ANO');
      
       });
       }
+
+      function neprihlaseny(){
+        h = "<button id='btn-pridaj_inzerat' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+			  h += "<button id='btn-prihlas_sa' class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>";
+        document.getElementById('mnBt').innerHTML = h;
+        
+        localStorage.setItem('prihlaseny', 'NIE');
+      }
+
+       function mojProfil(){
+         console.log("moj profil");
+       }
      
        function logOut(){
         FB.logout();
+
         window.location.reload();
 
         var h = document.getElementById('mnBt').innerHTML;
