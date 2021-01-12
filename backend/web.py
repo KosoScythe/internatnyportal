@@ -235,7 +235,7 @@ def inzeratyuzivatela():
 
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select nazov,popis,dni,aktivity."dateFrom"::text, aktivity."dateTo"::text, aktivity."casOd"::text, aktivity."casDo"::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select id from ciselnik_uzivatelia where email = %s)'
+    query = 'Select nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select id from ciselnik_uzivatelia where email = %s)'
     to_filter = []
     to_filter.append(user)
     c.execute(query, to_filter)
@@ -263,6 +263,61 @@ def upravprodukt():
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     query = 'Update portal set nazov = %s,cena = %s,kategoria = %s,typ = %s,popis = %s,hashtag= %s,uzivatel=%s where id = %s;'
     to_filter = [nazov,cena,int(kategoria),int(typ),popis,hashtag,uzivatel, int(idcko)]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return ''
+
+@app.route("/upravakivity" , methods=['POST'])
+def upravakivity():
+    parametre= request.form
+    idcko = parametre.get('id')
+    nazov = parametre.get('nazov')
+    popis = parametre.get('popis') 
+    datefrom = parametre.get('datefrom')
+    dateto = parametre.get('dateto')
+    casod = parametre.get('casod')
+    casdo = parametre.get('casdo')
+    pocet = parametre.get('pocet')
+    lokalita = parametre.get('lokalita')
+    opakuje = parametre.get('opakuje')
+    dni = parametre.get('dni')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Update aktivity set nazov = %s, popis = %s, datefrom = %s, dateto = %s, casod = %s, casdo = %s, max = %s, lokalita = %s, opakuje = %s, dni = %s where id = %s;'
+    to_filter = [nazov,popis,datefrom,dateto,casod,casdo,int(pocet),lokalita,opakuje,dni, int(idcko)]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return ''
+
+@app.route("/odstranprodukt" , methods=['POST'])
+def odstranprodukt():
+    parametre= request.form
+    idcko = parametre.get('id')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Delete from portal where id = %s;'
+    to_filter = [int(idcko)]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return ''
+
+@app.route("/odstrankivitu" , methods=['POST'])
+def odstranaktivitu():
+    parametre= request.form
+    idcko = parametre.get('id')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Delete from aktivity where id = %s;'
+    to_filter = [int(idcko)]
+    c.execute(query, to_filter)
+    a.commit()
+    query = 'Delete from aktivity_prihlaseny where id_aktivity = %s;'
     c.execute(query, to_filter)
     a.commit()
     c.close()
