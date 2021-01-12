@@ -61,6 +61,7 @@ function showLatestAd(typ, kategoria, urln=0) {
 				JsonAndContent(data);
 			}
 		}
+		console.log(tmp);
 		xmlhttp.open("POST", url, true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send(tmp);

@@ -37,7 +37,7 @@
 		
 		<section id="page-container">
 			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
-			<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;" onsubmit="findEverything()">
+				<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;" onsubmit="findEverything()">
 					<div class="row w-100">
 						<h3 class="align-self-center">Čo hľadáte?</h3>
 						<div id="vyrazy_box">
