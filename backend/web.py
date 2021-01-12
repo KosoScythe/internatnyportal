@@ -149,6 +149,7 @@ def vsetky():
 def allin():
     parametre= request.form
     nazov = parametre.get('nazov')
+    hladane_vyrazy = []
     if nazov:
         hladane_vyrazy = [i.strip() for i in re.split('[, #]', nazov) if i.strip() != '']
     a = connectpg()
@@ -224,7 +225,6 @@ def inzeratyuzivatela():
     query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where uzivatel = %s'
     to_filter = []
     to_filter.append(user)
-
     c.execute(query, to_filter)
     t = c.fetchall()
     c.close()
@@ -235,23 +235,43 @@ def inzeratyuzivatela():
 
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select nazov,popis,dni,aktivity."dateFrom"::text, aktivity."dateTo"::text, aktivity."casOd"::text, aktivity."casDo"::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select email from ciselnik_uzivatelia where owner = ciselnik_uzivatelia.id)'
+    query = 'Select nazov,popis,dni,aktivity."dateFrom"::text, aktivity."dateTo"::text, aktivity."casOd"::text, aktivity."casDo"::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select id from ciselnik_uzivatelia where email = %s)'
     to_filter = []
-
+    to_filter.append(user)
     c.execute(query, to_filter)
     t = c.fetchall()
     c.close()
-    a.close()
-   
+    a.close()  
     for row in t:
         dict_result.append(dict(row))
     
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
 
+@app.route("/upravprodukt" , methods=['POST'])
+def upravprodukt():
+    parametre= request.form
+    idcko = parametre.get('id')
+    kategoria = parametre.get('kategoria')
+    typ = parametre.get('typ')
+    nazov = parametre.get('nazov')
+    popis = parametre.get('popis') 
+    hashtag = parametre.get('hashtag')
+    uzivatel = parametre.get('uzivatel')
+    cena = parametre.get('cena')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Update portal set nazov = %s,cena = %s,kategoria = %s,typ = %s,popis = %s,hashtag= %s,uzivatel=%s where id = %s;'
+    to_filter = [nazov,cena,int(kategoria),int(typ),popis,hashtag,uzivatel, int(idcko)]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return ''
+
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0')
-    app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
+    app.run(host='0.0.0.0')
+    #app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
 
 #app.run('0.0.0.0', debug=True, port=8100, ssl_context='adhoc')
 def get_dict_resultset(sql):
