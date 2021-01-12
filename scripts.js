@@ -52,7 +52,7 @@ function showLatestAd(typ, kategoria, urln=0) {
 	if (dul != null) {
 		var xmlhttp = new XMLHttpRequest();
 		var url = "https://internatnyportalxyz.xyz:5000/";
-		var tmp = "allin="+dul;
+		var tmp = 'allin="'+dul+'"';
 		window.localStorage.removeItem("everything");
 		
 		xmlhttp.onreadystatechange = function() {
