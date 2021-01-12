@@ -362,6 +362,25 @@ def selectjednuaktivitu():
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
 
+@app.route("/selectprihlaseneaktivity" , methods=['POST'])
+def selectprihlaseneaktivity():
+    parametre= request.form
+    user = parametre.get('owner')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where aktivity.id in (Select id_aktivity from aktivity_prihlaseny where id_uzivatel = ( Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s))'
+    to_filter = []
+    to_filter.append(user)
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
+
 if __name__ == "__main__":
     #app.run(host='0.0.0.0')
     app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
