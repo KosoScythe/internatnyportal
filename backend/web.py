@@ -270,8 +270,8 @@ def upravprodukt():
     return ''
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
-    #app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
+    #app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
 
 #app.run('0.0.0.0', debug=True, port=8100, ssl_context='adhoc')
 def get_dict_resultset(sql):
