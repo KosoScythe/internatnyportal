@@ -53,8 +53,8 @@ def kat():
     
     if query[-1] == 'D':
         query = query[:-4]
-    if not (kategoria or typ or nazov or hashtag):
-        query = 'select * from portal'
+    if not (kategoria or typ or nazov):
+        query = 'select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal'
     c.execute(query, to_filter)
     t = c.fetchall()
     c.close()
@@ -145,7 +145,112 @@ def vsetky():
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
 
+@app.route("/allin" , methods=['POST'])
+def allin():
+    parametre= request.form
+    nazov = parametre.get('nazov')
+    if nazov:
+        hladane_vyrazy = [i.strip() for i in re.split('[, #]', nazov) if i.strip() != '']
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where '
+    to_filter = []
+    if len(hladane_vyrazy) != 0:
+        query += ' (('
+        for i in hladane_vyrazy:            
+            query += ' unaccent(lower(nazov)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]    
+        query += ') OR ('
+        for i in hladane_vyrazy:
+            query += ' unaccent(lower(hashtag)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]
+        query += ') OR ('
+        for i in hladane_vyrazy:    
+            query += ' unaccent(lower(popis)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]
+        query += '))'
+    
+    if query[-1] == 'D':
+        query = query[:-4]
+
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select nazov,popis,dni,aktivity."dateFrom"::text, aktivity."dateTo"::text, aktivity."casOd"::text, aktivity."casDo"::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
+    to_filter = []
+    if len(hladane_vyrazy) != 0:
+        query += ' (('
+        for i in hladane_vyrazy:            
+            query += ' unaccent(lower(nazov)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]    
+        query += ') OR ('
+        for i in hladane_vyrazy:    
+            query += ' unaccent(lower(popis)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]
+        query += '))'
+    
+    if query[-1] == 'D':
+        query = query[:-4]
+
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+   
+    for row in t:
+        dict_result.append(dict(row))
+    
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
+
+@app.route("/inzeratyuzivatela" , methods=['POST'])
+def inzeratyuzivatela():
+    parametre= request.form
+    user = parametre.get('user')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where uzivatel = %s'
+    to_filter = []
+    to_filter.append(user)
+
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select nazov,popis,dni,aktivity."dateFrom"::text, aktivity."dateTo"::text, aktivity."casOd"::text, aktivity."casDo"::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select email from ciselnik_uzivatelia where owner = ciselnik_uzivatelia.id)'
+    to_filter = []
+
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+   
+    for row in t:
+        dict_result.append(dict(row))
+    
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
+
 if __name__ == "__main__":
+    #app.run(host='0.0.0.0')
     app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
 
 #app.run('0.0.0.0', debug=True, port=8100, ssl_context='adhoc')
