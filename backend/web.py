@@ -187,7 +187,7 @@ def allin():
 
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select nazov,popis,dni,aktivity."dateFrom"::text, aktivity."dateTo"::text, aktivity."casOd"::text, aktivity."casDo"::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
+    query = 'Select nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casDo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
     to_filter = []
     if len(hladane_vyrazy) != 0:
         query += ' (('
@@ -222,7 +222,7 @@ def inzeratyuzivatela():
     user = parametre.get('user')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where uzivatel = %s'
+    query = 'Select id,nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where uzivatel = %s'
     to_filter = []
     to_filter.append(user)
     c.execute(query, to_filter)
@@ -235,7 +235,7 @@ def inzeratyuzivatela():
 
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select id from ciselnik_uzivatelia where email = %s)'
+    query = 'Select id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select id from ciselnik_uzivatelia where email = %s)'
     to_filter = []
     to_filter.append(user)
     c.execute(query, to_filter)
@@ -323,6 +323,44 @@ def odstranaktivitu():
     c.close()
     a.close()
     return ''
+
+@app.route("/selectjedenprodukt" , methods=['POST'])
+def selectjeden():
+    parametre= request.form
+    idcko = parametre.get('id')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select id,nazov,cena,kategoria,typ,popis,hashtag,inserted_at::text,uzivatel from portal Where id = %s'
+    to_filter = []
+    to_filter.append(idcko)
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
+
+@app.route("/selectjednuaktivitu" , methods=['POST'])
+def selectjednuaktivitu():
+    parametre= request.form
+    idcko = parametre.get('id')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where aktivity.id = %s'
+    to_filter = []
+    to_filter.append(idcko)
+    c.execute(query, to_filter)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
 
 if __name__ == "__main__":
     #app.run(host='0.0.0.0')
