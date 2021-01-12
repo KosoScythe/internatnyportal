@@ -235,7 +235,7 @@ def inzeratyuzivatela():
 
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select id from ciselnik_uzivatelia where email = %s)'
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s)'
     to_filter = []
     to_filter.append(user)
     c.execute(query, to_filter)
