@@ -48,43 +48,63 @@ function insertAdIntoDatabase(tmp) {
 }
 
 function showLatestAd(typ, kategoria, urln=0) {
-	var tmp = '';
-	if (typ != 0) {
-		tmp += 'typ=' + typ;
-	}
-	else if (kategoria != 0) {
-		if (typ) {
-			tmp += '&kategoria=' + kategoria; 
+	var dul = window.localStorage.getItem("everything");
+	if (dul != null) {
+		var xmlhttp = new XMLHttpRequest();
+		var url = "https://internatnyportalxyz.xyz:5000/";
+		var tmp = "allin="+dul;
+		window.localStorage.removeItem("everything");
+		
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var data = JSON.parse(this.responseText);
+				JsonAndContent(data);
+			}
 		}
-		else {
-			tmp += 'kategoria=' + kategoria;
-		}
-	}
-
-	if (!tmp) {
-		tmp = null;
-	}
-	
-	
-	var xmlhttp = new XMLHttpRequest();
-	var url = "https://internatnyportalxyz.xyz:5000/";
-	if (urln == 0){
-		url = url + "nove";
+		xmlhttp.open("POST", url, true);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send(tmp);
+		return false;	
 	}
 	else {
-		url = url + "vsetky";	
-	}
-	
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(this.responseText);
-			JsonAndContent(data);
+		var tmp = '';
+		if (typ != 0) {
+			tmp += 'typ=' + typ;
 		}
+		else if (kategoria != 0) {
+			if (typ) {
+				tmp += '&kategoria=' + kategoria; 
+			}
+			else {
+				tmp += 'kategoria=' + kategoria;
+			}
+		}
+
+		if (!tmp) {
+			tmp = null;
+		}
+		
+		
+		var xmlhttp = new XMLHttpRequest();
+		var url = "https://internatnyportalxyz.xyz:5000/";
+		if (urln == 0){
+			url = url + "nove";
+		}
+		else {
+			url = url + "vsetky";	
+		}
+		
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var data = JSON.parse(this.responseText);
+				JsonAndContent(data);
+			}
+		}
+		xmlhttp.open("POST", url, true);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send(tmp);
+		return false;	
 	}
-	xmlhttp.open("POST", url, true);
-	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xmlhttp.send(tmp);
-	return false;
 }
 
 function findInDatabase(stranka){
@@ -165,5 +185,11 @@ function vyberKategoriu(){
     document.getElementById('kategoria').value=kat;
     findInDatabase();
   }
+}
+
+function findEverything() {
+	hashtag = document.getElementById('hashtag').value;
+	window.localStorage.setItem("everything", hashtag);
+	window.location.href="https://internatnyportalxyz.xyz/vsetko.html";
 }
        

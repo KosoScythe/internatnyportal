@@ -37,6 +37,15 @@
 		
 		<section id="page-container">
 			<main class = "container w-75 border-right-1 border-left-1 text shadow-lg">
+			<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;" onsubmit="findEverything()">
+					<div class="row w-100">
+						<h3 class="align-self-center">Čo hľadáte?</h3>
+						<div id="vyrazy_box">
+							<input id ="hashtag" class="form-control mr-sm-3" type="text" placeholder="Hľadané výrazy" aria-label="Hľadané výrazy">
+							<button class="btn btn-warning btn-rounded" type="submit" >Hľadať</button><br>
+						</div>
+					</div>
+				</form>
 				<div style="background-color: blue;">
 					<div style="cursor: pointer;" onclick = 'location.href="vsetko.html"' class="polozky"><img class="obrazok" src="img/all.svg" /><p>Všetko</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" alt="Elektro" /><p>Elektronika</p></div>
