@@ -18,7 +18,7 @@
 		<script src="fb.js"></script>
 	</head>
 	
-	<body onload = "showLatestAd('1,2',0); vyberKategoriu();">
+	<body onload = "vyberKategoriu();">
 		<nav class="navbar fixed-top navbar-dark bg-primary row">
 			<div class = "navbar-left">
 				<div class = "navbar-brand">
