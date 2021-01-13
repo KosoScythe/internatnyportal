@@ -214,11 +214,9 @@ function nacitajMojeInzeraty() {
 
 function spracujInzeraty(data) {
   var s = '';
-  console.log(data);
   s += '<table style="width:100%"> <tr>     <th style="width:60%">Moje inzeráty</th>     <th></th>    <th></th>   </tr> ';
   for (var i  = 0; i < data.length; i++){
     var diel = data[i];
-    console.log('diel', diel);
     var inzerat = 'i';
     if (diel['dni'] != null) inzerat = 'a';
     s += '<tr><td>' + diel['nazov'] + '</td>';
@@ -235,10 +233,8 @@ function upravInzerat(id, inzerat) {
 }
 
 function vymazInzerat(id, inzerat) {
-  console.log("odhlas z aktivity");
   var tmp = '';
   tmp = 'id=' + id;
-  console.log(tmp);
   var xmlhttp = new XMLHttpRequest();
   var url = "https://internatnyportalxyz.xyz:5000/";
   if (inzerat == 'i') {
@@ -248,7 +244,6 @@ function vymazInzerat(id, inzerat) {
   }
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      console.log('Inzerat vymazny');
       location.reload();
     }
   }
@@ -260,7 +255,7 @@ function vymazInzerat(id, inzerat) {
 
 function nacitajMojeAktivity() {
   var tmp = '';
-  tmp = 'user=' + sessionStorage.getItem('email');
+  tmp = 'owner=' + sessionStorage.getItem('email');
   var xmlhttp = new XMLHttpRequest();
   var url = "https://internatnyportalxyz.xyz:5000/";
   url = url + "selectprihlaseneaktivity";
@@ -282,9 +277,8 @@ function spracujAktivity(data) {
     s += '<table style="width:100%"> <tr>     <th style="width:70%">Aktivity, kde som prihlásený</th>     <th></th>   </tr> ';
     for (var i  = 0; i < data.length; i++){
       var diel = data[i];
-      console.log('diel', diel);
       s += '<tr><td>' + diel['nazov'];
-      s +='</td><th><button class="btn btn-warning btn-rounded" onclick="odhlasZAktivity(\'' + diel['aktivity.id'] + '\')">Odhlás</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
+      s +='</td><th><button class="btn btn-warning btn-rounded" onclick="odhlasZAktivity(\'' + diel['id'] + '\')">Odhlás</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
     }
     s += '</table>';
   } else {
@@ -300,7 +294,7 @@ function odhlasZAktivity(id) {
     console.log(tmp);
     var xmlhttp = new XMLHttpRequest();
     var url = "https://internatnyportalxyz.xyz:5000/";
-    url = url + "odstrankivitu";
+    url = url + "odhlaszaktivity";
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         console.log('Aktivita odhlasena');
@@ -354,7 +348,6 @@ function aktivitaPodlaID(id) {
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText);
-      console.log('ssssssssaktivitaPodlaID');
 		}
 	}
 	xmlhttp.open("POST", url, true);
