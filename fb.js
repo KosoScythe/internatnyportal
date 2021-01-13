@@ -30,8 +30,8 @@
       }
       window.fbAsyncInit = function() {
       FB.init({
-      //appId : '2779146055678575', //internatnyportalxyz.xyz
-      appId : '2820959324850465', //localhost Maros
+      appId : '2779146055678575', //internatnyportalxyz.xyz
+      //appId : '2820959324850465', //localhost Maros
       cookie : true, // enable cookies to allow the server to access
       // the session
       xfbml : true, // parse social plugins on this page
