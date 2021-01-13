@@ -194,3 +194,241 @@ function findEverything() {
 	window.location.href="https://internatnyportalxyz.xyz/vsetko.html";
 }
        
+function nacitajMojeInzeraty() {
+  var tmp = '';
+  tmp = 'user=' + sessionStorage.getItem('email');
+  var xmlhttp = new XMLHttpRequest();
+	var url = "https://internatnyportalxyz.xyz:5000/";
+	url = url + "inzeratyuzivatela";
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(this.responseText);
+			spracujInzeraty(data);
+		}
+	}
+	xmlhttp.open("POST", url, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
+}
+
+function spracujInzeraty(data) {
+  var s = '';
+  console.log(data);
+  s += '<table style="width:100%"> <tr>     <th style="width:60%">Moje inzeráty</th>     <th></th>    <th></th>   </tr> ';
+  for (var i  = 0; i < data.length; i++){
+    var diel = data[i];
+    console.log('diel', diel);
+    var inzerat = 'i';
+    if (diel['dni'] != null) inzerat = 'a';
+    s += '<tr><td>' + diel['nazov'] + '</td>';
+    s +='<th><button class="btn btn-warning btn-rounded" onclick="upravInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Uprav inzerát</button></th>'; //TODO uprav inzerat asi idckodon, alebo tak
+    s +='<th><button class="btn btn-warning btn-rounded" onclick="vymazInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Vymaž inzerát</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
+  }
+  s += '</table>';
+  document.getElementById('moje_inzeraty').innerHTML = s;
+}
+
+function upravInzerat(id, inzerat) {
+  var urlParams = '?idInz=' + id + '&inz=' + inzerat;
+  window.location.href = 'inzerat_uprav.html' + urlParams;
+}
+
+function vymazInzerat(id, inzerat) {
+  console.log("odhlas z aktivity");
+  var tmp = '';
+  tmp = 'id=' + id;
+  console.log(tmp);
+  var xmlhttp = new XMLHttpRequest();
+  var url = "https://internatnyportalxyz.xyz:5000/";
+  if (inzerat == 'i') {
+    url = url + "odstranprodukt";
+  } else {
+    url = url + "odstrankivitu";
+  }
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log('Inzerat vymazny');
+      location.reload();
+    }
+  }
+  xmlhttp.open("POST", url, true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send(tmp);
+  return false;
+}
+
+function nacitajMojeAktivity() {
+  var tmp = '';
+  tmp = 'user=' + sessionStorage.getItem('email');
+  var xmlhttp = new XMLHttpRequest();
+  var url = "https://internatnyportalxyz.xyz:5000/";
+  url = url + "selectprihlaseneaktivity";
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var data = JSON.parse(this.responseText);
+      spracujAktivity(data);
+    }
+  }
+  xmlhttp.open("POST", url, true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send(tmp);
+  return false;
+}
+
+function spracujAktivity(data) {
+  var s = '';
+  if (data.length != 0) {
+    s += '<table style="width:100%"> <tr>     <th style="width:70%">Aktivity, kde som prihlásený</th>     <th></th>   </tr> ';
+    for (var i  = 0; i < data.length; i++){
+      var diel = data[i];
+      console.log('diel', diel);
+      s += '<tr><td>' + diel['nazov'];
+      s +='</td><th><button class="btn btn-warning btn-rounded" onclick="odhlasZAktivity(\'' + diel['aktivity.id'] + '\')">Odhlás</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
+    }
+    s += '</table>';
+  } else {
+    s = '<table style="width:100%"> <tr><th>Aktivity, kde som prihlásený</th></tr>  <tr><td> Nie si prihlásený na žiadne akvitiy :( </td></tr> </table>';
+  }
+  document.getElementById('moje_aktivity').innerHTML = s;
+}
+
+function odhlasZAktivity(id) {
+    console.log("odhlas z aktivity");
+    var tmp = '';
+    tmp = 'id=' + id;
+    console.log(tmp);
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://internatnyportalxyz.xyz:5000/";
+    url = url + "odstrankivitu";
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log('Aktivita odhlasena');
+        location.reload();
+      }
+    }
+    xmlhttp.open("POST", url, true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send(tmp);
+    return false;
+}
+
+function loadData() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('idInz');
+  const i = urlParams.get('inz');
+  if (id != null){
+    if (i == 'i') {
+      inzeratPodlaID(id);
+    } else {
+      aktivitaPodlaID(id);
+    }
+  }
+}
+
+function inzeratPodlaID(id) {
+  var tmp = '';
+  tmp = 'id=' + id;
+  var xmlhttp = new XMLHttpRequest();
+	var url = "https://internatnyportalxyz.xyz:5000/";
+	url = url + "selectjedenprodukt";
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(this.responseText);
+			fillFormAdd(data, id);
+		}
+	}
+	xmlhttp.open("POST", url, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
+}
+
+function aktivitaPodlaID(id) {
+  var tmp = '';
+  tmp = 'id=' + id;
+  var xmlhttp = new XMLHttpRequest();
+	var url = "https://internatnyportalxyz.xyz:5000/";
+	url = url + "selectjednuaktivitu";
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(this.responseText);
+      console.log('ssssssssaktivitaPodlaID');
+		}
+	}
+	xmlhttp.open("POST", url, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
+}
+
+function fillFormAdd(data, id) {
+  document.getElementById('nazov').value = data[0]['nazov'];
+  document.getElementById('cena').value = data[0]['cena'];
+  document.getElementById('typ').value = data[0]['typ'];
+  document.getElementById('kategoria').value = data[0]['kategoria'];
+  document.getElementById('popis').value = data[0]['popis'];
+  document.getElementById('hashtagy').value = data[0]['hashtag'];
+}
+
+function aktualizujInzerat() {
+  updateAd();
+}
+
+function updateAd (){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('idInz');
+  var nazov = document.getElementById('nazov').value;
+  var cena =  document.getElementById('cena').value;
+  var typ =  document.getElementById('typ').value;
+  var kategoria =  document.getElementById('kategoria').value;
+  var popis = document.getElementById('popis').value;
+  var hashtagy = document.getElementById('hashtagy').value;
+  var tmp = 'id=' + id + '&nazov=' + nazov + '&cena=' + cena + '&typ=' + typ + '&kategoria=' + kategoria + '&popis=' + popis + '&hashtag=' + hashtagy + '&uzivatel=' + sessionStorage.getItem('email');
+  var xmlhttp = new XMLHttpRequest();
+  var url = "https://internatnyportalxyz.xyz:5000/";
+  url = url + "upravprodukt";
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      window.location.href = 'moj_profil.html';
+    }
+  }
+  xmlhttp.open("POST", url, true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send(tmp);
+  return false;
+}
+
+function updateActivity() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('idInz');
+
+	var nazov = document.getElementById('nazov podujatia').value;
+	var datum_zaciatku =  document.getElementById('datepicker').value;
+	var cas_zaciatku =  document.getElementById('timepicker').value;
+	var kategoria =  document.getElementById('pridaj_datum_cas').value;
+	var datum_konca = document.getElementById('datepicker2').value;
+	var cas_konca = document.getElementById('timepicker2').value;
+	var typ_udalosti = document.getElementById('typ_udalosti').value;
+	var dni = document.getElementById('dni').value;
+	var lokalita = document.getElementById('lokalita').value;
+	var pocet_ludi = document.getElementById('pocet_ludi').value;
+	var popis = document.getElementById('popis').value;
+
+	var tmp = 'id=' + id + '&nazov=' + nazov + '&popis=' + popis + '&datefrom=' + datum_zaciatku + '&dateto=' + datum_konca + '&casod=' + cas_zaciatku + '&casdo=' + cas_konca + '&pocet=' + pocet +'&lokalita=' + lokalita +'&opakuje=' + typ_udalosti +'&dni=' + dni;
+  	var xmlhttp = new XMLHttpRequest();
+	var url = "https://internatnyportalxyz.xyz:5000/";
+	url = url + "upravakivity";
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+      console.log('upravAktivitu');
+		}
+	}
+	xmlhttp.open("POST", url, true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
+}

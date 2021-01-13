@@ -101,7 +101,7 @@
       }
 
        function mojProfil(){
-         console.log("moj profil");
+         window.location.href = 'moj_profil.html';
        }
      
        function logOut(){
