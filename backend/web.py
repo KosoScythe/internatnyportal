@@ -324,6 +324,8 @@ def odstranaktivitu():
     a.close()
     return ''
 
+
+
 @app.route("/selectjedenprodukt" , methods=['POST'])
 def selectjeden():
     parametre= request.form
@@ -381,9 +383,25 @@ def selectprihlaseneaktivity():
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
 
+@app.route("/odhlaszaktivity" , methods=['POST'])
+def odhlaszaktivity():
+    parametre= request.form
+    idcko = parametre.get('id')
+    user = parametre.get('uzivatel')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Delete from aktivity_prihlaseny where id_aktivity = %s and id_uzivatel = (Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s);'
+    to_filter = [int(idcko),user]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return ''
+
+
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0')
-    app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
+    app.run(host='0.0.0.0')
+    #app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
 
 #app.run('0.0.0.0', debug=True, port=8100, ssl_context='adhoc')
 def get_dict_resultset(sql):
