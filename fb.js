@@ -76,9 +76,9 @@
         //h += "<img id ='profileImage' src='' width='50' height='50' class=profilepic onclick='mojProfil()'>";
         //document.getElementById('mnBt').innerHTML = h;
 
-        h = "<button id='btn-pridaj_inzerat' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
-				h += "<button id='btn-odhlas_sa' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
-        h += "<img id ='btn-moj_profil' src='' width='50' height='50' class='profilepic' onclick='mojProfil()'></img>";
+        h = "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+				h += "<button id='btn-odhlas_sa' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
+        h += "<img id ='btn-moj_profil'  src='' width='50' height='50' class='profilepic' onclick='mojProfil()'></img>";
         document.getElementById('mnBt').innerHTML = h;
 
         var im = document.getElementById("btn-moj_profil").setAttribute("src", "http://graph.facebook.com/" + response.id + "/picture?type=normal");
@@ -93,8 +93,8 @@
       }
 
       function neprihlaseny(){
-        h = "<button id='btn-pridaj_inzerat' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
-			  h += "<button id='btn-prihlas_sa' class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>";
+        h = "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+			  h += "<button style='margin-right:1em' id='btn-prihlas_sa' class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>";
         document.getElementById('mnBt').innerHTML = h;
         
         localStorage.setItem('prihlaseny', 'NIE');
