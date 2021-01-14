@@ -441,6 +441,8 @@ def searchakivit():
         to_filter.append(casod)
         to_filter.append(casdo)
     query = query[:-4]
+    if not (nazov or datefrom or dateto or casod or casdo or dni):
+        query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id)'
     c.execute(query, to_filter)
     a.commit()
     t = c.fetchall()
