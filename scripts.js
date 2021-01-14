@@ -35,7 +35,7 @@ function addAd() {
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "insert";
+	url = url + "insert?abc="+ new Date().getTime();
 	
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
