@@ -75,7 +75,7 @@
         //h +="<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
         //h += "<img id ='profileImage' src='' width='50' height='50' class=profilepic onclick='mojProfil()'>";
         //document.getElementById('mnBt').innerHTML = h;
-        h = "<button id='pridaj_aktivitu' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>";
+        h = "<button id='pridaj_aktivitu' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>";
         h += "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
 				h += "<button id='btn-odhlas_sa' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
         h += "<img id ='btn-moj_profil'  src='' width='50' height='50' class='profilepic' onclick='mojProfil()'></img>";
@@ -93,7 +93,7 @@
       }
 
       function neprihlaseny(){
-        h = "<button id='pridaj_aktivitu' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>";
+        h = "<button id='pridaj_aktivitu' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>";
         h = "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
 			  h += "<button style='margin-right:1em' id='btn-prihlas_sa' class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>";
         document.getElementById('mnBt').innerHTML = h;
