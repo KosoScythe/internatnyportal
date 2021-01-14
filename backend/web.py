@@ -187,7 +187,7 @@ def allin():
 
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casDo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
+    query = 'Select nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casDo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
     to_filter = []
     if len(hladane_vyrazy) != 0:
         query += ' (('
@@ -235,7 +235,7 @@ def inzeratyuzivatela():
 
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s)'
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where owner = (Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s)'
     to_filter = []
     to_filter.append(user)
     c.execute(query, to_filter)
@@ -283,10 +283,11 @@ def upravakivity():
     lokalita = parametre.get('lokalita')
     opakuje = parametre.get('opakuje')
     dni = parametre.get('dni')
+    min_pocet = parametre.get('min')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Update aktivity set nazov = %s, popis = %s, datefrom = %s, dateto = %s, casod = %s, casdo = %s, max = %s, lokalita = %s, opakuje = %s, dni = %s where id = %s;'
-    to_filter = [nazov,popis,datefrom,dateto,casod,casdo,int(pocet),lokalita,opakuje,dni, int(idcko)]
+    query = 'Update aktivity set nazov = %s, popis = %s, datefrom = %s, dateto = %s, casod = %s, casdo = %s, max = %s, lokalita = %s, opakuje = %s, dni = %s, min = %s where id = %s;'
+    to_filter = [nazov,popis,datefrom,dateto,casod,casdo,int(pocet),lokalita,opakuje,dni, int(min_pocet), int(idcko)]
     c.execute(query, to_filter)
     a.commit()
     c.close()
@@ -351,7 +352,7 @@ def selectjednuaktivitu():
     idcko = parametre.get('id')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where aktivity.id = %s'
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where aktivity.id = %s'
     to_filter = []
     to_filter.append(idcko)
     c.execute(query, to_filter)
@@ -370,7 +371,7 @@ def selectprihlaseneaktivity():
     user = parametre.get('owner')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where aktivity.id in (Select id_aktivity from aktivity_prihlaseny where id_uzivatel = ( Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s))'
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where aktivity.id in (Select id_aktivity from aktivity_prihlaseny where id_uzivatel = ( Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s))'
     to_filter = []
     to_filter.append(user)
     c.execute(query, to_filter)
@@ -398,6 +399,58 @@ def odhlaszaktivity():
     a.close()
     return ''
 
+@app.route("/searchakivit" , methods=['POST'])
+def searchakivit():
+    parametre= request.form
+    nazov = parametre.get('nazov')
+    datefrom = parametre.get('datefrom')
+    dateto = parametre.get('dateto')
+    casod = parametre.get('casod')
+    casdo = parametre.get('casdo')
+    dni = parametre.get('dni')
+    print(dni)
+    hladane_vyrazy = []
+    if nazov:
+        hladane_vyrazy = [i.strip() for i in re.split('[, ]', nazov) if i.strip() != '']
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
+    to_filter = []
+    if len(hladane_vyrazy) != 0:
+        query += ' (('
+        for i in hladane_vyrazy:            
+            query += ' unaccent(lower(nazov)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]    
+        query += ') OR ('
+        for i in hladane_vyrazy:    
+            query += ' unaccent(lower(popis)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
+            to_filter.append(i)
+        query = query[:-4]
+        query += ')) AND'
+    if dni != '0' and dni:
+        query += 'dni && %s AND'
+        #ret = "['" + "','".join(dni.split(',')) + "']"
+        dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
+        to_filter.append(dni)
+    if datefrom != '0' and datefrom:
+        query += '(%s between datefrom and dateto ) AND'
+        to_filter.append(datefrom)
+    if casod != '0' and casod:
+        query += '(%s between casod and casdo ) AND (%s between casod and casdo ) AND'
+        to_filter.append(casod)
+        to_filter.append(casdo)
+    query = query[:-4]
+    c.execute(query, to_filter)
+    a.commit()
+    t = c.fetchall()
+    c.close()
+    a.close()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
