@@ -408,13 +408,13 @@ def searchakivit():
     casod = parametre.get('casod')
     casdo = parametre.get('casdo')
     dni = parametre.get('dni')
-    print(dni)
     hladane_vyrazy = []
     if nazov:
         hladane_vyrazy = [i.strip() for i in re.split('[, ]', nazov) if i.strip() != '']
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) WHERE '
+    print('what')
     to_filter = []
     if len(hladane_vyrazy) != 0:
         query += ' (('
@@ -430,19 +430,25 @@ def searchakivit():
         query += ')) AND'
     if dni != '0' and dni:
         query += 'dni && %s AND'
-        #ret = "['" + "','".join(dni.split(',')) + "']"
         dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
         to_filter.append(dni)
-    if datefrom != '0' and datefrom:
-        query += '(%s between datefrom and dateto ) AND'
+    if datefrom != '0' and datefrom and dateto and dateto != '0':
+        query += '(%s between datefrom and dateto ) OR (%s between datefrom and dateto )AND'
         to_filter.append(datefrom)
+        to_filter.append(dateto)
     if casod != '0' and casod:
-        query += '(%s between casod and casdo ) AND (%s between casod and casdo ) AND'
+        query += '(%s between casod and casdo ) AND'
         to_filter.append(casod)
+    if casdo != '0' and casdo:
+        if casod:
+            query = query[:-3]
+            query += ' OR '
+        query += '(%s between casod and casdo ) AND'
         to_filter.append(casdo)
-    query = query[:-4]
+    query = query[:-3]
     if not (nazov or datefrom or dateto or casod or casdo or dni):
         query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id)'
+    print(query)
     c.execute(query, to_filter)
     a.commit()
     t = c.fetchall()
@@ -455,8 +461,8 @@ def searchakivit():
     return js.decode()
 
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0')
-    app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
+    app.run(host='0.0.0.0')
+    #app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
 
 #app.run('0.0.0.0', debug=True, port=8100, ssl_context='adhoc')
 def get_dict_resultset(sql):
