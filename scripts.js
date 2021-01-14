@@ -51,8 +51,8 @@ function showLatestAd(typ, kategoria, urln=0) {
 	var dul = window.localStorage.getItem("everything");
 	if (dul != null) {
 		var xmlhttp = new XMLHttpRequest();
-		var url = "https://internatnyportalxyz.xyz:5000/";
-		var tmp = 'allin="'+dul+'"';
+		var url = "https://internatnyportalxyz.xyz:5000/allin";
+		var tmp = 'nazov='+dul;
 		window.localStorage.removeItem("everything");
 		
 		xmlhttp.onreadystatechange = function() {
