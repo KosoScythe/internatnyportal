@@ -171,6 +171,31 @@
 							</button><br>
                             <script>
                                 function tmp(){
+									p1 = document.getElementById("pocet_ludi").value;
+									p2 = document.getElementById("pocet_ludi2").value;
+									cas_do = document.getElementById("timepicker2").value;
+									datum = document.getElementById("datepicker2").value;
+                                    if (p1 == ""){
+                                        document.getElementById("pocet_ludi").value = 0;
+                                    }
+                                    if (p2 == ""){
+                                        document.getElementById("pocet_ludi2").value = 0;
+									}
+									if (cas_do == ""){
+										document.getElementById("timepicker2").value = "23:59";
+									}
+									if (datum == ""){
+										
+										if (document.getElementById('typ_udalosti').value == "JEDNORÁZOVÁ"){
+											document.getElementById("datepicker2").value = document.getElementById("datepicker").value;
+										}
+										else{
+											var today = new Date();
+											var yyyy = today.getFullYear();
+
+											document.getElementById("datepicker2").value = '31/12/'+ yyyy;
+										}
+									}
                                 }
                             </script>
 						</div>
