@@ -33,20 +33,8 @@
 				<a id = "activated" class="navbar-brand rounded" href="#">Aktivity</a>
 				<a id = "navBarButton" class="navbar-brand" href="#" data-toggle="modal" data-target="#helpModal"><img src="img/question.png" alt="Nápoveda" style="height: 3vh;"></a>
 			</div>
-			<div class = "navbar-right" id="pridavanie_akt">
-				<button id='pridaj_aktivitu' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>
-			</div>
 			<div class = "navbar-right" id="mnBt">
-
 			</div>
-
-			<script>
-
-				function pridajAktivitu(){
-					window.location.href = "pridaj_aktivitu.html";
-				}
-			</script>
-
 		</nav>
 
 		<section id="page-container">
@@ -71,11 +59,19 @@
 								<input type="text" id="datepicker" placeholder="Kedykoľvek"/>
 							</div>
 							<div class="col-4">
-								V aký čas?
+								Čas od:
 								<input type="text" class="timepicker" id="timepicker" placeholder="Kedykoľvek"/>
 								<script>
 									$(document).ready(function(){
 										$('input.timepicker').timepicker({ timeFormat: 'HH:mm' });
+									});
+								</script>
+
+								Čas do:
+								<input type="text" class="timepicker" id="timepicker2" placeholder="Kedykoľvek"/>
+								<script>
+									$(document).ready(function(){
+										$('input.timepicker2').timepicker({ timeFormat: 'HH:mm' });
 									});
 								</script>
 							</div>
@@ -89,25 +85,13 @@
 
 							<div class="col-3">
 								Kedykoľvek
-								<input type="checkbox" id="den-kedykolvek" checked="checked"/>
+								<input type="checkbox" id="den-kedykolvek" checked="checked" value="0">
 							</div>
 
 							<div id="zvol_dni" class="col-6">
 								Zvoľ dni
 								<button id="btn-zvol_dni" onclick="zvolDni(this.parentElement.id)"><img src="img/kalendarik.png"></button>
 							</div>
-
-							<script>
-								function zvolDni(id){
-									document.getElementById("den-kedykolvek").checked = false;
-									r = "";
-									pole = ["PO","UT","ST","ŠT","PI","SO","NE"]
-									for (i = 0; i < 7; i++){
-										r += pole[i]+" <input type='checkbox' id='den-"+pole[i]+"'>  "
-									}
-									document.getElementById(id).innerHTML = r; 
-								}
-							</script>
 						</div>
 
 						<div class="col-12" style="margin-top:1em;margin-left:-1em;">

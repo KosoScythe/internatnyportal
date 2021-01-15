@@ -408,13 +408,12 @@ def searchakivit():
     casod = parametre.get('casod')
     casdo = parametre.get('casdo')
     dni = parametre.get('dni')
-    print(dni)
     hladane_vyrazy = []
     if nazov:
         hladane_vyrazy = [i.strip() for i in re.split('[, ]', nazov) if i.strip() != '']
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) Where '
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) WHERE '
     to_filter = []
     if len(hladane_vyrazy) != 0:
         query += ' (('
@@ -428,19 +427,24 @@ def searchakivit():
             to_filter.append(i)
         query = query[:-4]
         query += ')) AND'
-    if dni != '0' and dni:
+    if dni:
         query += 'dni && %s AND'
-        #ret = "['" + "','".join(dni.split(',')) + "']"
         dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
         to_filter.append(dni)
-    if datefrom != '0' and datefrom:
-        query += '(%s between datefrom and dateto ) AND'
+    if datefrom and dateto :
+        query += '(%s between datefrom and dateto ) OR (%s between datefrom and dateto )AND'
         to_filter.append(datefrom)
-    if casod != '0' and casod:
-        query += '(%s between casod and casdo ) AND (%s between casod and casdo ) AND'
+        to_filter.append(dateto)
+    if casod:
+        query += '(%s between casod and casdo ) AND'
         to_filter.append(casod)
+    if casdo:
+        if casod:
+            query = query[:-3]
+            query += ' OR '
+        query += '(%s between casod and casdo ) AND'
         to_filter.append(casdo)
-    query = query[:-4]
+    query = query[:-3]
     if not (nazov or datefrom or dateto or casod or casdo or dni):
         query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id)'
     c.execute(query, to_filter)
@@ -453,6 +457,38 @@ def searchakivit():
         dict_result.append(dict(row))
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
+
+
+
+@app.route("/pridajakivitu" , methods=['POST'])
+def pridajakivitu():
+    parametre= request.form
+    owner = parametre.get('owner')
+    nazov = parametre.get('nazov')
+    popis = parametre.get('popis') 
+    datefrom = parametre.get('datefrom')
+    dateto = parametre.get('dateto')
+    casod = parametre.get('casod')
+    casdo = parametre.get('casdo')
+    pocet = parametre.get('pocet')
+    lokalita = parametre.get('lokalita')
+    opakuje = parametre.get('opakuje')
+    dni = parametre.get('dni')
+    min_pocet = parametre.get('min')
+    dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
+    if not min_pocet:
+        min_pocet = 0
+    if not pocet:
+        pocet = 0   
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'INSERT INTO aktivity (nazov, popis, datefrom, dateto, casod, casdo, max, lokalita , opakuje, dni , min, owner) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, (Select id from ciselnik_uzivatelia where email = %s) )'
+    to_filter = [nazov,popis,datefrom,dateto,casod,casdo,int(pocet),lokalita,opakuje,dni, int(min_pocet), owner]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return ''
 
 if __name__ == "__main__":
     #app.run(host='0.0.0.0')

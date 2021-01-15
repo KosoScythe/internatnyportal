@@ -30,8 +30,7 @@
       }
       window.fbAsyncInit = function() {
       FB.init({
-      appId : '2779146055678575', //internatnyportalxyz.xyz
-      //appId : '2820959324850465', //localhost Maros
+      appId : '2820959324850465', //internatnyportalxyz.xyz
       cookie : true, // enable cookies to allow the server to access
       // the session
       xfbml : true, // parse social plugins on this page
@@ -65,9 +64,9 @@
       var mail = '';
 
       function testAPI() {
-        console.log('Welcome! Fetching your information.... ');
+        //console.log('Welcome! Fetching your information.... ');
         FB.api('/me?fields=name,email', function(response) {
-        console.log('Successful login for: ' + response.name);
+        //console.log('Successful login for: ' + response.name);
 
         sessionStorage.setItem('email', response.email);
         
@@ -75,8 +74,8 @@
         //h +="<button id='rightUserButtons' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
         //h += "<img id ='profileImage' src='' width='50' height='50' class=profilepic onclick='mojProfil()'>";
         //document.getElementById('mnBt').innerHTML = h;
-
-        h = "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+        h = "<button id='pridaj_aktivitu' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>";
+        h += "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
 				h += "<button id='btn-odhlas_sa' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'logOut();' >Odhlásiť sa</button>";
         h += "<img id ='btn-moj_profil'  src='' width='50' height='50' class='profilepic' onclick='mojProfil()'></img>";
         document.getElementById('mnBt').innerHTML = h;
@@ -93,7 +92,8 @@
       }
 
       function neprihlaseny(){
-        h = "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+        h = "<button id='pridaj_aktivitu' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>";
+        h += "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
 			  h += "<button style='margin-right:1em' id='btn-prihlas_sa' class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>";
         document.getElementById('mnBt').innerHTML = h;
         

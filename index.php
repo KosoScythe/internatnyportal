@@ -47,7 +47,7 @@
 					</div>
 				</form>
 				<div style="background-color: blue;">
-					<div style="cursor: pointer;" onclick = 'location.href="vsetko.html"' class="polozky"><img class="obrazok" src="img/all.svg" /><p>Všetko</p></div>
+					<div style="cursor: pointer;" onclick = 'location.href="aktivity.html"' class="polozky"><img class="obrazok" src="img/sport.svg" alt="Šport"/><p>Šport</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" alt="Elektro" /><p>Elektronika</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=2"' class="polozky"><img class="obrazok" src="img/drogeria.svg" alt="Drogéria" /><p>Drogéria</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=3"' class="polozky"><img class="obrazok" src="img/jedlo.svg" alt="Jedlo" /><p>Potraviny</p></div>
@@ -56,7 +56,6 @@
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=6"' class="polozky"><img class="obrazok" src="img/oblecenie.svg" alt="Oblečenie" /><p>Oblečenie</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=7"' class="polozky"><img class="obrazok" src="img/alkohol.svg" alt="Alkohol" /><p>Alkohol</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=8"' class="polozky"><img class="obrazok" src="img/ine.svg" alt="Iné" /><p>Iné</p></div>
-					<div class="polozky"><img class="obrazok" src="img/sport.svg" alt="Šport" /><p>Šport</p></div>
 				</div>
 			</main>
 			<footer id="indexFooter" class="page-footer font-small bg-primary pt-4 d-flex flex-column" id = "footer">

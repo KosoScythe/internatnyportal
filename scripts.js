@@ -64,7 +64,7 @@ function insertAdIntoDatabase(tmp) {
 		if (this.readyState == 4 && this.status == 200) {
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -74,8 +74,8 @@ function showLatestAd(typ, kategoria, urln=0) {
 	var dul = window.localStorage.getItem("everything");
 	if (dul != null) {
 		var xmlhttp = new XMLHttpRequest();
-		var url = "https://internatnyportalxyz.xyz:5000/";
-		var tmp = 'allin="'+dul+'"';
+		var url = "https://internatnyportalxyz.xyz:5000/allin";
+		var tmp = 'nazov='+dul;
 		window.localStorage.removeItem("everything");
 		
 		xmlhttp.onreadystatechange = function() {
@@ -85,7 +85,7 @@ function showLatestAd(typ, kategoria, urln=0) {
 			}
 		}
 		console.log(tmp);
-		xmlhttp.open("POST", url, true);
+		xmlhttp.open("POST", url, false);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send(tmp);
 		return false;	
@@ -124,7 +124,7 @@ function showLatestAd(typ, kategoria, urln=0) {
 				JsonAndContent(data);
 			}
 		}
-		xmlhttp.open("POST", url, true);
+		xmlhttp.open("POST", url, false);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send(tmp);
 		return false;	
@@ -134,11 +134,26 @@ function showLatestAd(typ, kategoria, urln=0) {
 function findInDatabase(stranka){
 	var tmp = null;
 	if (stranka == 'aktivity') {
-		hashtag = document.getElementById('hashtag').value;
-		tmp = 'typ=5'
-		if (hashtag) {
-			tmp += "&nazov=" + hashtag;
+		datepicker = document.getElementById('datepicker').value.split(' - ');
+		date = "";
+
+		nazov = document.getElementById('hashtag').value;
+		datefrom = datepicker[0];
+		dateto = datepicker[1];
+		casod = document.getElementById('timepicker').value;
+		casdo = document.getElementById('timepicker2').value;
+
+		array = ["den-PO","den-UT","den-ST", "den-ŠT","den-Pi","den-SO","den-NE"];
+		for (let index = 0; index < array.length; index++) {
+			var checkBox = document.getElementById("myCheck");
+			var text = document.getElementById("text");
+			if (checkBox.checked == true){
+				date = checkBox.value + ",";
+				date.pop();
+			} 
 		}
+
+		
 	}
 	else {
 		kategoria = document.getElementById('kategoria').value;
@@ -166,7 +181,7 @@ function databaseConnector(tmp){
 			JsonAndContent(data);
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -229,7 +244,7 @@ function nacitajMojeInzeraty() {
 			spracujInzeraty(data);
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -237,16 +252,20 @@ function nacitajMojeInzeraty() {
 
 function spracujInzeraty(data) {
   var s = '';
-  s += '<table style="width:100%"> <tr>     <th style="width:60%">Moje inzeráty</th>     <th></th>    <th></th>   </tr> ';
-  for (var i  = 0; i < data.length; i++){
-    var diel = data[i];
-    var inzerat = 'i';
-    if (diel['dni'] != null) inzerat = 'a';
-    s += '<tr><td>' + diel['nazov'] + '</td>';
-    s +='<th><button class="btn btn-warning btn-rounded" onclick="upravInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Uprav inzerát</button></th>'; //TODO uprav inzerat asi idckodon, alebo tak
-    s +='<th><button class="btn btn-warning btn-rounded" onclick="vymazInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Vymaž inzerát</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
+  if (data.length != 0) {
+    s += '<table style="width:100%"> <tr>     <th style="width:60%">Moje inzeráty</th>     <th></th>    <th></th>   </tr> ';
+    for (var i  = 0; i < data.length; i++){
+      var diel = data[i];
+      var inzerat = 'i';
+      if (diel['dni'] != null) inzerat = 'a';
+      s += '<tr><td>' + diel['nazov'] + '</td>';
+      s +='<th><button class="btn btn-warning btn-rounded" onclick="upravInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Uprav inzerát</button></th>'; //TODO uprav inzerat asi idckodon, alebo tak
+      s +='<th><button class="btn btn-warning btn-rounded" onclick="vymazInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Vymaž inzerát</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
+    }
+    s += '</table>';
+  } else {
+    s = '<table style="width:100%"> <tr><th>Moje inzeráty</th></tr>  <tr><td> Nemáš vytvorené žiadne inzeráty :( </td></tr> </table>';
   }
-  s += '</table>';
   document.getElementById('moje_inzeraty').innerHTML = s;
 }
 
@@ -270,7 +289,7 @@ function vymazInzerat(id, inzerat) {
       location.reload();
     }
   }
-  xmlhttp.open("POST", url, true);
+  xmlhttp.open("POST", url, false);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send(tmp);
   return false;
@@ -288,7 +307,7 @@ function nacitajMojeAktivity() {
       spracujAktivity(data);
     }
   }
-  xmlhttp.open("POST", url, true);
+  xmlhttp.open("POST", url, false);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send(tmp);
   return false;
@@ -322,7 +341,7 @@ function odhlasZAktivity(id) {
         location.reload();
       }
     }
-    xmlhttp.open("POST", url, true);
+    xmlhttp.open("POST", url, false);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send(tmp);
     return false;
@@ -334,49 +353,32 @@ function loadData() {
   const id = urlParams.get('idInz');
   const i = urlParams.get('inz');
   if (id != null){
-    if (i == 'i') {
-      inzeratPodlaID(id);
-    } else {
-      aktivitaPodlaID(id);
-    }
+    inzeratAktivitaPodlaID(id, i);
   }
 }
 
-function inzeratPodlaID(id) {
+function inzeratAktivitaPodlaID(id, inz) {
   var tmp = '';
   tmp = 'id=' + id;
   var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "selectjedenprodukt";
+  if (inz == 'i') {
+  	url = url + "selectjedenprodukt";
+  } else {
+    url = url + "selectjednuaktivitu";
+  }
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText);
-			fillForm(data, id, 'i');
+			fillForm(data, id, i);
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
 }
 
-function aktivitaPodlaID(id) {
-  var tmp = '';
-  tmp = 'id=' + id;
-  var xmlhttp = new XMLHttpRequest();
-	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "selectjednuaktivitu";
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(this.responseText);
-			fillForm(data, id,  'a');
-		}
-	}
-	xmlhttp.open("POST", url, true);
-	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xmlhttp.send(tmp);
-	return false;
-}
 
 function fillForm(data, id, inz) {
   if (inz == 'i'){
@@ -384,17 +386,17 @@ function fillForm(data, id, inz) {
     document.getElementById('cena').value = data[0]['cena'];
     document.getElementById('hashtagy').value = data[0]['hashtag'];
   } else {
-    // TODO vyplnenie formularu aktivit
-    // document.getElementById('nazov podujatia').value =
-    // document.getElementById('datepicker').value = data[0]['datefrom'];
-    // document.getElementById('timepicker').value = data[0]['timefrom'];
-    // document.getElementById('pridaj_datum_cas').value =
-    // document.getElementById('datepicker2').value = data[0]['dateto'];
-    // document.getElementById('timepicker2').value = data[0]['timeto'];
-    // document.getElementById('typ_udalosti').value = data[0]['opakuje'];
-    // document.getElementById('dni').value = data[0]['dni'];
-    // document.getElementById('lokalita').value = data[0]['lokalita'];
-    // document.getElementById('pocet_ludi').value = data[0]['max'];
+    // TODO vyplnenie formularu aktivit pri jej uprave
+    document.getElementById('nazov podujatia').value =
+    document.getElementById('datepicker').value = data[0]['datefrom'];
+    document.getElementById('timepicker').value = data[0]['timefrom'];
+    document.getElementById('pridaj_datum_cas').value =
+    document.getElementById('datepicker2').value = data[0]['dateto'];
+    document.getElementById('timepicker2').value = data[0]['timeto'];
+    document.getElementById('typ_udalosti').value = data[0]['opakuje'];
+    document.getElementById('dni').value = data[0]['dni'];
+    document.getElementById('lokalita').value = data[0]['lokalita'];
+    document.getElementById('pocet_ludi').value = data[0]['max'];
   }
   document.getElementById('nazov').value = data[0]['nazov'];
   document.getElementById('typ').value = data[0]['typ'];
@@ -424,7 +426,7 @@ function updateAd (){
       window.location.href = 'moj_profil.html';
     }
   }
-  xmlhttp.open("POST", url, true);
+  xmlhttp.open("POST", url, false);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send(tmp);
   return false;
@@ -456,8 +458,27 @@ function updateActivity() {
       console.log('upravAktivitu');
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
+}
+
+function pridajAktivitu(){
+	if(FB.getAuthResponse() != null) {
+		window.location.href = "pridaj_aktivitu.html";
+	  } else {
+		$("#pridajModal").modal();
+	  }
+}
+
+function zvolDni(id){
+	document.getElementById("den-kedykolvek").checked = false;
+	r = "";
+	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
+	values = ["pon","uto","str","stv","pia","sob", "ned"];	
+	for (i = 0; i < 7; i++){
+		r += pole[i]+"<input type='checkbox' id='den-"+va[i]+"' value='"+ values[i] + "'>";
+	}
+	document.getElementById(id).innerHTML = r; 
 }
