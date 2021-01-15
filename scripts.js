@@ -556,7 +556,7 @@ function updateActivity() {
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('idInz');
 
-  var nazov = document.getElementById('nazov_podujatia').value;
+  var nazov = document.getElementById('nazov podujatia').value;
   var datum_1=  convertDate(document.getElementById('datepicker').value);
   var time_1 =  document.getElementById('timepicker').value;
 
