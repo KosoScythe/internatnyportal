@@ -53,8 +53,21 @@ function addAd_activity() {
 	
 	var typ_udalosti = document.getElementById('typ_udalosti').value;
 	var lokalita = document.getElementById('lokalita').value;
-	var pocet_ludi = document.getElementById('pocet_ludi').value;
-	var pocet_ludi2 = document.getElementById('pocet_ludi2').value;
+
+	if (document.getElementById('pocet_ludi') != null){
+		var pocet_ludi =  document.getElementById('pocet_ludi').value;
+	}
+	else{
+		var pocet_ludi = 0;
+	}
+
+	if (document.getElementById('pocet_ludi2') != null){
+		var pocet_ludi2 =  document.getElementById('pocet_ludi2').value;
+	}
+	else{
+		var pocet_ludi2 = 0;
+	}
+
 	var popis = document.getElementById('popis').value;
 	var tmp =
 	'owner' + sessionStorage.getItem('email') +   
