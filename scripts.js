@@ -647,7 +647,7 @@ function pridajAktivitu(){
 }
 
 function zvolDni(id){
-	r = "";
+	r = document.getElementById(id).innerHTML;
 	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
 	values = ["pon","uto","str","stv","pia","sob", "ned"];	
 	for (i = 0; i < 7; i++){
