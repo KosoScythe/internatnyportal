@@ -438,3 +438,7 @@ function updateActivity() {
 	xmlhttp.send(tmp);
 	return false;
 }
+
+function pridajAktivitu(){
+	window.location.href = "pridaj_aktivitu.html";
+}

@@ -94,7 +94,7 @@
 
       function neprihlaseny(){
         h = "<button id='pridaj_aktivitu' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajAktivitu();'>Pridať aktivitu</button>";
-        h = "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
+        h += "<button id='btn-pridaj_inzerat' style='margin-right:1em' class='btn btn-warning btn-rounded' onclick = 'pridajInzerat();'>Pridať inzerát</button>";
 			  h += "<button style='margin-right:1em' id='btn-prihlas_sa' class='btn btn-warning btn-rounded' onclick = 'prihlasSa()'>Prihlásiť sa</button>";
         document.getElementById('mnBt').innerHTML = h;
         
