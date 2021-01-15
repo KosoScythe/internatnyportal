@@ -206,6 +206,10 @@ function findInDatabase(stranka){
 		nazov = document.getElementById('hashtag').value;
 		datefrom = convertDate(datepicker[0]);
 		dateto = convertDate(datepicker[1]);
+		console.log(convertDate(datepicker[1]));//tmp
+		if(dateto == undefined){
+			dateto = datefrom;
+		}
 		casod = document.getElementById('timepicker').value;
 		casdo = document.getElementById('timepicker2').value;
 
