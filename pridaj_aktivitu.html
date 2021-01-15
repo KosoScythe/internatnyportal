@@ -192,11 +192,15 @@
                                 function tmp(){
 									p1 = document.getElementById("pocet_ludi").value;
 									p2 = document.getElementById("pocet_ludi2").value;
+									cas_do = document.getElementById("timepicker2").value;
                                     if (p1 == ""){
                                         document.getElementById("pocet_ludi").value = 0;
                                     }
                                     if (p2 == ""){
                                         document.getElementById("pocet_ludi2").value = 0;
+									}
+									if (cas_do == ""){
+										document.getElementById("timepicker2").value = "23:59";
 									}
 
                                 }
