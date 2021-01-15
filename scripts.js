@@ -477,6 +477,7 @@ function inzeratAktivitaPodlaID(id, inz) {
   if (inz == 'i') {
   	url = url + "selectjedenprodukt";
   } else {
+	console.log("TMP TMP TMP")
     url = url + "selectjednuaktivitu";
   }
 	xmlhttp.onreadystatechange = function() {
