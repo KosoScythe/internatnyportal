@@ -440,5 +440,9 @@ function updateActivity() {
 }
 
 function pridajAktivitu(){
-	window.location.href = "pridaj_aktivitu.html";
+	if(FB.getAuthResponse() != null) {
+		window.location.href = "pridaj_aktivitu.html";
+	  } else {
+		$("#pridajModal").modal();
+	  }
 }
