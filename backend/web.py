@@ -314,6 +314,8 @@ def upravakivity():
     opakuje = parametre.get('opakuje')
     dni = parametre.get('dni')
     min_pocet = parametre.get('min')
+    if dni:
+        dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
     if not dni:
         dni = []
         year1,month1,day1 = (int(x) for x in datefrom.split('-'))
