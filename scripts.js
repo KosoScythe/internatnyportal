@@ -296,7 +296,7 @@ function JsonAndContent(data, stranka="kategoria") {
 								"<p class='card-text'> <b>Čas:</b> " + diel["casod"] + " - " + diel["casdo"]+"</p>" + 
 							"</div>" +
 							"<div class='col'>" +
-								"<p class='card-text'><b>Dátum:</b> "+ diel["datefrom"] + " - " + diel["datefrom"] + "</p>" + 
+								"<p class='card-text'><b>Dátum:</b> "+ diel["datefrom"] + " - " + diel["dateto"] + "</p>" + 
 							"</div>" +
 							"<div class='col'>" +
 								"<p class='card-text'><b>Počet prihlásených ľudí:</b> "+ diel["pocet_prihlasenych"] + "/" + diel["max"] + "</p>" + 
