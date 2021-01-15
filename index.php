@@ -112,7 +112,7 @@
 					</div>
 					<div class="modal-body">
 						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">Vyhľadávanie inzerátov</h5>
+							<h5 class="mb-1">Vyhľadávanie inzerátov/aktivít</h5>
 						</div>
 						<p class="mb-1">Pokiaľ chcete vyhľadávať produkty/služby/aktivity prejdite na príslušnú podstránku. Následne vyberieme typ a kategóriu, ktorú chceme prehľadávať.
 							Po vybratí zadáme do vyhľadávacieho pola pojmy, ktoré cheme hľadať.
@@ -142,7 +142,7 @@
 					</div>
 					<div class="modal-body">
 						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">Pridávanie inzerátov</h5>
+							<h5 class="mb-1">Pridávanie inzerátov/aktivít</h5>
 						</div>
 						<p class="mb-1">Pre pridávanie inzerátov/aktivít je potrebné sa najprv prihlásiť. Po prihlásení je možné pridať inzerát - užívateľ vyplní príslušné polia a následne potvrdí pridanie inzerátu. </p>
 						<br>
