@@ -558,11 +558,11 @@ function updateActivity() {
   const id = urlParams.get('idInz');
 
   var nazov = document.getElementById('nazov podujatia').value;
-  var datum_1=  convertDate(document.getElementById('datepicker').value);
+  var datum_1=  document.getElementById('datepicker').value;
   var time_1 =  document.getElementById('timepicker').value;
 
   if (document.getElementById('datepicker2') != null){
-	  var datum_2 =  convertDate(document.getElementById('datepicker2').value);
+	  var datum_2 =  document.getElementById('datepicker2').value;
   }
   else{
 	  var datum_2 = "";

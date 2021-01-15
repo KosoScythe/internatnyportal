@@ -16,6 +16,18 @@ def connectpg():
 app = Flask(__name__)
 CORS(app)
 
+def cislanadni(argument):
+    switcher = { 
+        0: "pon", 
+        1: "uto", 
+        2: "str",
+        3: "stv", 
+        4: "pia", 
+        5: "sob",
+        6: "ned", 
+    } 
+    return switcher.get(argument, "nothing")
+
 @app.route("/kategoria" , methods=['POST'])
 def kat():
     parametre= request.form
@@ -286,6 +298,16 @@ def upravakivity():
     opakuje = parametre.get('opakuje')
     dni = parametre.get('dni')
     min_pocet = parametre.get('min')
+    if not dni:
+        dni = []
+        year1,month1,day1 = (int(x) for x in datefrom.split('-'))
+        year2,month2,day2 = (int(x) for x in dateto.split('-'))
+        start, end = datetime.date(year1,month1,day1), datetime.date(year2,month2,day2)
+        delta = timedelta(days=1)
+        while start <= end or len(dni) < 7:
+            dni.append(start.weekday())
+            start += delta
+        dni = [cislanadni(i) for i in dni]
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     query = 'Update aktivity set nazov = %s, popis = %s, datefrom = %s, dateto = %s, casod = %s, casdo = %s, max = %s, lokalita = %s, opakuje = %s, dni = %s, min = %s where id = %s;'
@@ -461,18 +483,6 @@ def searchakivit():
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
 
-
-def cislanadni(argument):
-    switcher = { 
-        0: "pon", 
-        1: "uto", 
-        2: "str",
-        3: "stv", 
-        4: "pia", 
-        5: "sob",
-        6: "ned", 
-    } 
-    return switcher.get(argument, "nothing")
 
 def checkuser(email):
     a = connectpg()
