@@ -32,6 +32,29 @@ function addAd() {
 	}
 }
 
+function addAd_activity() {
+	var nazov = document.getElementById('nazov_podujatia').value;
+	var datum_1=  document.getElementById('datepicker').value;
+	var time_1 =  document.getElementById('timepicker').value;
+	var datum_2 =  document.getElementById('datepicker2').value;
+	var time_2 = document.getElementById('timepicker2').value;
+	var typ_udalosti = document.getElementById('typ_udalosti').value;
+	var tmp = 
+	'nazov=' + nazov + 
+	'&cena=' + datum_1 + 
+	'&typ=' + time_1 + 
+	'&kategoria=' + datum_2 + 
+	'&popis=' + time_2 + 
+	'&hashtag=' + typ_udalosti + 
+	'&uzivatel=' + sessionStorage.getItem('email');
+	insertAdIntoDatabase(tmp);
+}
+
+function insertAdIntoDatabase_activity(tmp) {
+	//...
+}
+
+
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
