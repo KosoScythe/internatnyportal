@@ -102,6 +102,7 @@ function addAd_activity() {
 	'&dni=' + date +
 	'&min=' + pocet_ludi;
 	insertAdIntoDatabase_activity(tmp);
+	window.open('aktivity.html', "_self");
 }
 
 function insertAdIntoDatabase_activity(tmp) {
@@ -556,6 +557,11 @@ function updateAd (){
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send(tmp);
   return false;
+}
+
+function aktualizujAktivitu(){
+	updateActivity();
+	window.open('aktivity.html', "_self");
 }
 
 function updateActivity() {
