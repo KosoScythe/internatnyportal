@@ -166,10 +166,12 @@ function findInDatabase(stranka){
 		array = ["den-PO","den-UT","den-ST", "den-ŠT","den-PI","den-SO","den-NE"];
 		for (let index = 0; index < array.length; index++) {
 			var checkBox = document.getElementById(array[index]);
-			if (checkBox.checked == true){
-				date = checkBox.value + ",";
-				date.pop();
-			} 
+			if (checkBox != null) {
+				if (checkBox.checked == true){
+					date = checkBox.value + ",";
+					date.pop();
+				} 
+			}
 		}
 		tmp = "nazov=" + nazov + "&datefrom=" + datefrom + "&dateto=" + dateto + "&casod=" + casod + "&casdo=" + casdo + "&dni=" + dni; 
 		
@@ -503,7 +505,7 @@ function zvolDni(id){
 	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
 	values = ["pon","uto","str","stv","pia","sob", "ned"];	
 	for (i = 0; i < 7; i++){
-		r += pole[i]+"<input type='checkbox' id='den-"+va[i]+"' value='"+ values[i] + "'>";
+		r += pole[i]+"<input type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] + "'>";
 	}
 	document.getElementById(id).innerHTML = r; 
 }
