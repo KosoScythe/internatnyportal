@@ -4,6 +4,8 @@ from flask_cors import CORS
 import json
 import psycopg2.extras
 import re
+import datetime
+from datetime import timedelta
 from OpenSSL import SSL
 
 
@@ -49,8 +51,7 @@ def kat():
             query += ' unaccent(lower(popis)) like \'%%\'||unaccent(lower(%s))||\'%%\' AND'
             to_filter.append(i)
         query = query[:-4]
-        query += '))'
-    
+        query += '))'    
     if query[-1] == 'D':
         query = query[:-4]
     if not (kategoria or typ or nazov):
@@ -460,9 +461,21 @@ def searchakivit():
     return js.decode()
 
 
+def cislanadni(argument):
+    switcher = { 
+        0: "pon", 
+        1: "uto", 
+        2: "str",
+        3: "stv", 
+        4: "pia", 
+        5: "sob",
+        6: "ned", 
+    } 
+    return switcher.get(argument, "nothing")
 
-@app.route("/pridajakivitu" , methods=['POST'])
-def pridajakivitu():
+
+@app.route("/pridajaktivitu" , methods=['POST'])
+def pridajaktivitu():
     parametre= request.form
     owner = parametre.get('owner')
     nazov = parametre.get('nazov')
@@ -476,13 +489,24 @@ def pridajakivitu():
     opakuje = parametre.get('opakuje')
     dni = parametre.get('dni')
     min_pocet = parametre.get('min')
-    dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
+    if dni:
+        dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
     if not min_pocet:
         min_pocet = 0
     if not pocet:
         pocet = 0
     if not dateto:
         dateto = datefrom
+    if not dni:
+        dni = []
+        year1,month1,day1 = (int(x) for x in datefrom.split('-'))
+        year2,month2,day2 = (int(x) for x in dateto.split('-'))
+        start, end = datetime.date(year1,month1,day1), datetime.date(year2,month2,day2)
+        delta = timedelta(days=1)
+        while start <= end or len(dni) < 7:
+            dni.append(start.weekday())
+            start += delta
+        dni = [cislanadni(i) for i in [4, 5, 6, 0, 1, 2, 3, 4]]
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     if casdo:
