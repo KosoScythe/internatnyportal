@@ -41,7 +41,7 @@ function insertAdIntoDatabase(tmp) {
 		if (this.readyState == 4 && this.status == 200) {
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -62,7 +62,7 @@ function showLatestAd(typ, kategoria, urln=0) {
 			}
 		}
 		console.log(tmp);
-		xmlhttp.open("POST", url, true);
+		xmlhttp.open("POST", url, false);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send(tmp);
 		return false;	
@@ -101,7 +101,7 @@ function showLatestAd(typ, kategoria, urln=0) {
 				JsonAndContent(data);
 			}
 		}
-		xmlhttp.open("POST", url, true);
+		xmlhttp.open("POST", url, false);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send(tmp);
 		return false;	
@@ -143,7 +143,7 @@ function databaseConnector(tmp){
 			JsonAndContent(data);
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -206,7 +206,7 @@ function nacitajMojeInzeraty() {
 			spracujInzeraty(data);
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -247,7 +247,7 @@ function vymazInzerat(id, inzerat) {
       location.reload();
     }
   }
-  xmlhttp.open("POST", url, true);
+  xmlhttp.open("POST", url, false);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send(tmp);
   return false;
@@ -265,7 +265,7 @@ function nacitajMojeAktivity() {
       spracujAktivity(data);
     }
   }
-  xmlhttp.open("POST", url, true);
+  xmlhttp.open("POST", url, false);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send(tmp);
   return false;
@@ -299,7 +299,7 @@ function odhlasZAktivity(id) {
         location.reload();
       }
     }
-    xmlhttp.open("POST", url, true);
+    xmlhttp.open("POST", url, false);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send(tmp);
     return false;
@@ -331,7 +331,7 @@ function inzeratPodlaID(id) {
 			fillForm(data, id, 'i');
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -349,7 +349,7 @@ function aktivitaPodlaID(id) {
 			fillForm(data, id,  'a');
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
@@ -401,7 +401,7 @@ function updateAd (){
       window.location.href = 'moj_profil.html';
     }
   }
-  xmlhttp.open("POST", url, true);
+  xmlhttp.open("POST", url, false);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send(tmp);
   return false;
@@ -433,7 +433,7 @@ function updateActivity() {
       console.log('upravAktivitu');
 		}
 	}
-	xmlhttp.open("POST", url, true);
+	xmlhttp.open("POST", url, false);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
