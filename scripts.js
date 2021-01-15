@@ -32,6 +32,75 @@ function addAd() {
 	}
 }
 
+function addAd_activity() {
+	var nazov = document.getElementById('nazov_podujatia').value;
+	var datum_1=  document.getElementById('datepicker').value;
+	var time_1 =  document.getElementById('timepicker').value;
+
+	if (document.getElementById('datepicker2') != null){
+		var datum_2 =  document.getElementById('datepicker2').value;
+	}
+	else{
+		var datum_2 = "";
+	}
+
+	if (document.getElementById('timepicker2') != null){
+		var time_2 =  document.getElementById('timepicker2').value;
+	}
+	else{
+		var time_2 = "";
+	}
+	
+	var typ_udalosti = document.getElementById('typ_udalosti').value;
+	var lokalita = document.getElementById('lokalita').value;
+
+	if (document.getElementById('pocet_ludi') != null){
+		var pocet_ludi =  document.getElementById('pocet_ludi').value;
+	}
+	else{
+		var pocet_ludi = 0;
+	}
+
+	if (document.getElementById('pocet_ludi2') != null){
+		var pocet_ludi2 =  document.getElementById('pocet_ludi2').value;
+	}
+	else{
+		var pocet_ludi2 = 0;
+	}
+
+	var popis = document.getElementById('popis').value;
+	var tmp =
+	'owner' + sessionStorage.getItem('email') +   
+	'&nazov=' + nazov + 
+	'&popis=' + popis + 
+	'&datefrom=' + datum_1 + 
+	'&dateto=' + datum_2 + 
+	'&casod=' + time_1 + 
+	'&casdo=' + time_2 + 
+	'&pocet=' + pocet_ludi2 +
+	'&lokalita=' + lokalita +
+	'&opakuje=' + typ_udalosti +
+	'&dni=' + "?,?,?" +
+	'&min_pocet=' + pocet_ludi;
+	insertAdIntoDatabase_activity(tmp);
+}
+
+function insertAdIntoDatabase_activity(tmp) {
+	var xmlhttp = new XMLHttpRequest();
+	var url = "https://internatnyportalxyz.xyz:5000/";
+	url = url + "pridajaktivitu";
+	
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		}
+	}
+	xmlhttp.open("POST", url, false);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
+}
+
+
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
@@ -120,16 +189,17 @@ function findInDatabase(stranka){
 		casod = document.getElementById('timepicker').value;
 		casdo = document.getElementById('timepicker2').value;
 
-		array = ["den-PO","den-UT","den-ST", "den-ŠT","den-Pi","den-SO","den-NE"];
+		array = ["den-PO","den-UT","den-ST", "den-ŠT","den-PI","den-SO","den-NE"];
 		for (let index = 0; index < array.length; index++) {
-			var checkBox = document.getElementById("myCheck");
-			var text = document.getElementById("text");
-			if (checkBox.checked == true){
-				date = checkBox.value + ",";
-				date.pop();
-			} 
+			var checkBox = document.getElementById(array[index]);
+			if (checkBox != null) {
+				if (checkBox.checked == true){
+					date = checkBox.value + ",";
+					date = date.slice(0, -1);
+				} 
+			}
 		}
-
+		tmp = "nazov=" + nazov + "&datefrom=" + datefrom + "&dateto=" + dateto + "&casod=" + casod + "&casdo=" + casdo + "&dni=" + date; 
 		
 	}
 	else {
@@ -142,20 +212,25 @@ function findInDatabase(stranka){
 		}
 	}
 
-	databaseConnector(tmp);
+	databaseConnector(tmp,stranka);
 
 	return false;
 }
 
-function databaseConnector(tmp){
+function databaseConnector(tmp, stranka="kategoria"){
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "kategoria";
+	if (stranka == "aktivity"){
+		url += "searchakivit";
+	}
+	else {
+		url += "kategoria";
+	}
 	
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText);
-			JsonAndContent(data);
+			JsonAndContent(data, stranka);
 		}
 	}
 	xmlhttp.open("POST", url, false);
@@ -164,12 +239,13 @@ function databaseConnector(tmp){
 	return false;
 }
 
-function JsonAndContent(data) {
+function JsonAndContent(data, stranka="kategoria") {
 	var content = '';
 	if (data.length > 0) {
 		for (var i  = 0; i < data.length; i++){
 			var diel = data[i];
-			content += 	"<article id='karta' class='card'>"+
+			console.log(diel);
+			/*content += 	"<article id='karta' class='card'>"+
 							"<div class='card-body'>" +
 								"<div class='row'>" +
 									"<div class='col'>" +
@@ -183,7 +259,7 @@ function JsonAndContent(data) {
 								"<p class='card-text'>"+ diel["hashtag"] +"</p>" + 
 								"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
 							"</div>"+
-						"</article>"
+						"</article>"*/
 		}
 	}
 	else {
@@ -455,7 +531,7 @@ function zvolDni(id){
 	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
 	values = ["pon","uto","str","stv","pia","sob", "ned"];	
 	for (i = 0; i < 7; i++){
-		r += pole[i]+"<input type='checkbox' id='den-"+va[i]+"' value='"+ values[i] + "'>";
+		r += pole[i]+"<input type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] + "'>";
 	}
 	document.getElementById(id).innerHTML = r; 
 }

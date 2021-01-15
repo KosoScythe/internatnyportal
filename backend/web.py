@@ -461,8 +461,8 @@ def searchakivit():
 
 
 
-@app.route("/pridajakivitu" , methods=['POST'])
-def pridajakivitu():
+@app.route("/pridajaktivitu" , methods=['POST'])
+def pridajaktivitu():
     parametre= request.form
     owner = parametre.get('owner')
     nazov = parametre.get('nazov')
