@@ -495,7 +495,11 @@ function fillForm(data, id, inz) {
   if (inz == 'i'){
     document.getElementById('kategoria').value = data[0]['kategoria'];
     document.getElementById('cena').value = data[0]['cena'];
-    document.getElementById('hashtagy').value = data[0]['hashtag'];
+	document.getElementById('hashtagy').value = data[0]['hashtag'];
+	
+	document.getElementById('nazov').value = data[0]['nazov'];
+  	document.getElementById('typ').value = data[0]['typ'];
+  	document.getElementById('popis').value = data[0]['popis'];
   } else {
     // TODO vyplnenie formularu aktivit pri jej uprave
     document.getElementById('nazov_podujatia').value = data[0]['nazov']
@@ -508,9 +512,6 @@ function fillForm(data, id, inz) {
     document.getElementById('lokalita').value = data[0]['lokalita'];
     document.getElementById('pocet_ludi').value = data[0]['pocet'];
   }
-  document.getElementById('nazov').value = data[0]['nazov'];
-  document.getElementById('typ').value = data[0]['typ'];
-  document.getElementById('popis').value = data[0]['popis'];
 }
 
 function aktualizujInzerat() {
