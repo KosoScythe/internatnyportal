@@ -502,7 +502,7 @@ function fillForm(data, id, inz) {
   	document.getElementById('popis').value = data[0]['popis'];
   } else {
     // TODO vyplnenie formularu aktivit pri jej uprave
-    document.getElementById('nazov_podujatia').value = data[0]['nazov']
+    document.getElementById('nazov podujatia').value = data[0]['nazov']
     document.getElementById('datepicker').value = data[0]['datefrom'];
     document.getElementById('timepicker').value = data[0]['casod'];
     document.getElementById('datepicker2').value = data[0]['dateto'];
