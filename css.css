@@ -138,5 +138,6 @@ form {
 }
 
 .boxy {
+  display: inline;
   padding-right: 1vw;
 }
