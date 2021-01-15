@@ -315,24 +315,24 @@ function loadData() {
   const id = urlParams.get('idInz');
   const i = urlParams.get('inz');
   if (id != null){
-    if (i == 'i') {
-      inzeratPodlaID(id);
-    } else {
-      aktivitaPodlaID(id);
-    }
+    inzeratAktivitaPodlaID(id, i);
   }
 }
 
-function inzeratPodlaID(id) {
+function inzeratAktivitaPodlaID(id, inz) {
   var tmp = '';
   tmp = 'id=' + id;
   var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "selectjedenprodukt";
+  if (inz == 'i') {
+  	url = url + "selectjedenprodukt";
+  } else {
+    url = url + "selectjednuaktivitu";
+  }
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText);
-			fillForm(data, id, 'i');
+			fillForm(data, id, i);
 		}
 	}
 	xmlhttp.open("POST", url, false);
@@ -341,23 +341,6 @@ function inzeratPodlaID(id) {
 	return false;
 }
 
-function aktivitaPodlaID(id) {
-  var tmp = '';
-  tmp = 'id=' + id;
-  var xmlhttp = new XMLHttpRequest();
-	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "selectjednuaktivitu";
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(this.responseText);
-			fillForm(data, id,  'a');
-		}
-	}
-	xmlhttp.open("POST", url, false);
-	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xmlhttp.send(tmp);
-	return false;
-}
 
 function fillForm(data, id, inz) {
   if (inz == 'i'){
@@ -365,17 +348,17 @@ function fillForm(data, id, inz) {
     document.getElementById('cena').value = data[0]['cena'];
     document.getElementById('hashtagy').value = data[0]['hashtag'];
   } else {
-    // TODO vyplnenie formularu aktivit
-    // document.getElementById('nazov podujatia').value =
-    // document.getElementById('datepicker').value = data[0]['datefrom'];
-    // document.getElementById('timepicker').value = data[0]['timefrom'];
-    // document.getElementById('pridaj_datum_cas').value =
-    // document.getElementById('datepicker2').value = data[0]['dateto'];
-    // document.getElementById('timepicker2').value = data[0]['timeto'];
-    // document.getElementById('typ_udalosti').value = data[0]['opakuje'];
-    // document.getElementById('dni').value = data[0]['dni'];
-    // document.getElementById('lokalita').value = data[0]['lokalita'];
-    // document.getElementById('pocet_ludi').value = data[0]['max'];
+    // TODO vyplnenie formularu aktivit pri jej uprave
+    document.getElementById('nazov podujatia').value =
+    document.getElementById('datepicker').value = data[0]['datefrom'];
+    document.getElementById('timepicker').value = data[0]['timefrom'];
+    document.getElementById('pridaj_datum_cas').value =
+    document.getElementById('datepicker2').value = data[0]['dateto'];
+    document.getElementById('timepicker2').value = data[0]['timeto'];
+    document.getElementById('typ_udalosti').value = data[0]['opakuje'];
+    document.getElementById('dni').value = data[0]['dni'];
+    document.getElementById('lokalita').value = data[0]['lokalita'];
+    document.getElementById('pocet_ludi').value = data[0]['max'];
   }
   document.getElementById('nazov').value = data[0]['nazov'];
   document.getElementById('typ').value = data[0]['typ'];
