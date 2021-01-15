@@ -413,7 +413,7 @@ def searchakivit():
         hladane_vyrazy = [i.strip() for i in re.split('[, ]', nazov) if i.strip() != '']
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) WHERE '
+    query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email,lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) WHERE'
     to_filter = []
     if len(hladane_vyrazy) != 0:
         query += ' (('
@@ -428,24 +428,25 @@ def searchakivit():
         query = query[:-4]
         query += ')) AND'
     if dni:
-        query += 'dni && %s AND'
+        query += ' dni && %s AND'
         dni = [i.strip() for i in re.split(',', dni) if i.strip() != '']
         to_filter.append(dni)
     if datefrom and dateto :
-        query += '(%s between datefrom and dateto ) OR (%s between datefrom and dateto )AND'
+        query += ' (%s between datefrom and dateto ) OR (%s between datefrom and dateto )AND'
         to_filter.append(datefrom)
         to_filter.append(dateto)
     if casod:
-        query += '(%s between casod and casdo ) AND'
+        query += ' (%s between casod and casdo ) AND'
         to_filter.append(casod)
     if casdo:
         if casod:
             query = query[:-3]
             query += ' OR '
-        query += '(%s between casod and casdo ) AND'
+        query += ' (%s between casod and casdo ) AND'
         to_filter.append(casdo)
-    query = query[:-3]
-    if not (nazov or datefrom or dateto or casod or casdo or dni):
+    if query[-1] == 'D':
+        query = query[:-3]
+    if not (nazov or datefrom or dateto or casod or casdo or dni) or query[-1] == 'E':
         query = 'Select aktivity.id,nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casdo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id)'
     c.execute(query, to_filter)
     a.commit()
