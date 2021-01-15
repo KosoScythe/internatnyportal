@@ -519,7 +519,7 @@ function fillForm(data, id, inz) {
     document.getElementById('dni').value = data[0]['dni'];
     document.getElementById('lokalita').value = data[0]['lokalita'];
 	document.getElementById('pocet_ludi').value = data[0]['min'];
-	document.getElementById('pocet_ludi2').value = data[0]['pocet'];
+	document.getElementById('pocet_ludi2').value = data[0]['max'];
 	document.getElementById('popis').value = data[0]['popis'];
 
 	if (data[0]['opakuje'] == true){
