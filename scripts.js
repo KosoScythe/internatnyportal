@@ -120,16 +120,15 @@ function findInDatabase(stranka){
 		casod = document.getElementById('timepicker').value;
 		casdo = document.getElementById('timepicker2').value;
 
-		array = ["den-PO","den-UT","den-ST", "den-ŠT","den-Pi","den-SO","den-NE"];
+		array = ["den-PO","den-UT","den-ST", "den-ŠT","den-PI","den-SO","den-NE"];
 		for (let index = 0; index < array.length; index++) {
-			var checkBox = document.getElementById("myCheck");
-			var text = document.getElementById("text");
+			var checkBox = document.getElementById(array[index]);
 			if (checkBox.checked == true){
 				date = checkBox.value + ",";
 				date.pop();
 			} 
 		}
-
+		tmp = "nazov=" + nazov + "&datefrom=" + datefrom + "&dateto=" + dateto + "&casod=" + casod + "&casdo=" + casdo + "&dni=" + dni; 
 		
 	}
 	else {
@@ -142,20 +141,25 @@ function findInDatabase(stranka){
 		}
 	}
 
-	databaseConnector(tmp);
+	databaseConnector(tmp,stranka);
 
 	return false;
 }
 
-function databaseConnector(tmp){
+function databaseConnector(tmp, stranka="kategoria"){
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "kategoria";
+	if (stranka == "aktivity"){
+		url += "searchakivit";
+	}
+	else {
+		url += "kategoria";
+	}
 	
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText);
-			JsonAndContent(data);
+			JsonAndContent(data, stranka);
 		}
 	}
 	xmlhttp.open("POST", url, false);
@@ -164,12 +168,13 @@ function databaseConnector(tmp){
 	return false;
 }
 
-function JsonAndContent(data) {
+function JsonAndContent(data, stranka="kategoria") {
 	var content = '';
 	if (data.length > 0) {
 		for (var i  = 0; i < data.length; i++){
 			var diel = data[i];
-			content += 	"<article id='karta' class='card'>"+
+			console.log(diel);
+			/*content += 	"<article id='karta' class='card'>"+
 							"<div class='card-body'>" +
 								"<div class='row'>" +
 									"<div class='col'>" +
@@ -183,7 +188,7 @@ function JsonAndContent(data) {
 								"<p class='card-text'>"+ diel["hashtag"] +"</p>" + 
 								"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
 							"</div>"+
-						"</article>"
+						"</article>"*/
 		}
 	}
 	else {
