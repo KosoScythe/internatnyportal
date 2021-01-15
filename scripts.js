@@ -34,11 +34,11 @@ function addAd() {
 
 function addAd_activity() {
 	var nazov = document.getElementById('nazov_podujatia').value;
-	var datum_1=  document.getElementById('datepicker').value;
+	var datum_1=  convertDate(document.getElementById('datepicker').value);
 	var time_1 =  document.getElementById('timepicker').value;
 
 	if (document.getElementById('datepicker2') != null){
-		var datum_2 =  document.getElementById('datepicker2').value;
+		var datum_2 =  convertDate(document.getElementById('datepicker2').value);
 	}
 	else{
 		var datum_2 = "";
@@ -116,7 +116,6 @@ function insertAdIntoDatabase_activity(tmp) {
 	xmlhttp.send(tmp);
 	return false;
 }
-
 
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
@@ -201,8 +200,8 @@ function findInDatabase(stranka){
 		date = "";
 
 		nazov = document.getElementById('hashtag').value;
-		datefrom = datepicker[0];
-		dateto = datepicker[1];
+		datefrom = convertDate(datepicker[0]);
+		dateto = convertDate(datepicker[1]);
 		casod = document.getElementById('timepicker').value;
 		casdo = document.getElementById('timepicker2').value;
 
@@ -234,6 +233,13 @@ function findInDatabase(stranka){
 	return false;
 }
 
+function convertDate(oldDate){
+	let array = oldDate.split('/');
+	let result = array[2] + "-" + array[1] + "-" + array[0];
+	console.log(result);
+	return result;
+}
+
 function databaseConnector(tmp, stranka="kategoria"){
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
@@ -261,8 +267,36 @@ function JsonAndContent(data, stranka="kategoria") {
 	if (data.length > 0) {
 		for (var i  = 0; i < data.length; i++){
 			var diel = data[i];
-			console.log(diel);
-			/*content += 	"<article id='karta' class='card'>"+
+			if (stranka == "aktivity"){
+				content += 	"<article id='karta' class='card'>"+
+					"<div class='card-body'>" +
+						"<div class='row'>" +
+							"<div class='col'>" +
+								"<h2 class='card-title'>" + diel["nazov"] +"</h2>" + 
+							"</div>" +
+							"<div class='col'>" +
+								"<p class='card-text'>Kde: "+ diel["lokalita"] +"</p>" + 
+							"</div>" +
+						"</div>" +
+						"<div class='row'>" +
+							"<div class='col'>" +
+								"<h2 class='card-title'> Čas: " + diel["casod"] + " - " + diel["casdo"]+"</h2>" + 
+							"</div>" +
+							"<div class='col'>" +
+								"<p class='card-text'>Dátum: "+ diel["datefrom"] + " - " + diel["datefrom"] + "</p>" + 
+							"</div>" +
+							"<div class='col'>" +
+								"<p class='card-text'>Počet prihlásených ľudí: "+ diel["pocet_prihlasenych"] + "/" + diel["max"] + "</p>" + 
+							"</div>" +
+						"</div>" +
+						"<p class='card-text'>"+ diel["popis"] +"</p>" + 
+						"<p class='card-text'>"+ diel["hashtag"] +"</p>" + 
+						"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
+					"</div>"+
+				"</article>"
+			}
+			else {
+				content += 	"<article id='karta' class='card'>"+
 							"<div class='card-body'>" +
 								"<div class='row'>" +
 									"<div class='col'>" +
@@ -276,7 +310,9 @@ function JsonAndContent(data, stranka="kategoria") {
 								"<p class='card-text'>"+ diel["hashtag"] +"</p>" + 
 								"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
 							"</div>"+
-						"</article>"*/
+						"</article>"
+			}
+			
 		}
 	}
 	else {
@@ -448,7 +484,6 @@ function inzeratAktivitaPodlaID(id, inz) {
 	xmlhttp.send(tmp);
 	return false;
 }
-
 
 function fillForm(data, id, inz) {
   if (inz == 'i'){
