@@ -35,7 +35,7 @@ function addAd() {
 function insertAdIntoDatabase(tmp) {
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
-	url = url + "insert?abc="+ new Date().getTime();
+	url = url + "insert";
 	
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -111,11 +111,26 @@ function showLatestAd(typ, kategoria, urln=0) {
 function findInDatabase(stranka){
 	var tmp = null;
 	if (stranka == 'aktivity') {
-		hashtag = document.getElementById('hashtag').value;
-		tmp = 'typ=5'
-		if (hashtag) {
-			tmp += "&nazov=" + hashtag;
+		datepicker = document.getElementById('datepicker').value.split(' - ');
+		date = "";
+
+		nazov = document.getElementById('hashtag').value;
+		datefrom = datepicker[0];
+		dateto = datepicker[1];
+		casod = document.getElementById('timepicker').value;
+		casdo = document.getElementById('timepicker2').value;
+
+		array = ["den-PO","den-UT","den-ST", "den-ŠT","den-Pi","den-SO","den-NE"];
+		for (let index = 0; index < array.length; index++) {
+			var checkBox = document.getElementById("myCheck");
+			var text = document.getElementById("text");
+			if (checkBox.checked == true){
+				date = checkBox.value + ",";
+				date.pop();
+			} 
 		}
+
+		
 	}
 	else {
 		kategoria = document.getElementById('kategoria').value;
@@ -432,4 +447,15 @@ function pridajAktivitu(){
 	  } else {
 		$("#pridajModal").modal();
 	  }
+}
+
+function zvolDni(id){
+	document.getElementById("den-kedykolvek").checked = false;
+	r = "";
+	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
+	values = ["pon","uto","str","stv","pia","sob", "ned"];	
+	for (i = 0; i < 7; i++){
+		r += pole[i]+"<input type='checkbox' id='den-"+va[i]+"' value='"+ values[i] + "'>";
+	}
+	document.getElementById(id).innerHTML = r; 
 }
