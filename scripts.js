@@ -51,7 +51,12 @@ function addAd_activity() {
 		var time_2 = "";
 	}
 	
-	var typ_udalosti = document.getElementById('typ_udalosti').value;
+	if (document.getElementById('typ_udalosti').value == "JEDNORÁZOVÁ") {
+		var typ_udalosti = true;
+	}else{
+		var typ_udalosti = false;
+	}
+	
 	var lokalita = document.getElementById('lokalita').value;
 
 	if (document.getElementById('pocet_ludi') != null){
