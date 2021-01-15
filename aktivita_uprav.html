@@ -167,22 +167,10 @@
 
 						<div class="col-12">
 							<button onclick="tmp()"class="btn btn-warning btn-rounded" style="margin-left:-1em;" type="submit" >
-								Vytvor aktivitu!
+								Ulož aktivitu
 							</button><br>
                             <script>
                                 function tmp(){
-                                    d1 = document.getElementById("datepicker").value;
-                                    d2 = document.getElementById("datepicker2").value
-                                    t1 = document.getElementById("timepicker").value;
-                                    t2 = document.getElementById("timepicker2").value
-                                    if (d1 > d2){
-                                        document.getElementById("datepicker2").value = d1;
-                                        document.getElementById("datepicker").value = d2;
-                                    }
-                                    if (t1 > t2){
-                                        document.getElementById("timepicker2").value = t1;
-                                        document.getElementById("timepicker").value = t2;
-                                    }
                                 }
                             </script>
 						</div>

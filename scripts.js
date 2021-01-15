@@ -556,25 +556,79 @@ function updateActivity() {
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('idInz');
 
-	var nazov = document.getElementById('nazov podujatia').value;
-	var datum_zaciatku =  document.getElementById('datepicker').value;
-	var cas_zaciatku =  document.getElementById('timepicker').value;
-	var kategoria =  document.getElementById('pridaj_datum_cas').value;
-	var datum_konca = document.getElementById('datepicker2').value;
-	var cas_konca = document.getElementById('timepicker2').value;
-	var typ_udalosti = document.getElementById('typ_udalosti').value;
-	var dni = document.getElementById('dni').value;
-	var lokalita = document.getElementById('lokalita').value;
-	var pocet_ludi = document.getElementById('pocet_ludi').value;
-	var popis = document.getElementById('popis').value;
+  var nazov = document.getElementById('nazov_podujatia').value;
+  var datum_1=  convertDate(document.getElementById('datepicker').value);
+  var time_1 =  document.getElementById('timepicker').value;
 
-	var tmp = 'id=' + id + '&nazov=' + nazov + '&popis=' + popis + '&datefrom=' + datum_zaciatku + '&dateto=' + datum_konca + '&casod=' + cas_zaciatku + '&casdo=' + cas_konca + '&pocet=' + pocet +'&lokalita=' + lokalita +'&opakuje=' + typ_udalosti +'&dni=' + dni;
-  	var xmlhttp = new XMLHttpRequest();
+  if (document.getElementById('datepicker2') != null){
+	  var datum_2 =  convertDate(document.getElementById('datepicker2').value);
+  }
+  else{
+	  var datum_2 = "";
+  }
+
+  if (document.getElementById('timepicker2') != null){
+	  var time_2 =  document.getElementById('timepicker2').value;
+  }
+  else{
+	  var time_2 = "";
+  }
+  
+  if (document.getElementById('typ_udalosti').value == "JEDNORÁZOVÁ") {
+	  var typ_udalosti = false;
+  }else{
+	  var typ_udalosti = true;
+  }
+  
+  var lokalita = document.getElementById('lokalita').value;
+
+  if (document.getElementById('pocet_ludi') != null){
+	  var pocet_ludi =  document.getElementById('pocet_ludi').value;
+  }
+  else{
+	  var pocet_ludi = 0;
+  }
+
+  if (document.getElementById('pocet_ludi2') != null){
+	  var pocet_ludi2 =  document.getElementById('pocet_ludi2').value;
+  }
+  else{
+	  var pocet_ludi2 = 0;
+  }
+
+  var date = "";
+  array = ["den-PO","den-UT","den-ST", "den-ŠT","den-PI","den-SO","den-NE"];
+  for (let index = 0; index < array.length; index++) {
+	  var checkBox = document.getElementById(array[index]);
+	  if (checkBox != null) {
+		  if (checkBox.checked == true){
+			  date = checkBox.value + ",";
+			  date = date.slice(0, -1);
+		  } 
+	  }
+  }
+
+  var popis = document.getElementById('popis').value;
+  var tmp =
+  'owner=' + sessionStorage.getItem('email') +   
+  '&nazov=' + nazov + 
+  '&popis=' + popis + 
+  '&datefrom=' + datum_1 + 
+  '&dateto=' + datum_2 + 
+  '&casod=' + time_1 + 
+  '&casdo=' + time_2 + 
+  '&pocet=' + pocet_ludi2 +
+  '&lokalita=' + lokalita +
+  '&opakuje=' + typ_udalosti +
+  '&dni=' + date +
+  '&min_pocet=' + pocet_ludi;
+
+	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
 	url = url + "upravakivity";
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-      console.log('upravAktivitu');
+      		console.log('upravAktivitu');
 		}
 	}
 	xmlhttp.open("POST", url, false);
