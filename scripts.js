@@ -68,6 +68,17 @@ function addAd_activity() {
 		var pocet_ludi2 = 0;
 	}
 
+	array = ["den-PO","den-UT","den-ST", "den-ŠT","den-PI","den-SO","den-NE"];
+	for (let index = 0; index < array.length; index++) {
+		var checkBox = document.getElementById(array[index]);
+		if (checkBox != null) {
+			if (checkBox.checked == true){
+				date = checkBox.value + ",";
+				date = date.slice(0, -1);
+			} 
+		}
+	}
+
 	var popis = document.getElementById('popis').value;
 	var tmp =
 	'owner' + sessionStorage.getItem('email') +   
@@ -80,7 +91,7 @@ function addAd_activity() {
 	'&pocet=' + pocet_ludi2 +
 	'&lokalita=' + lokalita +
 	'&opakuje=' + typ_udalosti +
-	'&dni=' + "?,?,?" +
+	'&dni=' + date +
 	'&min_pocet=' + pocet_ludi;
 	insertAdIntoDatabase_activity(tmp);
 }
