@@ -87,7 +87,7 @@ function addAd_activity() {
 
 	var popis = document.getElementById('popis').value;
 	var tmp =
-	'owner' + sessionStorage.getItem('email') +   
+	'owner=' + sessionStorage.getItem('email') +   
 	'&nazov=' + nazov + 
 	'&popis=' + popis + 
 	'&datefrom=' + datum_1 + 
