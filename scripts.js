@@ -39,19 +39,39 @@ function addAd_activity() {
 	var datum_2 =  document.getElementById('datepicker2').value;
 	var time_2 = document.getElementById('timepicker2').value;
 	var typ_udalosti = document.getElementById('typ_udalosti').value;
-	var tmp = 
-	'nazov=' + nazov + 
-	'&cena=' + datum_1 + 
-	'&typ=' + time_1 + 
-	'&kategoria=' + datum_2 + 
-	'&popis=' + time_2 + 
-	'&hashtag=' + typ_udalosti + 
-	'&uzivatel=' + sessionStorage.getItem('email');
-	insertAdIntoDatabase(tmp);
+	var lokalita = document.getElementById('lokalita').value;
+	var pocet_ludi = document.getElementById('pocet_ludi').value;
+	var pocet_ludi2 = document.getElementById('pocet_ludi2').value;
+	var popis = document.getElementById('popis').value;
+	var tmp =
+	'owner' + sessionStorage.getItem('email') +   
+	'&nazov=' + nazov + 
+	'&popis=' + popis + 
+	'&datefrom=' + datum_1 + 
+	'&dateto=' + datum_2 + 
+	'&casod=' + time_1 + 
+	'&casdo=' + time_2 + 
+	'&pocet=' + pocet_ludi2 +
+	'&lokalita=' + lokalita +
+	'&opakuje=' + typ_udalosti +
+	'&dni=' + "?,?,?" +
+	'&min_pocet=' + pocet_ludi;
+	insertAdIntoDatabase_activity(tmp);
 }
 
 function insertAdIntoDatabase_activity(tmp) {
-	//...
+	var xmlhttp = new XMLHttpRequest();
+	var url = "https://internatnyportalxyz.xyz:5000/";
+	url = url + "pridajaktivitu";
+	
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		}
+	}
+	xmlhttp.open("POST", url, false);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(tmp);
+	return false;
 }
 
 
