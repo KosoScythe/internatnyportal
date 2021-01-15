@@ -55,19 +55,20 @@
 
 						<div class="row" style="margin-top:1em;">
 							<div class="col-4">
-								Kedy?
+								<h6>Kedy?</h6> 
 								<input type="text" id="datepicker" placeholder="Kedykoľvek"/>
 							</div>
-							<div class="col">
-								Čas od:
+							<div class="col-4">
+								<h6>Čas od:</h6> 
 								<input type="text" class="timepicker" id="timepicker" placeholder="Kedykoľvek"/>
 								<script>
 									$(document).ready(function(){
 										$('input.timepicker').timepicker({ timeFormat: 'HH:mm' });
 									});
 								</script>
-
-								Čas do:
+							</div>
+							<div class="col-4">
+								<h6>Čas do:</h6> 
 								<input type="text" class="timepicker" id="timepicker2" placeholder="Kedykoľvek"/>
 								<script>
 									$(document).ready(function(){
@@ -78,18 +79,8 @@
 						</div>
 
 						<div class="row" style="margin-top:1em;">
-							
-							<div class="col-3">
-								V ktoré dni?
-							</div>
-
-							<div class="col-3">
-								Kedykoľvek
-								<input type="checkbox" id="den-kedykolvek" checked="checked" value="0">
-							</div>
-
 							<div id="zvol_dni" class="col-6">
-								Zvoľ dni
+								<h6>V ktoré dni?</h6> 
 								<button id="btn-zvol_dni" onclick="zvolDni(this.parentElement.id)"><img src="img/kalendarik.png"></button>
 							</div>
 						</div>

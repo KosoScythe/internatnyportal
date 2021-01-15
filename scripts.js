@@ -647,12 +647,11 @@ function pridajAktivitu(){
 }
 
 function zvolDni(id){
-	document.getElementById("den-kedykolvek").checked = false;
 	r = "";
 	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
 	values = ["pon","uto","str","stv","pia","sob", "ned"];	
 	for (i = 0; i < 7; i++){
-		r += pole[i]+"<input type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] + "'>";
+		r += "<b>" + pole[i] + "</b> "+"<div class='boxy'><input type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] + "' ></div>";
 	}
 	document.getElementById(id).innerHTML = r; 
 }
