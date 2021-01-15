@@ -461,8 +461,8 @@ def searchakivit():
 
 
 
-@app.route("/pridajaktivitu" , methods=['POST'])
-def pridajaktivitu():
+@app.route("/pridajakivitu" , methods=['POST'])
+def pridajakivitu():
     parametre= request.form
     owner = parametre.get('owner')
     nazov = parametre.get('nazov')
@@ -480,11 +480,17 @@ def pridajaktivitu():
     if not min_pocet:
         min_pocet = 0
     if not pocet:
-        pocet = 0   
+        pocet = 0
+    if not dateto:
+        dateto = datefrom
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    query = 'INSERT INTO aktivity (nazov, popis, datefrom, dateto, casod, casdo, max, lokalita , opakuje, dni , min, owner) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, (Select id from ciselnik_uzivatelia where email = %s) )'
-    to_filter = [nazov,popis,datefrom,dateto,casod,casdo,int(pocet),lokalita,opakuje,dni, int(min_pocet), owner]
+    if casdo:
+        query = 'INSERT INTO aktivity (nazov, popis, datefrom, dateto, casod, casdo, max, lokalita , opakuje, dni , min, owner) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, (Select id from ciselnik_uzivatelia where email = %s) )'
+        to_filter = [nazov,popis,datefrom,dateto,casod,casdo,int(pocet),lokalita,opakuje,dni, int(min_pocet), owner]
+    else:
+        query = 'INSERT INTO aktivity (nazov, popis, datefrom, dateto, casod, casdo, max, lokalita , opakuje, dni , min, owner) VALUES (%s,%s,%s,%s,%s,\'24:00:00\',%s,%s,%s,%s,%s, (Select id from ciselnik_uzivatelia where email = %s) )'
+        to_filter = [nazov,popis,datefrom,dateto,casod,int(pocet),lokalita,opakuje,dni, int(min_pocet), owner]
     c.execute(query, to_filter)
     a.commit()
     c.close()
