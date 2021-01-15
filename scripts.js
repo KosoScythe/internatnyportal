@@ -293,7 +293,8 @@ function JsonAndContent(data, stranka="kategoria") {
 							"</div>" +
 						"</div>" +
 						"<p class='card-text'>"+ diel["popis"] +"</p>" + 
-						"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
+						"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj organizátora cez Facebook</a>" +
+						"<button class='btn btn-primary float-right' onclick='pridajSaNaAktivitu('" + diel['id'] + "')'>Prihlás sa nsa aktivitu</button>" +
 					"</div>"+
 				"</article>"
 			}
@@ -654,4 +655,22 @@ function zvolDni(id){
 		r += "<b>" + pole[i] + "</b> "+"<div class='boxy'><input type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] + "' ></div>";
 	}
 	document.getElementById(id).innerHTML = r; 
+}
+
+function pridajSaNaAktivitu(id) {
+	var tmp = '';
+    tmp = 'id=' + id;
+    tmp += '&uzivatel=' + sessionStorage.getItem('email');
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://internatnyportalxyz.xyz:5000/";
+    url = url + "odhlaszaktivity";
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        location.reload();
+      }
+    }
+    xmlhttp.open("POST", url, false);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send(tmp);
+    return false;
 }

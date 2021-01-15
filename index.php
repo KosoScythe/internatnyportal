@@ -46,7 +46,7 @@
 						</div>
 					</div>
 				</form>
-				<div style="background-color: blue;">
+				<div class="form-inline md-form mr-auto mb-4">
 					<div style="cursor: pointer;" onclick = 'location.href="aktivity.html"' class="polozky"><img class="obrazok" src="img/sport.svg" alt="Šport"/><p>Šport</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=1"' class="polozky"><img class="obrazok" src="img/elektro.svg" alt="Elektro" /><p>Elektronika</p></div>
 					<div style="cursor: pointer;" onclick = 'location.href="produkty.html?kat=2"' class="polozky"><img class="obrazok" src="img/drogeria.svg" alt="Drogéria" /><p>Drogéria</p></div>
