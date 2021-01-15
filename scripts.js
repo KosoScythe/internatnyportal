@@ -79,10 +79,12 @@ function addAd_activity() {
 		var checkBox = document.getElementById(array[index]);
 		if (checkBox != null) {
 			if (checkBox.checked == true){
-				date = checkBox.value + ",";
-				date = date.slice(0, -1);
+				date += checkBox.value + ",";
 			} 
 		}
+	}
+	if (date!=""){
+		date = date.slice(0, -1);
 	}
 
 	var popis = document.getElementById('popis').value;
