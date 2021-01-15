@@ -647,7 +647,6 @@ function pridajAktivitu(){
 }
 
 function zvolDni(id){
-	document.getElementById("den-kedykolvek").checked = false;
 	r = "";
 	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
 	values = ["pon","uto","str","stv","pia","sob", "ned"];	
