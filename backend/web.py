@@ -527,7 +527,7 @@ def pridajaktivitu():
         while start <= end or len(dni) < 7:
             dni.append(start.weekday())
             start += delta
-        dni = [cislanadni(i) for i in [4, 5, 6, 0, 1, 2, 3, 4]]
+        dni = [cislanadni(i) for i in dni]
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     if casdo:
