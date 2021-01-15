@@ -100,6 +100,22 @@ def ins():
     a.close()
     return ''
 
+@app.route("/prihlasitnaaktivitu" , methods=['POST'])
+def prihlasitnaaktivitu():
+    parametre= request.form
+    uzivatel = parametre.get('uzivatel')
+    checkuser(uzivatel)
+    idcko = parametre.get('id')
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'INSERT INTO aktivity_prihlaseny (id_uzivatel, id_aktivity) VALUES ((Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s),%s);'
+    to_filter = [uzivatel, int(idcko)]
+    c.execute(query, to_filter)
+    a.commit()
+    c.close()
+    a.close()
+    return ''
+
 @app.route("/nove" , methods=['POST'])
 def nove():
     parametre= request.form
@@ -553,8 +569,8 @@ def pridajaktivitu():
     return ''
 
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0')
-    app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
+    app.run(host='0.0.0.0')
+    #app.run(host='0.0.0.0', ssl_context=('/etc/letsencrypt/live/internatnyportalxyz.xyz/cert.pem','/etc/letsencrypt/live/internatnyportalxyz.xyz/privkey.pem'))
 
 #app.run('0.0.0.0', debug=True, port=8100, ssl_context='adhoc')
 def get_dict_resultset(sql):
