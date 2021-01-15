@@ -38,7 +38,7 @@
         <section id="page-container">
 			<main  id="kontajner" class = "container border-right-1 border-left-1 text shadow-lg">
 				<h1 style="padding-top: 2vw; padding-bottom: 2vw;" class="align-self-center"><i>Vytvorenie novej aktivity</i></h1>
-				<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript:;">
+				<form class="form-inline md-form mr-auto mb-4 bg-info" action="javascript: addAd_activity();">
 					<div id=vyrazy_box class="col-12">
 
 						<div class="row">
@@ -188,7 +188,9 @@
                                     d1 = document.getElementById("datepicker").value;
                                     d2 = document.getElementById("datepicker2").value
                                     t1 = document.getElementById("timepicker").value;
-                                    t2 = document.getElementById("timepicker2").value
+									t2 = document.getElementById("timepicker2").value;
+									p1 = document.getElementById("pocet_ludi").value;
+									p2 = document.getElementById("pocet_ludi2").value;
                                     if (d1 > d2){
                                         document.getElementById("datepicker2").value = d1;
                                         document.getElementById("datepicker").value = d2;
@@ -197,7 +199,11 @@
                                         document.getElementById("timepicker2").value = t1;
                                         document.getElementById("timepicker").value = t2;
 									}
-									window.location.href='tmp_uspech.html';
+									if (p1 > p2){
+                                        document.getElementById("pocet_ludi2").value = p1;
+                                        document.getElementById("pocet_ludi").value = p2;
+									}
+									
                                 }
                             </script>
 						</div>
