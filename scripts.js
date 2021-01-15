@@ -236,6 +236,9 @@ function findInDatabase(stranka){
 }
 
 function convertDate(oldDate){
+	if (oldDate.split('/').length < 3){
+		return oldDate;
+	}
 	let result = "";
 	if (oldDate != undefined){
 		let array = oldDate.split('/');
