@@ -610,7 +610,8 @@ function updateActivity() {
 
   var popis = document.getElementById('popis').value;
   var tmp =
-  'owner=' + sessionStorage.getItem('email') +   
+  'id=' + id +
+  '&owner=' + sessionStorage.getItem('email') +   
   '&nazov=' + nazov + 
   '&popis=' + popis + 
   '&datefrom=' + datum_1 + 
