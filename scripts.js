@@ -234,8 +234,11 @@ function findInDatabase(stranka){
 }
 
 function convertDate(oldDate){
-	let array = oldDate.split('/');
-	let result = array[2] + "-" + array[1] + "-" + array[0];
+	let result = "";
+	if (oldDate != undefined){
+		let array = oldDate.split('/');
+		result = array[2] + "-" + array[1] + "-" + array[0];
+	}
 	console.log(result);
 	return result;
 }
