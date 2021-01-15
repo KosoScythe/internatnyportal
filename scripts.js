@@ -477,7 +477,6 @@ function inzeratAktivitaPodlaID(id, inz) {
   if (inz == 'i') {
   	url = url + "selectjedenprodukt";
   } else {
-	console.log("TMP TMP TMP")
     url = url + "selectjednuaktivitu";
   }
 	xmlhttp.onreadystatechange = function() {
@@ -499,16 +498,15 @@ function fillForm(data, id, inz) {
     document.getElementById('hashtagy').value = data[0]['hashtag'];
   } else {
     // TODO vyplnenie formularu aktivit pri jej uprave
-    document.getElementById('nazov podujatia').value =
+    document.getElementById('nazov_podujatia').value = data[0]['nazov']
     document.getElementById('datepicker').value = data[0]['datefrom'];
-    document.getElementById('timepicker').value = data[0]['timefrom'];
-    document.getElementById('pridaj_datum_cas').value =
+    document.getElementById('timepicker').value = data[0]['casod'];
     document.getElementById('datepicker2').value = data[0]['dateto'];
-    document.getElementById('timepicker2').value = data[0]['timeto'];
-    document.getElementById('typ_udalosti').value = data[0]['opakuje'];
+    document.getElementById('timepicker2').value = data[0]['casdo'];
+    
     document.getElementById('dni').value = data[0]['dni'];
     document.getElementById('lokalita').value = data[0]['lokalita'];
-    document.getElementById('pocet_ludi').value = data[0]['max'];
+    document.getElementById('pocet_ludi').value = data[0]['pocet'];
   }
   document.getElementById('nazov').value = data[0]['nazov'];
   document.getElementById('typ').value = data[0]['typ'];
