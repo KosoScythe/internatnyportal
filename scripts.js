@@ -206,6 +206,9 @@ function findInDatabase(stranka){
 		nazov = document.getElementById('hashtag').value;
 		datefrom = convertDate(datepicker[0]);
 		dateto = convertDate(datepicker[1]);
+		if(dateto == "..."){
+			dateto = datefrom;
+		}
 		casod = document.getElementById('timepicker').value;
 		casdo = document.getElementById('timepicker2').value;
 
@@ -518,8 +521,8 @@ function fillForm(data, id, inz) {
     
     document.getElementById('dni').value = data[0]['dni'];
     document.getElementById('lokalita').value = data[0]['lokalita'];
-	document.getElementById('pocet_ludi').value = data[0]['min_pocet'];
-	document.getElementById('pocet_ludi2').value = data[0]['pocet'];
+	document.getElementById('pocet_ludi').value = data[0]['min'];
+	document.getElementById('pocet_ludi2').value = data[0]['max'];
 	document.getElementById('popis').value = data[0]['popis'];
 
 	if (data[0]['opakuje'] == true){
