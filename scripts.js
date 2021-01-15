@@ -294,7 +294,7 @@ function JsonAndContent(data, stranka="kategoria") {
 						"</div>" +
 						"<p class='card-text'>"+ diel["popis"] +"</p>" + 
 						"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj organizátora cez Facebook</a>" +
-						"<button class='btn btn-primary float-right' onclick='pridajSaNaAktivitu('" + diel['id'] + "')'>Prihlás sa nsa aktivitu</button>" +
+						"<button class='btn btn-primary float-right psn' onclick='pridajSaNaAktivitu(" + diel['id'] + ")'>Prihlás sa na aktivitu</button>" +
 					"</div>"+
 				"</article>"
 			}
