@@ -379,7 +379,11 @@ function spracujInzeraty(data) {
 
 function upravInzerat(id, inzerat) {
   var urlParams = '?idInz=' + id + '&inz=' + inzerat;
-  window.location.href = 'inzerat_uprav.html' + urlParams;
+    if (inzerat == 'i'){
+    window.location.href = 'inzerat_uprav.html' + urlParams;
+  } else {
+    window.location.href = 'aktivita_uprav.html' + urlParams;
+  }
 }
 
 function vymazInzerat(id, inzerat) {
