@@ -651,7 +651,7 @@ function zvolDni(id){
 	pole = ["PO","UT","ST","ŠT","PI","SO","NE"];
 	values = ["pon","uto","str","stv","pia","sob", "ned"];	
 	for (i = 0; i < 7; i++){
-		r += "<b>" + pole[i] + "</b> "+"<input class='boxy' type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] + "' >";
+		r += "<b>" + pole[i] + "</b> "+"<div class='boxy'><input type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] + "' ></div>";
 	}
 	document.getElementById(id).innerHTML = r; 
 }
