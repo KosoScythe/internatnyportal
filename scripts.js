@@ -214,16 +214,20 @@ function nacitajMojeInzeraty() {
 
 function spracujInzeraty(data) {
   var s = '';
-  s += '<table style="width:100%"> <tr>     <th style="width:60%">Moje inzeráty</th>     <th></th>    <th></th>   </tr> ';
-  for (var i  = 0; i < data.length; i++){
-    var diel = data[i];
-    var inzerat = 'i';
-    if (diel['dni'] != null) inzerat = 'a';
-    s += '<tr><td>' + diel['nazov'] + '</td>';
-    s +='<th><button class="btn btn-warning btn-rounded" onclick="upravInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Uprav inzerát</button></th>'; //TODO uprav inzerat asi idckodon, alebo tak
-    s +='<th><button class="btn btn-warning btn-rounded" onclick="vymazInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Vymaž inzerát</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
+  if (data.length != 0) {
+    s += '<table style="width:100%"> <tr>     <th style="width:60%">Moje inzeráty</th>     <th></th>    <th></th>   </tr> ';
+    for (var i  = 0; i < data.length; i++){
+      var diel = data[i];
+      var inzerat = 'i';
+      if (diel['dni'] != null) inzerat = 'a';
+      s += '<tr><td>' + diel['nazov'] + '</td>';
+      s +='<th><button class="btn btn-warning btn-rounded" onclick="upravInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Uprav inzerát</button></th>'; //TODO uprav inzerat asi idckodon, alebo tak
+      s +='<th><button class="btn btn-warning btn-rounded" onclick="vymazInzerat(\'' + diel['id'] + '\',\'' + inzerat + '\')">Vymaž inzerát</button></th></tr>'; //TODO uprav inzerat asi idckodon, alebo tak
+    }
+    s += '</table>';
+  } else {
+    s = '<table style="width:100%"> <tr><th>Moje inzeráty</th></tr>  <tr><td> Nemáš vytvorené žiadne inzeráty :( </td></tr> </table>';
   }
-  s += '</table>';
   document.getElementById('moje_inzeraty').innerHTML = s;
 }
 
