@@ -47,7 +47,7 @@
 								<h5>Názov podujatia</h5>
 							</div>
 							<div class="col-10">
-								<input type="text" id="nazov_podujatia" />
+								<input type="text" id="nazov_podujatia" required/>
 							</div>
                         </div>
                         
@@ -56,7 +56,7 @@
 								<h5>Dátum začiaku</h5> 
 							</div>
 							<div class="col-10" >
-								<input type="text" id="datepicker"/>
+								<input type="text" id="datepicker" required/>
 							</div>
                         </div>
                         
@@ -65,7 +65,7 @@
 								<h5>Čas začiatku</h5> 
 							</div>
 							<div class="col-10">
-								<input type="text" class="timepicker" id="timepicker"/>
+								<input type="text" class="timepicker" id="timepicker" required/>
 								<script>
 									$(document).ready(function(){
 										$('input.timepicker').timepicker({ timeFormat: 'HH:mm' });
@@ -119,7 +119,7 @@
 								<h5>Typ udalosti</h5> 
 							</div>
 							<div class="col-10" id="cas_konca">
-                                <select name="typ_udalosti" id="typ_udalosti" value="" onchange="zmena();">
+                                <select name="typ_udalosti" id="typ_udalosti" value="" onchange="zmena();" required>
                                     <option value="JEDNORÁZOVÁ">JEDNORÁZOVÁ</option>
                                     <option value="OPAKUJÚCA SA">OPAKUJÚCA SA</option>
                                 </select>
@@ -129,16 +129,16 @@
                                     function zmena(){
                                         chbox = document.getElementById("typ_udalosti")
                                         val = chbox.options[chbox.selectedIndex].value;
-                                        if (val == "OPAKUJÚCA SA"){
+                                        if (val == "OPAKUJÚCA SA" || val == "JEDNORÁZOVÁ"){
                                             r = "";
 									        pole = ["PO","UT","ST","ŠT","PI","SO","NE"]
                                             for (i = 0; i < 7; i++){
                                                 r += pole[i]+" <input type='checkbox' id='den-"+pole[i]+"'>  "
                                             }
                                             document.getElementById("dni").innerHTML = r;
-                                        } else if  (val == "JEDNORÁZOVÁ"){
-                                            document.getElementById("dni").innerHTML = "";
-                                        }
+                                        } //else if  (val == "JEDNORÁZOVÁ"){
+                                            //document.getElementById("dni").innerHTML = "";
+                                       //}
                                     }
                                 </script>
 							</div>
@@ -149,7 +149,7 @@
 								<h5>Lokalita</h5> 
 							</div>
 							<div class="col-10" id="cas_konca">
-								<input type="text" id="lokalita" name="lokalita">
+								<input type="text" id="lokalita" name="lokalita" required>
 							</div>
                         </div>
 
@@ -176,7 +176,7 @@
 								<h5>Popis</h5> 
 							</div>
 							<div class="col-10" id="cas_konca">
-								<textarea id="popis" name="popis" rows="4" cols="50"></textarea>
+								<textarea id="popis" name="popis" rows="4" cols="50" required></textarea>
 							</div>
 						</div>
 
