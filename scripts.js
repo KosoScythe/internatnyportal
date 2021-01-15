@@ -238,9 +238,8 @@ function convertDate(oldDate){
 	if (oldDate != null){
 		let array = oldDate.split('/');
 		result = array[2] + "-" + array[1] + "-" + array[0];
-		console.log(result);
 	}
-	
+	console.log(result);
 	return result;
 }
 
