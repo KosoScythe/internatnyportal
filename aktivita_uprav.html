@@ -114,16 +114,17 @@
                                     function zmena(){
                                         chbox = document.getElementById("typ_udalosti")
                                         val = chbox.options[chbox.selectedIndex].value;
-                                        if (val == "OPAKUJÚCA SA"){
+										if (val == "OPAKUJÚCA SA"){
                                             r = "";
-									        pole = ["PO","UT","ST","ŠT","PI","SO","NE"]
+											pole = ["PO","UT","ST","ŠT","PI","SO","NE"]
+											values = ["pon","uto","str","stv","pia","sob", "ned"];
                                             for (i = 0; i < 7; i++){
-                                                r += pole[i]+" <input type='checkbox' id='den-"+pole[i]+"'>  "
+                                                r += pole[i]+" <input type='checkbox' id='den-"+pole[i]+"' value='"+ values[i] +"'>  "
                                             }
                                             document.getElementById("dni").innerHTML = r;
                                         } else if  (val == "JEDNORÁZOVÁ"){
                                             document.getElementById("dni").innerHTML = "";
-                                        }
+                                       }
                                     }
                                 </script>
 							</div>
