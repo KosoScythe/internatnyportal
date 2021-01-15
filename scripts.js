@@ -36,8 +36,21 @@ function addAd_activity() {
 	var nazov = document.getElementById('nazov_podujatia').value;
 	var datum_1=  document.getElementById('datepicker').value;
 	var time_1 =  document.getElementById('timepicker').value;
-	var datum_2 =  document.getElementById('datepicker2').value;
-	var time_2 = document.getElementById('timepicker2').value;
+
+	if (document.getElementById('datepicker2') != null){
+		var datum_2 =  document.getElementById('datepicker2').value;
+	}
+	else{
+		var datum_2 = "";
+	}
+
+	if (document.getElementById('timepicker2') != null){
+		var time_2 =  document.getElementById('timepicker2').value;
+	}
+	else{
+		var time_2 = "";
+	}
+	
 	var typ_udalosti = document.getElementById('typ_udalosti').value;
 	var lokalita = document.getElementById('lokalita').value;
 	var pocet_ludi = document.getElementById('pocet_ludi').value;
