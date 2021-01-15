@@ -513,6 +513,12 @@ function fillForm(data, id, inz) {
 	document.getElementById('pocet_ludi').value = data[0]['min_pocet'];
 	document.getElementById('pocet_ludi2').value = data[0]['pocet'];
 	document.getElementById('popis').value = data[0]['popis'];
+
+	if (data[0]['opakuje'] == true){
+		document.getElementById('typ_udalosti').value = "OPAKUJÚCA SA";
+	}else{
+		document.getElementById('typ_udalosti').value = "JEDNORÁZOVÁ";
+	}
   }
 }
 
