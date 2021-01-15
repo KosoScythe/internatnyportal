@@ -52,9 +52,9 @@ function addAd_activity() {
 	}
 	
 	if (document.getElementById('typ_udalosti').value == "JEDNORÁZOVÁ") {
-		var typ_udalosti = true;
-	}else{
 		var typ_udalosti = false;
+	}else{
+		var typ_udalosti = true;
 	}
 	
 	var lokalita = document.getElementById('lokalita').value;

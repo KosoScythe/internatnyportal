@@ -204,7 +204,16 @@
 										document.getElementById("timepicker2").value = "23:59";
 									}
 									if (datum == ""){
-										document.getElementById("datepicker2").value = document.getElementById("datepicker").value;
+										if (document.getElementById("typ_udalosti") == "OPAKUJÚCA SA"){
+											var today = new Date();
+											var yyyy = today.getFullYear();
+
+											document.getElementById("datepicker2").value = '31/12/'+ yyyy;
+											
+										}
+										else{
+											document.getElementById("datepicker2").value = document.getElementById("datepicker").value;
+										}
 									}
 
 
