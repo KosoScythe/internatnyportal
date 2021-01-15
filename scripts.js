@@ -68,6 +68,7 @@ function addAd_activity() {
 		var pocet_ludi2 = 0;
 	}
 
+	var date = "";
 	array = ["den-PO","den-UT","den-ST", "den-ŠT","den-PI","den-SO","den-NE"];
 	for (let index = 0; index < array.length; index++) {
 		var checkBox = document.getElementById(array[index]);
