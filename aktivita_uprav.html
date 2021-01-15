@@ -76,23 +76,6 @@
 							</div>
                         </div>
 
-                        <div class="row" id="pridaj_datum_cas">
-							<div class="col-12">
-                                <button onclick="pridaj_koniec()">+ Dátum a čas skončenia</button><br>
-                                <script>
-                                    function pridaj_koniec(){
-                                        if (document.getElementById("datepicker").value != "" && document.getElementById("timepicker").value != ""){
-                                            document.getElementById("datum_konca").style.visibility = "visible";
-                                            document.getElementById("cas_konca").style.visibility = "visible";
-                                            document.getElementById("pridaj_datum_cas").style.visibility = "hidden";
-                                        } else{
-                                            alert("zadaj čas a dátum začiatku!");
-                                        }
-                                    }
-                                </script>
-							</div>
-                        </div>
-
                         <div class="row" id="datum_konca">
 							<div class="col-2">
 								Dátum konca
