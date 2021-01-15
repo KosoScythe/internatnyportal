@@ -76,6 +76,7 @@ def ins():
     popis = parametre.get('popis') 
     hashtag = parametre.get('hashtag')
     uzivatel = parametre.get('uzivatel')
+    checkuser(uzivatel)
     cena = parametre.get('cena')
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -473,11 +474,31 @@ def cislanadni(argument):
     } 
     return switcher.get(argument, "nothing")
 
+def checkuser(email):
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select ciselnik_uzivatelia.id from ciselnik_uzivatelia where email = %s;'
+    to_filter = [email]
+    c.execute(query, to_filter)
+    a.commit()
+    t = c.fetchall()
+    dict_result = []
+    for row in t:
+        dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    if(len(js) == 2):
+        query = 'INSERT INTO ciselnik_uzivatelia (email) Values (%s);'
+        c.execute(query, to_filter)
+        a.commit()
+    c.close()
+    a.close()
+    return ''
 
 @app.route("/pridajaktivitu" , methods=['POST'])
 def pridajaktivitu():
     parametre= request.form
     owner = parametre.get('owner')
+    checkuser(owner)
     nazov = parametre.get('nazov')
     popis = parametre.get('popis') 
     datefrom = parametre.get('datefrom')
