@@ -663,7 +663,7 @@ function pridajSaNaAktivitu(id) {
     tmp += '&uzivatel=' + sessionStorage.getItem('email');
     var xmlhttp = new XMLHttpRequest();
     var url = "https://internatnyportalxyz.xyz:5000/";
-    url = url + "odhlaszaktivity";
+    url = url + "prihlasitnaaktivitu";
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         location.reload();
