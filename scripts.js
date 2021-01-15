@@ -173,7 +173,7 @@ function findInDatabase(stranka){
 				} 
 			}
 		}
-		tmp = "nazov=" + nazov + "&datefrom=" + datefrom + "&dateto=" + dateto + "&casod=" + casod + "&casdo=" + casdo + "&dni=" + dni; 
+		tmp = "nazov=" + nazov + "&datefrom=" + datefrom + "&dateto=" + dateto + "&casod=" + casod + "&casdo=" + casdo + "&dni=" + date; 
 		
 	}
 	else {
