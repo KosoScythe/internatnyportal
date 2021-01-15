@@ -283,7 +283,7 @@ function JsonAndContent(data, stranka="kategoria") {
 						"</div>" +
 						"<div class='row'>" +
 							"<div class='col'>" +
-								"<h2 class='card-title'> Čas: " + diel["casod"] + " - " + diel["casdo"]+"</h2>" + 
+								"<p class='card-text'> Čas: " + diel["casod"] + " - " + diel["casdo"]+"</p>" + 
 							"</div>" +
 							"<div class='col'>" +
 								"<p class='card-text'>Dátum: "+ diel["datefrom"] + " - " + diel["datefrom"] + "</p>" + 
@@ -293,7 +293,6 @@ function JsonAndContent(data, stranka="kategoria") {
 							"</div>" +
 						"</div>" +
 						"<p class='card-text'>"+ diel["popis"] +"</p>" + 
-						"<p class='card-text'>"+ diel["hashtag"] +"</p>" + 
 						"<a href='https://www.facebook.com/tomas.koso.kosec' class='btn btn-primary float-right' target='_blank'>Kontaktuj predajcu cez Facebook</a>" +
 					"</div>"+
 				"</article>"
