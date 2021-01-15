@@ -169,7 +169,7 @@ function findInDatabase(stranka){
 			if (checkBox != null) {
 				if (checkBox.checked == true){
 					date = checkBox.value + ",";
-					date.pop();
+					date = date.slice(0, -1);
 				} 
 			}
 		}
