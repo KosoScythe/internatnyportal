@@ -278,18 +278,18 @@ function JsonAndContent(data, stranka="kategoria") {
 								"<h2 class='card-title'>" + diel["nazov"] +"</h2>" + 
 							"</div>" +
 							"<div class='col'>" +
-								"<p class='card-text'>Kde: "+ diel["lokalita"] +"</p>" + 
+								"<p class='card-text'><b>Kde:</b> "+ diel["lokalita"] +"</p>" + 
 							"</div>" +
 						"</div>" +
 						"<div class='row'>" +
 							"<div class='col'>" +
-								"<p class='card-text'> Čas: " + diel["casod"] + " - " + diel["casdo"]+"</p>" + 
+								"<p class='card-text'> <b>Čas:</b> " + diel["casod"] + " - " + diel["casdo"]+"</p>" + 
 							"</div>" +
 							"<div class='col'>" +
-								"<p class='card-text'>Dátum: "+ diel["datefrom"] + " - " + diel["datefrom"] + "</p>" + 
+								"<p class='card-text'><b>Dátum:</b> "+ diel["datefrom"] + " - " + diel["datefrom"] + "</p>" + 
 							"</div>" +
 							"<div class='col'>" +
-								"<p class='card-text'>Počet prihlásených ľudí: "+ diel["pocet_prihlasenych"] + "/" + diel["max"] + "</p>" + 
+								"<p class='card-text'><b>Počet prihlásených ľudí:</b> "+ diel["pocet_prihlasenych"] + "/" + diel["max"] + "</p>" + 
 							"</div>" +
 						"</div>" +
 						"<p class='card-text'>"+ diel["popis"] +"</p>" + 
