@@ -98,7 +98,7 @@ function addAd_activity() {
 	'&lokalita=' + lokalita +
 	'&opakuje=' + typ_udalosti +
 	'&dni=' + date +
-	'&min_pocet=' + pocet_ludi;
+	'&min=' + pocet_ludi;
 	insertAdIntoDatabase_activity(tmp);
 }
 
@@ -622,7 +622,7 @@ function updateActivity() {
   '&lokalita=' + lokalita +
   '&opakuje=' + typ_udalosti +
   '&dni=' + date +
-  '&min_pocet=' + pocet_ludi;
+  '&min=' + pocet_ludi;
 
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/";
