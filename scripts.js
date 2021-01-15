@@ -117,6 +117,7 @@ function insertAdIntoDatabase_activity(tmp) {
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(tmp);
 	return false;
+	
 }
 
 function insertAdIntoDatabase(tmp) {
