@@ -199,7 +199,7 @@ function showLatestAd(typ, kategoria, urln=0) {
 
 function showLatestActivity() {
 	var xmlhttp = new XMLHttpRequest();
-	var url = "https://internatnyportalxyz.xyz:5000/novekativity";
+	var url = "https://internatnyportalxyz.xyz:5000/noveaktivity";
 		
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
