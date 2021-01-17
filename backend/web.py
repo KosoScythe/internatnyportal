@@ -143,7 +143,11 @@ def nove():
     dict_result = []
     for row in t:
         dict_result.append(dict(row))
+    js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
+    return js.decode()
 
+@app.route("/noveaktivity" , methods=['POST'])
+def noveaktivity():
     a = connectpg()
     c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
     query = 'Select nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casDo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) '
@@ -152,10 +156,12 @@ def nove():
     t = c.fetchall()
     c.close()
     a.close()
+    dict_result = []
     for row in t:
         dict_result.append(dict(row))
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
+
 
 @app.route("/vsetky" , methods=['POST'])
 def vsetky():
