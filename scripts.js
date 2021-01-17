@@ -200,7 +200,6 @@ function showLatestAd(typ, kategoria, urln=0) {
 function showLatestActivity() {
 	var xmlhttp = new XMLHttpRequest();
 	var url = "https://internatnyportalxyz.xyz:5000/noveaktivity";
-		
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText);
@@ -689,19 +688,23 @@ function zvolDni(id){
 }
 
 function pridajSaNaAktivitu(id) {
-	var tmp = '';
-    tmp = 'id=' + id;
-    tmp += '&uzivatel=' + sessionStorage.getItem('email');
-    var xmlhttp = new XMLHttpRequest();
-    var url = "https://internatnyportalxyz.xyz:5000/";
-    url = url + "prihlasitnaaktivitu";
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        location.reload();
-      }
-    }
-    xmlhttp.open("POST", url, false);
-    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlhttp.send(tmp);
-    return false;
+	if(FB.getAuthResponse() != null) {
+		var tmp = '';
+		tmp = 'id=' + id;
+		tmp += '&uzivatel=' + sessionStorage.getItem('email');
+		var xmlhttp = new XMLHttpRequest();
+		var url = "https://internatnyportalxyz.xyz:5000/";
+		url = url + "prihlasitnaaktivitu";
+		xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			location.reload();
+		}
+		}
+		xmlhttp.open("POST", url, false);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send(tmp);
+		return false;
+	  } else {
+		$("#pridajModal").modal();
+	  }
 }
