@@ -143,6 +143,17 @@ def nove():
     dict_result = []
     for row in t:
         dict_result.append(dict(row))
+
+    a = connectpg()
+    c = a.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    query = 'Select nazov,popis,dni,aktivity.datefrom::text, aktivity.dateto::text, aktivity.casod::text, aktivity.casDo::text,min, max, ciselnik_uzivatelia.email, lokalita, opakuje, (Select count(*) from aktivity_prihlaseny where id_aktivity = aktivity.id) as pocet_prihlasenych from aktivity join ciselnik_uzivatelia on (owner = ciselnik_uzivatelia.id) '
+    query += 'ORDER BY 1 DESC LIMIT 5'
+    c.execute(query)
+    t = c.fetchall()
+    c.close()
+    a.close()
+    for row in t:
+        dict_result.append(dict(row))
     js = json.dumps(dict_result, ensure_ascii=False).encode('utf8')
     return js.decode()
 
