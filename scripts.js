@@ -197,6 +197,22 @@ function showLatestAd(typ, kategoria, urln=0) {
 	}
 }
 
+function showLatestActivity() {
+	var xmlhttp = new XMLHttpRequest();
+	var url = "https://internatnyportalxyz.xyz:5000/novekativity";
+		
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(this.responseText);
+			JsonAndContent(data, "aktivity");
+		}
+	}
+	
+	xmlhttp.open("POST", url, false);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send("");
+	return false;	
+}
 function findInDatabase(stranka){
 	var tmp = null;
 	if (stranka == 'aktivity') {
